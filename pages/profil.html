@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profil ? Clothink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .profile-header { display:flex; align-items:center; gap:32px; padding:60px 0 40px; border-bottom:1px solid #eee; }
+
+        .profile-avatar-wrap { position:relative; width:80px; height:80px; flex-shrink:0; }
+
+        .profile-avatar { width:80px; height:80px; border-radius:50%; background:#111; color:#fff; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:700; font-family:'Playfair Display',serif; overflow:hidden; cursor:pointer; }
+
+        .profile-avatar img { width:100%; height:100%; object-fit:cover; }
+
+        .profile-avatar-input { display:none; }
+
+        .profile-avatar-overlay { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); color:#fff; font-size:10px; text-align:center; padding:3px 0; border-radius:0 0 40px 40px; cursor:pointer; opacity:0; transition:opacity 0.2s; }
+
+        .profile-avatar-wrap:hover .profile-avatar-overlay { opacity:1; }
+
+        .profile-info h1 { font-size:28px; font-weight:700; margin-bottom:4px; }
+
+        .profile-info p { color:#888; font-size:14px; }
+
+        .profile-stats { display:flex; gap:32px; margin-top:12px; }
+
+        .profile-stats span { font-size:14px; color:#555; cursor:pointer; }
+
+        .profile-stats strong { font-weight:700; color:#111; }
+
+        .profile-body { display:grid; grid-template-columns:1fr 2fr; gap:48px; padding:40px 0 80px; }
+
+        .profile-sidebar h3 { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:#888; margin-bottom:16px; }
+
+        .profile-menu { list-style:none; }
+
+        .profile-menu li { margin-bottom:4px; }
+
+        .profile-menu a { display:block; padding:10px 16px; border-radius:8px; color:#555; text-decoration:none; font-size:14px; font-weight:500; transition:background 0.2s; cursor:pointer; }
+
+        .profile-menu a:hover, .profile-menu a.active { background:#f0f0f0; color:#111; }
+
+        .profile-tab { display:none; }
+
+        .profile-tab.active { display:block; }
+
+        .profile-form label { display:block; font-size:12px; font-weight:600; color:#555; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
+
+        .profile-form input, .profile-form textarea { width:100%; padding:12px 16px; border:1px solid #ddd; border-radius:8px; font-family:'Inter',sans-serif; font-size:14px; outline:none; transition:border 0.2s; margin-bottom:20px; }
+
+        .profile-form input:focus, .profile-form textarea:focus { border-color:#111; }
+
+        .profile-form textarea { resize:vertical; min-height:80px; }
+
+        .profile-form .btn-primary { border:none; cursor:pointer; }
+
+        .profile-msg { font-size:13px; margin-bottom:16px; display:none; }
+
+        .profile-msg.success { display:block; background:#e8f5e9; color:#2e7d32; padding:12px 16px; border-radius:8px; }
+
+        .profile-msg.error { display:block; background:#fde8e8; color:#c0392b; padding:12px 16px; border-radius:8px; }
+
+        .outfit-mini-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+        .outfit-mini { border-radius:8px; overflow:hidden; aspect-ratio:3/4; background-size:cover; background-position:center; position:relative; cursor:pointer; }
+
+        .outfit-mini .outfit-mini-info { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,0.7)); color:#fff; padding:8px 10px; font-size:12px; }
+
+        .outfit-mini-actions { position:absolute; top:6px; right:6px; display:flex; gap:4px; opacity:0; transition:opacity 0.2s; }
+
+        .outfit-mini:hover .outfit-mini-actions { opacity:1; }
+
+        .outfit-mini-action { width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.9); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:13px; color:#555; transition:all 0.2s; }
+
+        .outfit-mini-action:hover { background:#fff; color:#111; }
+
+        .outfit-mini-action.delete:hover { color:#e74c3c; }
+
+        .empty-state { text-align:center; padding:48px 0; color:#999; font-size:14px; }
+
+        .public-profile-link { font-size:12px; color:#999; text-decoration:none; display:inline-block; margin-top:4px; }
+
+        .public-profile-link:hover { color:#111; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct">
+
+                    <span class="ct-monogram">
+
+                        <span class="ct-c">C</span>
+
+                        <span class="ct-t">T</span>
+
+                    </span>
+
+                </span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html">Kesfet</a></li>
+
+                <li><a href="kombinler.html">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html">Clothink</a></li>
+
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+
+                <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
+
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="page-section" style="padding:0;">
+
+        <div class="container">
+
+            <div class="profile-header" id="profileHeader">
+
+                <div class="profile-avatar-wrap">
+
+                    <div class="profile-avatar" id="avatarBox" onclick="document.getElementById('avatarInput').click()">
+
+                        <span id="avatarLetter">D</span>
+
+                        <img id="avatarImg" style="display:none;">
+
+                    </div>
+
+                    <div class="profile-avatar-overlay" onclick="document.getElementById('avatarInput').click()">Degistir</div>
+
+                    <input type="file" id="avatarInput" class="profile-avatar-input" accept="image/*">
+
+                </div>
+
+                <div class="profile-info">
+
+                    <h1 id="profileName">Kullanc</h1>
+
+                    <p id="profileEmail">ornek@email.com</p>
+
+                    <a id="publicProfileLink" class="public-profile-link" href="#" target="_blank">@kullaniciadi</a>
+
+                    <div class="profile-stats">
+
+                        <span id="statOutfits"><strong>0</strong> kombin</span>
+
+                        <span id="statLikes"><strong>0</strong> begeni</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="page-section" style="padding-top:0;">
+
+        <div class="container">
+
+            <div class="profile-body">
+
+                <div class="profile-sidebar">
+
+                    <h3>Hesap</h3>
+
+                    <ul class="profile-menu">
+
+                        <li><a class="active" data-tab="bilgiler">Profil Bilgileri</a></li>
+
+                        <li><a data-tab="kombinler">Kombinlerim</a></li>
+
+                        <li><a data-tab="begeniler">BeSenilenler</a></li>
+
+                        <li><a data-tab="kaydedilenler">Kaydedilenler</a></li>
+
+                        <li><a data-tab="sifre">ifre Degistir</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <div id="tabBilgiler" class="profile-tab active">
+
+                        <div class="profile-msg success" id="profileSaved">Profil bilgileri kaydedildi.</div>
+
+                        <form class="profile-form" id="profileForm">
+
+                            <label>Ad</label>
+
+                            <input id="editName" type="text" required>
+
+                            <label>Kullanc ad</label>
+
+                            <input id="editUsername" type="text" placeholder="@kullaniciadi">
+
+                            <label>Hakkmda</label>
+
+                            <textarea id="editBio" placeholder="Kendinden bahset..."></textarea>
+
+                            <label>Cinsiyet</label>
+
+                            <div style="display:flex;gap:12px;margin-bottom:20px;">
+
+                                <label id="genderKadin" style="flex:1;padding:10px;border:2px solid #ddd;border-radius:8px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">
+
+                                    <input type="radio" name="gender" value="kadin" style="display:none;"> Kadn
+
+                                </label>
+
+                                <label id="genderErkek" style="flex:1;padding:10px;border:2px solid #ddd;border-radius:8px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">
+
+                                    <input type="radio" name="gender" value="erkek" style="display:none;"> Erkek
+
+                                </label>
+
+                                <label id="genderCocuk" style="flex:1;padding:10px;border:2px solid #ddd;border-radius:8px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">
+
+                                    <input type="radio" name="gender" value="cocuk" style="display:none;"> Socuk
+
+                                </label>
+
+                            </div>
+
+                            <button type="submit" class="btn-primary">Kaydet</button>
+
+                        </form>
+
+                    </div>
+
+                    <div id="tabKombinler" class="profile-tab">
+
+                        <div class="outfit-mini-grid" id="myOutfitsGrid"></div>
+
+                        <div class="empty-state" id="emptyOutfits">Henz kombin olusturmadn.</div>
+
+                    </div>
+
+                    <div id="tabBegeniler" class="profile-tab">
+
+                        <div class="outfit-mini-grid" id="likedOutfitsGrid"></div>
+
+                        <div class="empty-state" id="emptyLikes">Henz begenilen kombin yok.</div>
+
+                    </div>
+
+                    <div id="tabKaydedilenler" class="profile-tab">
+
+                        <div class="outfit-mini-grid" id="savedOutfitsGrid"></div>
+
+                        <div class="empty-state" id="emptySaves">Henz kaydedilen kombin yok.</div>
+
+                    </div>
+
+                    <div id="tabSifre" class="profile-tab">
+
+                        <div class="profile-msg success" id="passwordSaved">ifre degistirildi.</div>
+
+                        <div class="profile-msg error" id="passwordError">Mevcut Sifre hatal.</div>
+
+                        <form class="profile-form" id="passwordForm">
+
+                            <label>Mevcut ifre</label>
+
+                            <input id="oldPassword" type="password" required>
+
+                            <label>Yeni ifre</label>
+
+                            <input id="newPassword" type="password" required minlength="6">
+
+                            <button type="submit" class="btn-primary">ifreyi Degistir</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <div class="footer-logo">
+
+                        <span class="logo-ct">
+
+                            <span class="ct-monogram">
+
+                                <span class="ct-c">C</span>
+
+                                <span class="ct-t">T</span>
+
+                            </span>
+
+                        </span>
+
+                        <span class="logo-text">CLOTHINK</span>
+
+                    </div>
+
+                    <p>Kombinini olustur, tarzn kesfet.</p>
+
+                </div>
+
+                <div>
+
+                    <h5>Platform</h5>
+
+                    <a href="kesfet.html">Kesfet</a>
+
+                    <a href="kombinler.html">Kombinler</a>
+
+                    <a href="markalar.html">Markalar</a>
+
+                    <a href="clothink.html">Clothink</a>
+
+                    <a href="#">Trendler</a>
+
+                </div>
+
+                <div>
+
+                    <h5>Topluluk</h5>
+
+                    <a href="#">Blog</a>
+
+                    <a href="#">Yardm Merkezi</a>
+
+                    <a href="#">Kullanm artlar</a>
+
+                    <a href="#">Gizlilik</a>
+
+                </div>
+
+                <div>
+
+                    <h5>Sosyal</h5>
+
+                    <a href="#">Instagram</a>
+
+                    <a href="#">TikTok</a>
+
+                    <a href="#">Pinterest</a>
+
+                    <a href="#">X</a>
+
+                </div>
+
+            </div>
+
+            <p class="footer-bottom"> 2026 Clothink. Tm haklar sakldr.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    (function() {
+
+        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+        if (!user) { window.location.href = 'giris.html'; return; }
+
+
+
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+        var profile = profiles[user.email] || {};
+
+        var avatarData = localStorage.getItem('clothink_avatar_' + user.email) || '';
+
+
+
+        function renderHeader() {
+
+            var name = profile.name || user.name || 'Kullanc';
+
+            var email = user.email;
+
+            var username = profile.username || '';
+
+            document.getElementById('profileName').textContent = name;
+
+            document.getElementById('profileEmail').textContent = email;
+
+            var letter = document.getElementById('avatarLetter');
+
+            var img = document.getElementById('avatarImg');
+
+            if (avatarData) {
+
+                letter.style.display = 'none';
+
+                img.style.display = 'block';
+
+                img.src = avatarData;
+
+            } else {
+
+                letter.style.display = 'block';
+
+                img.style.display = 'none';
+
+                letter.textContent = name.charAt(0).toUpperCase();
+
+            }
+
+            var link = document.getElementById('publicProfileLink');
+
+            if (username) {
+
+                link.textContent = '@' + username;
+
+                link.href = 'kullanici.htmlSu=' + encodeURIComponent(user.email);
+
+                link.style.display = 'inline-block';
+
+            } else {
+
+                link.style.display = 'none';
+
+            }
+
+            var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + user.email) || '[]');
+
+            var likes = JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]');
+
+            document.querySelector('#statOutfits strong').textContent = outfits.length;
+
+            document.querySelector('#statLikes strong').textContent = likes.length;
+
+        }
+
+
+
+        renderHeader();
+
+
+
+        document.getElementById('avatarInput').addEventListener('change', function(e) {
+
+            var file = e.target.files[0];
+
+            if (!file) return;
+
+            var reader = new FileReader();
+
+            reader.onload = function(ev) {
+
+                avatarData = ev.target.result;
+
+                localStorage.setItem('clothink_avatar_' + user.email, avatarData);
+
+                renderHeader();
+
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+
+        document.getElementById('editName').value = profile.name || user.name || '';
+
+        document.getElementById('editUsername').value = profile.username || '';
+
+        document.getElementById('editBio').value = profile.bio || '';
+
+
+
+        var gender = profile.gender || 'kadin';
+
+        document.querySelector('input[name="gender"][value="' + gender + '"]').checked = true;
+
+        document.querySelector('input[name="gender"]:checked').parentElement.style.borderColor = '#111';
+
+        document.querySelector('input[name="gender"]:checked').parentElement.style.background = '#f5f5f5';
+
+
+
+        document.querySelectorAll('input[name="gender"]').forEach(function(r) {
+
+            r.addEventListener('change', function() {
+
+                document.querySelectorAll('input[name="gender"]').forEach(function(r2) {
+
+                    r2.parentElement.style.borderColor = '#ddd';
+
+                    r2.parentElement.style.background = 'transparent';
+
+                });
+
+                this.parentElement.style.borderColor = '#111';
+
+                this.parentElement.style.background = '#f5f5f5';
+
+            });
+
+        });
+
+
+
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            profile.name = document.getElementById('editName').value.trim();
+
+            profile.username = document.getElementById('editUsername').value.trim();
+
+            profile.bio = document.getElementById('editBio').value.trim();
+
+            profile.gender = document.querySelector('input[name="gender"]:checked').value;
+
+            profiles[user.email] = profile;
+
+            localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
+
+            localStorage.setItem('clothink_gender', profile.gender);
+
+            var cu = JSON.parse(localStorage.getItem('clothink_user') || '{}');
+
+            cu.name = profile.name;
+
+            localStorage.setItem('clothink_user', JSON.stringify(cu));
+
+            renderHeader();
+
+            var msg = document.getElementById('profileSaved');
+
+            msg.style.display = 'block';
+
+            setTimeout(function() { msg.style.display = 'none'; }, 3000);
+
+        });
+
+
+
+        var menuItems = document.querySelectorAll('.profile-menu a');
+
+        menuItems.forEach(function(item) {
+
+            item.addEventListener('click', function() {
+
+                menuItems.forEach(function(m) { m.classList.remove('active'); });
+
+                item.classList.add('active');
+
+                document.querySelectorAll('.profile-tab').forEach(function(t) { t.classList.remove('active'); });
+
+                document.getElementById('tab' + item.dataset.tab.charAt(0).toUpperCase() + item.dataset.tab.slice(1)).classList.add('active');
+
+                if (item.dataset.tab === 'kombinler') renderMyOutfits();
+
+                if (item.dataset.tab === 'begeniler') renderLikedOutfits();
+
+                if (item.dataset.tab === 'kaydedilenler') renderSavedOutfits();
+
+            });
+
+        });
+
+
+
+        function renderMyOutfits() {
+
+            var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + user.email) || '[]');
+
+            var grid = document.getElementById('myOutfitsGrid');
+
+            var empty = document.getElementById('emptyOutfits');
+
+            grid.innerHTML = '';
+
+            if (outfits.length === 0) { empty.style.display = 'block'; return; }
+
+            empty.style.display = 'none';
+
+            outfits.forEach(function(o, i) {
+
+                var div = document.createElement('div');
+
+                div.className = 'outfit-mini';
+
+                div.style.backgroundImage = "url('" + o.image + "')";
+
+                div.innerHTML = '<div class="outfit-mini-info">' + o.title + '  ' + o.items + ' rn</div><div class="outfit-mini-actions"><button class="outfit-mini-action" title="Dzenle" onclick="event.stopPropagation();editOutfit(' + i + ')">??</button><button class="outfit-mini-action delete" title="Sil" onclick="event.stopPropagation();deleteOutfit(' + i + ')">?</button></div>';
+
+                div.addEventListener('click', function() {
+
+                    var od = { title: o.title, author: '@' + (profile.username || user.name), items: o.items + ' rn', likes: o.likes || 0, img: o.image, desc: '', products: [] };
+
+                    if (o.products) od.products = o.products;
+
+                    localStorage.setItem('clothink_viewing_outfit', JSON.stringify(od));
+
+                    window.location.href = 'kombinler.html';
+
+                });
+
+                grid.appendChild(div);
+
+            });
+
+        }
+
+
+
+        window.editOutfit = function(idx) {
+
+            var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + user.email) || '[]');
+
+            var o = outfits[idx];
+
+            if (!o) return;
+
+            var newTitle = prompt('Kombin baslsn dzenle:', o.title);
+
+            if (newTitle && newTitle.trim()) {
+
+                o.title = newTitle.trim();
+
+                outfits[idx] = o;
+
+                localStorage.setItem('clothink_outfits_' + user.email, JSON.stringify(outfits));
+
+                renderMyOutfits();
+
+            }
+
+        };
+
+
+
+        window.deleteOutfit = function(idx) {
+
+            if (!confirm('Bu kombin silinsin mi?')) return;
+
+            var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + user.email) || '[]');
+
+            outfits.splice(idx, 1);
+
+            localStorage.setItem('clothink_outfits_' + user.email, JSON.stringify(outfits));
+
+            document.querySelector('#statOutfits strong').textContent = outfits.length;
+
+            renderMyOutfits();
+
+        };
+
+
+
+        function renderLikedOutfits() {
+
+            var likes = JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]');
+
+            var grid = document.getElementById('likedOutfitsGrid');
+
+            var empty = document.getElementById('emptyLikes');
+
+            grid.innerHTML = '';
+
+            if (likes.length === 0) { empty.style.display = 'block'; return; }
+
+            empty.style.display = 'none';
+
+            likes.forEach(function(url, i) {
+
+                var div = document.createElement('div');
+
+                div.className = 'outfit-mini';
+
+                div.style.backgroundImage = "url('" + url + "')";
+
+                div.innerHTML = '<div class="outfit-heart" onclick="event.stopPropagation();this.parentElement.remove();var l=JSON.parse(localStorage.getItem(\'clothink_likes_' + user.email + '\')||\'[]\');l.splice(' + i + ',1);localStorage.setItem(\'clothink_likes_' + user.email + '\',JSON.stringify(l));document.querySelector(\'#statLikes strong\').textContent=l.length;">??</div>';
+
+                grid.appendChild(div);
+
+            });
+
+        }
+
+
+
+        function renderSavedOutfits() {
+
+            var saves = JSON.parse(localStorage.getItem('clothink_saves_' + user.email) || '[]');
+
+            var grid = document.getElementById('savedOutfitsGrid');
+
+            var empty = document.getElementById('emptySaves');
+
+            grid.innerHTML = '';
+
+            if (saves.length === 0) { empty.style.display = 'block'; return; }
+
+            empty.style.display = 'none';
+
+            saves.forEach(function(url) {
+
+                var div = document.createElement('div');
+
+                div.className = 'outfit-mini';
+
+                div.style.backgroundImage = "url('" + url + "')";
+
+                div.addEventListener('click', function() {
+
+                    var all = [];
+
+                    ['kadin','erkek','cocuk'].forEach(function(g) {
+
+                        var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
+
+                        if (cat) cat.forEach(function(o) { if (o.img === url || o.image === url) all.push(o); });
+
+                    });
+
+                    var usersAll = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+                    usersAll.forEach(function(u) {
+
+                        var oo = JSON.parse(localStorage.getItem('clothink_outfits_' + u.email) || '[]');
+
+                        oo.forEach(function(o) { if (o.image === url) all.push(o); });
+
+                    });
+
+                    if (all.length) {
+
+                        localStorage.setItem('clothink_viewing_outfit', JSON.stringify(all[0]));
+
+                        window.location.href = 'kombinler.html';
+
+                    }
+
+                });
+
+                grid.appendChild(div);
+
+            });
+
+        }
+
+
+
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            var oldPw = document.getElementById('oldPassword').value;
+
+            var newPw = document.getElementById('newPassword').value;
+
+            var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+            var idx = users.findIndex(function(u) { return u.email === user.email && u.password === oldPw; });
+
+            if (idx === -1) {
+
+                document.getElementById('passwordError').style.display = 'block';
+
+                document.getElementById('passwordSaved').style.display = 'none';
+
+                return;
+
+            }
+
+            users[idx].password = newPw;
+
+            localStorage.setItem('clothink_users', JSON.stringify(users));
+
+            document.getElementById('passwordError').style.display = 'none';
+
+            document.getElementById('passwordSaved').style.display = 'block';
+
+            document.getElementById('oldPassword').value = '';
+
+            document.getElementById('newPassword').value = '';
+
+            setTimeout(function() { document.getElementById('passwordSaved').style.display = 'none'; }, 3000);
+
+        });
+
+    })();
+
+    </script>
+
+</body>
+
+</html>

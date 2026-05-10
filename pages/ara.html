@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ara ? Clothink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .search-hero { padding:40px 0; background:#fff; border-bottom:1px solid #eee; }
+
+        .search-hero h1 { font-size:36px; font-weight:700; margin-bottom:16px; }
+
+        .search-big { display:flex; gap:12px; max-width:600px; }
+
+        .search-big input { flex:1; padding:14px 20px; border:2px solid #ddd; border-radius:100px; font-family:'Inter',sans-serif; font-size:16px; outline:none; transition:border 0.2s; }
+
+        .search-big input:focus { border-color:#111; }
+
+        .search-big button { padding:14px 32px; border:none; border-radius:100px; background:#111; color:#fff; font-weight:600; cursor:pointer; font-size:14px; font-family:'Inter',sans-serif; }
+
+        .search-tabs { display:flex; gap:8px; margin:20px 0; flex-wrap:wrap; }
+
+        .search-tab { padding:8px 20px; border-radius:100px; border:1px solid #ddd; background:transparent; cursor:pointer; font-size:13px; font-family:'Inter',sans-serif; color:#555; transition:all 0.2s; }
+
+        .search-tab.active { background:#111; color:#fff; border-color:#111; }
+
+        .search-results { padding:40px 0; }
+
+        .result-item { display:flex; gap:16px; padding:16px; border-radius:12px; background:#f5f5f5; margin-bottom:12px; transition:background 0.2s; cursor:pointer; }
+
+        .result-item:hover { background:#eee; }
+
+        .result-photo { width:80px; height:80px; border-radius:8px; background-size:cover; background-position:center; flex-shrink:0; }
+
+        .result-info h4 { font-size:15px; font-weight:600; }
+
+        .result-info p { font-size:13px; color:#888; }
+
+        .result-tag { font-size:11px; color:#999; margin-top:4px; }
+
+        .empty-search { text-align:center; padding:60px 0; color:#999; }
+
+        .dark .search-hero { background:#1a1a1a; border-color:#333; }
+
+        .dark .search-big input { background:#333; color:#eee; border-color:#444; }
+
+        .dark .search-big input:focus { border-color:#888; }
+
+        .dark .result-item { background:#252525; }
+
+        .dark .result-item:hover { background:#333; }
+
+        .dark .result-info h4 { color:#eee; }
+
+        .dark .result-info p { color:#999; }
+
+        .dark .search-tab { border-color:#444; color:#999; }
+
+        .dark .search-tab.active { background:#fff; color:#111; border-color:#fff; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html">Kesfet</a></li>
+
+                <li><a href="kombinler.html">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html">Clothink</a></li>
+
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+
+                <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
+
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="search-hero">
+
+        <div class="container">
+
+            <h1>Ara</h1>
+
+            <div class="search-big">
+
+                <input id="searchQuery" placeholder="Kullanc, marka, rn, kombin ara..." onkeydown="if(event.key==='Enter')doSearch()">
+
+                <button onclick="doSearch()">Ara</button>
+
+            </div>
+
+            <div class="search-tabs">
+
+                <span class="search-tab active" data-filter="all" onclick="setFilter(this,'all')">Tm</span>
+
+                <span class="search-tab" data-filter="outfit" onclick="setFilter(this,'outfit')">Kombinler</span>
+
+                <span class="search-tab" data-filter="user" onclick="setFilter(this,'user')">Kullanclar</span>
+
+                <span class="search-tab" data-filter="product" onclick="setFilter(this,'product')">?rnler</span>
+
+                <span class="search-tab" data-filter="brand" onclick="setFilter(this,'brand')">Markalar</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="search-results">
+
+        <div class="container" id="resultsContainer">
+
+            <div class="empty-search"><p>Ne aramak istersins</p></div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer">...</footer>
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    var currentFilter = 'all';
+
+    function setFilter(el, f) { document.querySelectorAll('.search-tab').forEach(function(t){t.classList.remove('active')}); el.classList.add('active'); currentFilter=f; doSearch(); }
+
+    function doSearch() {
+
+        var q = document.getElementById('searchQuery').value.trim().toLowerCase();
+
+        var container = document.getElementById('resultsContainer');
+
+        if (!q) { container.innerHTML = '<div class="empty-search"><p>Ne aramak istersins</p></div>'; return; }
+
+        var results = [];
+
+        // search catalog outfits
+
+        ['kadin','erkek','cocuk'].forEach(function(g) {
+
+            var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || '[]');
+
+            cat.forEach(function(o) {
+
+                if (currentFilter==='all'||currentFilter==='outfit') {
+
+                    if ((o.title&&o.title.toLowerCase().includes(q))||(o.author&&o.author.toLowerCase().includes(q))) { o._type='outfit'; o._gender=g; results.push(o); }
+
+                }
+
+                if (currentFilter==='all'||currentFilter==='product') {
+
+                    if (o.products) o.products.forEach(function(p) {
+
+                        if ((p.name&&p.name.toLowerCase().includes(q))||(p.brand&&p.brand.toLowerCase().includes(q))) { p._type='product'; p._outfitTitle=o.title; p._outfitImg=o.img; results.push(p); }
+
+                    });
+
+                }
+
+            });
+
+        });
+
+        // search users
+
+        if (currentFilter==='all'||currentFilter==='user') {
+
+            var users = JSON.parse(localStorage.getItem('clothink_users')||'[]');
+
+            var profiles = JSON.parse(localStorage.getItem('clothink_profiles')||'{}');
+
+            users.forEach(function(u) {
+
+                var p=profiles[u.email]||{};
+
+                if ((u.name&&u.name.toLowerCase().includes(q))||(p.username&&p.username.toLowerCase().includes(q))||u.email.toLowerCase().includes(q)) { results.push({_type:'user',name:u.name,username:p.username||'',email:u.email}); }
+
+            });
+
+        }
+
+        // search brands
+
+        if (currentFilter==='all'||currentFilter==='brand') {
+
+            var brands=['ZARA','H&M','MANGO','NIKE','ADIDAS','COS','LEVI\'S','ARMANI','DIOR','BERSHKA','PRADA','BALENCIAGA','BURBERRY','FENDI','GUCCI','CHANEL','LOUIS VUITTON','YSL','HERMES','VERSACE','VALENTINO','BOTTEGA VENETA','THE NORTH FACE','SUPREME','NEW BALANCE','PUMA','UNIQLO'];
+
+            brands.forEach(function(b) { if(b.toLowerCase().includes(q)) results.push({_type:'brand',name:b}); });
+
+        }
+
+        if (results.length===0) { container.innerHTML = '<div class="empty-search"><p>"'+q+'" iin sonu bulunamad.</p></div>'; return; }
+
+        var html = '<p style="font-size:14px;color:#888;margin-bottom:20px;">'+results.length+' sonu bulundu</p>';
+
+        results.slice(0,30).forEach(function(r) {
+
+            if (r._type==='outfit') html += '<div class="result-item" onclick="localStorage.setItem(\'clothink_viewing_outfit\',JSON.stringify('+JSON.stringify(r).replace(/"/g,'&quot;')+'));window.location.href=\'kombinler.html\'"><div class="result-photo" style="background-image:url(\''+r.img+'\')"></div><div class="result-info"><h4>'+r.title+'</h4><p>'+r.author+'  '+r.likes+' begeni</p><span class="result-tag">kombin</span></div></div>';
+
+            else if (r._type==='product') html += '<div class="result-item"><div class="result-photo" style="background-image:url(\''+r.img+'\')"></div><div class="result-info"><h4>'+r.name+'</h4><p>'+r.brand+'</p><span class="result-tag">rn  '+ (r._outfitTitle||'') +'</span></div></div>';
+
+            else if (r._type==='user') html += '<div class="result-item" onclick="window.location.href=\'kullanici.htmlSu='+encodeURIComponent(r.email)+'\'"><div class="result-photo" style="display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-size:24px;font-weight:700;">'+r.name.charAt(0).toUpperCase()+'</div><div class="result-info"><h4>'+r.name+'</h4><p>@'+(r.username||r.email.split('@')[0])+'</p><span class="result-tag">kullanc</span></div></div>';
+
+            else if (r._type==='brand') html += '<div class="result-item"><div class="result-photo" style="display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#111;font-size:16px;font-weight:700;">'+r.name.charAt(0)+'</div><div class="result-info"><h4>'+r.name+'</h4><span class="result-tag">marka</span></div></div>';
+
+        });
+
+        container.innerHTML = html;
+
+    }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ifre Sfrla ? Clothink</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .reset-box { max-width:420px; margin:60px auto; text-align:center; }
+
+        .reset-box h2 { font-size:28px; font-weight:700; margin-bottom:8px; }
+
+        .reset-box p { color:#888; font-size:14px; margin-bottom:32px; }
+
+        .reset-box input { width:100%; padding:12px 16px; border:1px solid #ddd; border-radius:8px; font-family:'Inter',sans-serif; font-size:14px; outline:none; margin-bottom:16px; }
+
+        .reset-box input:focus { border-color:#111; }
+
+        .reset-box .btn-primary { border:none; cursor:pointer; width:100%; padding:14px; }
+
+        .reset-msg { font-size:13px; padding:12px; border-radius:8px; margin-top:16px; display:none; }
+
+        .reset-msg.success { display:block; background:#e8f5e9; color:#2e7d32; }
+
+        .reset-msg.error { display:block; background:#fde8e8; color:#c0392b; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar"><div class="container"><div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><ul class="nav-links"><li><a href="kesfet.html">Kesfet</a></li><li><a href="kombinler.html">Kombinler</a></li><li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li><li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li><li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li><li><a href="giris.html" class="btn-primary">Giris</a></li><li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li></ul></div></nav>
+
+    <section class="page-section">
+
+        <div class="container">
+
+            <div class="reset-box">
+
+                <h2>ifre Sfrla</h2>
+
+                <p>E-posta adresini gir, sifre sifirlama baglantisi gonderelim.</p>
+                <input id="resetEmail" type="email" placeholder="E-posta adresin">
+                <button class="btn-primary" onclick="doReset()">Sifirlama Baglantisi Gonder</button>
+
+                <div id="resetMsg" class="reset-msg"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    function doReset(){
+
+        var email=document.getElementById('resetEmail').value.trim();
+
+        var msg=document.getElementById('resetMsg');
+
+        if(!email||!email.includes('@')){msg.className='reset-msg error';msg.textContent='Geerli bir e-posta girin.';msg.style.display='block';return;}
+
+        var users=JSON.parse(localStorage.getItem('clothink_users')||'[]');
+
+        var found=users.some(function(u){return u.email===email;});
+
+        if(!found){msg.className='reset-msg error';msg.textContent='Bu e-posta ile kayitli kullanici bulunamadi.';msg.style.display='block';return;}
+
+        msg.className='reset-msg success';
+
+        msg.textContent='Sifre sifirlama baglantisi '+email+' adresine gonderildi! (Demo: Sifreniz "123456" olarak sifirlandi)';
+
+        msg.style.display='block';
+
+        // demo: reset password to 123456
+
+        users=users.map(function(u){if(u.email===email)u.password='123456';return u;});
+
+        localStorage.setItem('clothink_users',JSON.stringify(users));
+
+    }
+
+    </script>
+
+    <footer class="footer" style="background:#0a0a0a;"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="footer-logo" style="color:#fff;"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c" style="-webkit-text-stroke-color:#fff;">C</span><span class="ct-t" style="color:#fff;">T</span></span></span><span class="logo-text" style="color:#fff;">CLOTHINK</span></div><p style="color:rgba(255,255,255,0.3);">Kombinini olustur, tarzini kesfet.</p></div><div><h5 style="color:rgba(255,255,255,0.3);">Platform</h5><a href="kesfet.html" style="color:rgba(255,255,255,0.5);">Kesfet</a><a href="kombinler.html" style="color:rgba(255,255,255,0.5);">Kombinler</a><a href="markalar.html" style="color:rgba(255,255,255,0.5);">Markalar</a><a href="clothink.html" style="color:rgba(255,255,255,0.5);">Clothink</a></div><div><h5 style="color:rgba(255,255,255,0.3);">Topluluk</h5><a href="#" style="color:rgba(255,255,255,0.5);">Blog</a><a href="#" style="color:rgba(255,255,255,0.5);">Yardim</a></div><div><h5 style="color:rgba(255,255,255,0.3);">Sosyal</h5><a href="#" style="color:rgba(255,255,255,0.5);">Instagram</a><a href="#" style="color:rgba(255,255,255,0.5);">X</a></div></div><p class="footer-bottom" style="color:rgba(255,255,255,0.15);border-top-color:rgba(255,255,255,0.06);">© 2026 Clothink</p></div></footer>
+</body>
+
+</html>

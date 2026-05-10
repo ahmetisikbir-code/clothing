@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Veri Olustur - Clothink</title>
+    <style>
+        body { font-family:'Inter',sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; background:#111; color:#fff; margin:0; padding:20px; }
+        .card { background:#1a1a1a; padding:40px; border-radius:16px; text-align:center; max-width:420px; }
+        h1 { font-size:24px; margin-bottom:12px; }
+        p { color:#999; font-size:14px; margin-bottom:24px; line-height:1.6; }
+        button { background:#fff; color:#111; border:none; padding:14px 32px; border-radius:100px; font-weight:600; cursor:pointer; font-size:14px; }
+        button:hover { background:#eee; }
+        .success { color:#4caf50; margin-top:16px; font-size:13px; display:none; }
+        .info { color:#888; font-size:12px; margin-top:8px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Clothink Demo Verileri</h1>
+        <p>10 kullanici, her birine 3-4 kombin,<br>begeniler ve profil bilgileri olusturulur.</p>
+        <button onclick="generateData()">Verileri Olustur</button>
+        <p class="success" id="msg"> 10 kullanici olusturuldu!</p>
+        <p class="info" id="info"></p>
+    </div>
+    <script>
+    function generateData() {
+        var CATALOG = {
+            kadin: [
+                { author:'@eliff', items:'3 urun', likes:42, img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop', title:'Gunluk Siklik', desc:'Isten cikip kahve bulusmasina gecerken rahat ama sik bir kombin.', products:[{name:'Siyah Deri Ceket',brand:'ZARA',price:'₺1.299',img:'https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=100&h=100&fit=crop'},{name:'Beyaz Basic Tisort',brand:'NIKE',price:'₺499',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Kot Pantolon',brand:"LEVI'S",price:'₺899',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop'}] },
+                { author:'@zeynepk', items:'4 urun', likes:56, img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=600&fit=crop', title:'Sehir Tarzi', desc:'Sehirde gunluk kullanim icin modern ve rahat kombin.', products:[{name:'Bej Trenchkot',brand:'MANGO',price:'₺1.599',img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=100&h=100&fit=crop'},{name:'Beyaz Gomlek',brand:'COS',price:'₺699',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Siyah Pantolon',brand:'ZARA',price:'₺799',img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'},{name:'Loafers',brand:'MANGO',price:'₺999',img:'https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop'}] },
+                { author:'@selinay', items:'3 urun', likes:21, img:'https://images.pexels.com/photos/28758240/pexels-photo-28758240.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Spor Siklik', desc:'Spor ayakkabilarla tamamlanmis rahat bir kombin.', products:[{name:'Kot Ceket',brand:"LEVI'S",price:'₺1.199',img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=100&h=100&fit=crop'},{name:'Beyaz Tisort',brand:'NIKE',price:'₺399',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Sneaker',brand:'ADIDAS',price:'₺1.499',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'}] },
+                { author:'@alin_v', items:'4 urun', likes:67, img:'https://images.pexels.com/photos/17218059/pexels-photo-17218059.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Aksam Daveti', desc:'Ozel davetler icin sik ve zarif bir tercih.', products:[{name:'Siyah Blazer',brand:'MANGO',price:'₺1.899',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'},{name:'Ipek Bluz',brand:'COS',price:'₺799',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Siyah Etek',brand:'ZARA',price:'₺599',img:'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=100&h=100&fit=crop'},{name:'Topuklu Ayakkabi',brand:'MANGO',price:'₺1.299',img:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop'}] }
+            ],
+            erkek: [
+                { author:'@can_', items:'5 urun', likes:28, img:'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=600&fit=crop', title:'Sokak Stili', desc:'Gunluk sokak modasinda fark yaratan bir kombin.', products:[{name:'Deri Ceket',brand:'ZARA',price:'₺1.499',img:'https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=100&h=100&fit=crop'},{name:'Baskili Tisort',brand:'NIKE',price:'₺449',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Kargo Pantolon',brand:'BERSHKA',price:'₺699',img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'},{name:'Sneaker',brand:'NIKE',price:'₺1.799',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'},{name:'Bez Canta',brand:'ADIDAS',price:'₺299',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'}] },
+                { author:'@merthan', items:'2 urun', likes:19, img:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&h=600&fit=crop', title:'Yaz Ruhu', desc:'Sicak yaz gunleri icin hafif ve ferah bir stil.', products:[{name:'Keten Gomlek',brand:'COS',price:'₺599',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Sort',brand:'ZARA',price:'₺399',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop'}] },
+                { author:'@burakx', items:'5 urun', likes:45, img:'https://images.pexels.com/photos/18434636/pexels-photo-18434636.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Ofis Sikligi', desc:'Is hayatinda profesyonel ve sik gorunum.', products:[{name:'Takim Elbise',brand:'ARMANI',price:'₺4.999',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'},{name:'Beyaz Gomlek',brand:'ZARA',price:'₺499',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Kravat',brand:'BOSS',price:'₺399',img:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=100&h=100&fit=crop'},{name:'Deri Ayakkabi',brand:'ARMANI',price:'₺2.499',img:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=100&h=100&fit=crop'},{name:'Saat',brand:'ARMANI',price:'₺1.999',img:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=100&h=100&fit=crop'}] },
+                { author:'@denizc', items:'6 urun', likes:34, img:'https://images.pexels.com/photos/9509649/pexels-photo-9509649.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Hafta Sonu', desc:'Hafta sonu keyfi icin rahat ve cool bir kombin.', products:[{name:'Sweatshirt',brand:'NIKE',price:'₺699',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Kot Pantolon',brand:"LEVI'S",price:'₺899',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop'},{name:'Sneaker',brand:'ADIDAS',price:'₺1.299',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'},{name:'Sapka',brand:'ADIDAS',price:'₺199',img:'https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=100&h=100&fit=crop'},{name:'Sirt Cantasi',brand:'NIKE',price:'₺599',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'},{name:'Gunes Gozlugu',brand:'DIOR',price:'₺1.999',img:'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=100&h=100&fit=crop'}] }
+            ],
+            cocuk: [
+                { author:'@minikmoda', items:'4 urun', likes:33, img:'https://images.pexels.com/photos/6334338/pexels-photo-6334338.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Neseli Gun', desc:'Renkli ve eglenceli bir cocuk kombinasyonu.', products:[{name:'Leopar Desen Tisort',brand:'ZARA',price:'₺299',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Siyah Pantolon',brand:'H&M',price:'₺199',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop'},{name:'Sneaker',brand:'NIKE',price:'₺599',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'},{name:'Kucuk Canta',brand:'H&M',price:'₺99',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'}] },
+                { author:'@cocukca', items:'3 urun', likes:25, img:'https://images.pexels.com/photos/1620769/pexels-photo-1620769.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Park Gunu', desc:'Parkta oyun oynarken rahat ve sik.', products:[{name:'Yesil Tisort',brand:'H&M',price:'₺149',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Beyaz Sort',brand:'ZARA',price:'₺179',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop'},{name:'Sneaker',brand:'ADIDAS',price:'₺499',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'}] },
+                { author:'@nese', items:'5 urun', likes:41, img:'https://images.pexels.com/photos/20975762/pexels-photo-20975762.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Okul Kombini', desc:'Okulda rahat ama sik gorunmek icin.', products:[{name:'Gri Sweatshirt',brand:'NIKE',price:'₺399',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Kot Pantolon',brand:"LEVI'S",price:'₺449',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop'},{name:'Sneaker',brand:'NIKE',price:'₺699',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'},{name:'Sirt Cantasi',brand:'ADIDAS',price:'₺349',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'},{name:'Sapka',brand:'NIKE',price:'₺149',img:'https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=100&h=100&fit=crop'}] },
+                { author:'@buglem', items:'2 urun', likes:18, img:'https://images.pexels.com/photos/17386406/pexels-photo-17386406.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', title:'Yaz Eglencesi', desc:'Yaz tatilinde serin ve keyifli bir stil.', products:[{name:'Elbise',brand:'ZARA',price:'₺349',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},{name:'Sandalet',brand:'H&M',price:'₺199',img:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop'}] }
+            ]
+        };
+
+        Object.keys(CATALOG).forEach(function(g) {
+            localStorage.setItem('clothink_catalog_' + g, JSON.stringify(CATALOG[g]));
+        });
+
+        var users = [
+            { name:'Elif Yilmaz', email:'eliff@demo.com', gender:'kadin', username:'eliff', bio:'Moda tutkunu' },
+            { name:'Can Demir', email:'candemir@demo.com', gender:'erkek', username:'can_', bio:'Streetwear koleksiyoneri' },
+            { name:'Zeynep Kaya', email:'zeynepk@demo.com', gender:'kadin', username:'zeynepk', bio:'Minimalist tarz' },
+            { name:'Mert Han', email:'merthan@demo.com', gender:'erkek', username:'merthan', bio:'Sokak modasi' },
+            { name:'Deniz Can', email:'denizc@demo.com', gender:'erkek', username:'denizc', bio:'Sneakerhead' },
+            { name:'Selin Ay', email:'selinay@demo.com', gender:'kadin', username:'selinay', bio:'Renkli stiller' },
+            { name:'Ali Veli', email:'alin_v@demo.com', gender:'kadin', username:'alin_v', bio:'Vintage aski' },
+            { name:'Burak Koc', email:'burakx@demo.com', gender:'erkek', username:'burakx', bio:'Takim elbise sever' },
+            { name:'Nese Gul', email:'nesegul@demo.com', gender:'cocuk', username:'nese', bio:'Renkli cocuk modasi' },
+            { name:'Buglem Ak', email:'buglem@demo.com', gender:'cocuk', username:'buglem', bio:'Mini modaci' }
+        ];
+
+        var existingUsers = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+        users.forEach(function(u) {
+            var idx = existingUsers.findIndex(function(e) { return e.email === u.email; });
+            if (idx === -1) {
+                existingUsers.push({ name: u.name, email: u.email, password: '123456' });
+            }
+            profiles[u.email] = { username: u.username, bio: u.bio, gender: u.gender };
+
+            var cat = CATALOG[u.gender];
+            var userOutfits = [];
+
+            cat.forEach(function(c, ci) {
+                var outfit = {
+                    title: c.title + (ci > 0 ? ' ' + (ci+1) : ''),
+                    image: c.img,
+                    items: c.products ? c.products.length : parseInt(c.items),
+                    products: c.products || [],
+                    likes: c.likes
+                };
+                userOutfits.push(outfit);
+            });
+
+            var extraIdx = 0;
+            while (userOutfits.length < 3) {
+                var otherG = Object.keys(CATALOG);
+                for (var gi = 0; gi < otherG.length && userOutfits.length < 3; gi++) {
+                    var og = otherG[gi];
+                    if (og === u.gender) continue;
+                    var oc = CATALOG[og];
+                    if (extraIdx < oc.length) {
+                        userOutfits.push({
+                            title: oc[extraIdx].title + (userOutfits.length > 0 ? ' (' + og + ')' : ''),
+                            image: oc[extraIdx].img,
+                            items: oc[extraIdx].products ? oc[extraIdx].products.length : parseInt(oc[extraIdx].items),
+                            products: oc[extraIdx].products || [],
+                            likes: oc[extraIdx].likes
+                        });
+                    }
+                    extraIdx++;
+                }
+                break;
+            }
+
+            localStorage.setItem('clothink_outfits_' + u.email, JSON.stringify(userOutfits));
+            var userLikes = [];
+            users.forEach(function(other) {
+                if (other.email === u.email) return;
+                var otherCat = CATALOG[other.gender];
+                if (otherCat && otherCat.length) {
+                    userLikes.push(otherCat[0].img);
+                    if (otherCat.length > 1) userLikes.push(otherCat[1].img);
+                }
+            });
+            localStorage.setItem('clothink_likes_' + u.email, JSON.stringify(userLikes));
+        });
+
+        localStorage.setItem('clothink_users', JSON.stringify(existingUsers));
+        localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
+        localStorage.setItem('clothink_demo_ready', '1');
+
+        var count = existingUsers.length;
+        var totalOutfits = 0;
+        existingUsers.forEach(function(u) {
+            var o = JSON.parse(localStorage.getItem('clothink_outfits_' + u.email) || '[]');
+            totalOutfits += o.length;
+        });
+
+        document.getElementById('msg').style.display = 'block';
+        document.getElementById('info').textContent = count + ' kullanici - ' + totalOutfits + ' kombin - begeniler hazir';
+    }
+    </script>
+</body>
+</html>

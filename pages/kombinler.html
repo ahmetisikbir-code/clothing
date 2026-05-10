@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kombin Detay ? Clothink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .outfit-hero { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+
+        .outfit-hero-photo { border-radius:16px; overflow:hidden; height:600px; background-size:cover; background-position:center; }
+
+        .outfit-hero-info h1 { font-size:32px; font-weight:700; margin-bottom:8px; }
+
+        .outfit-hero-info .outfit-author { font-size:15px; color:#666; margin-bottom:24px; }
+
+        .product-list { display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
+
+        .product-item { display:flex; align-items:center; gap:12px; padding:12px; background:#f5f5f5; border-radius:8px; }
+
+        .product-thumb { width:48px; height:48px; border-radius:8px; background-size:cover; background-position:center; flex-shrink:0; }
+
+        .product-item h4 { font-size:14px; font-weight:600; }
+
+        .product-item p { font-size:12px; color:#888; }
+
+        .empty-detail { text-align:center; padding:80px 0; color:#999; }
+
+        .back-link { display:inline-block; margin-bottom:24px; font-size:13px; color:#888; text-decoration:none; }
+
+        .back-link:hover { color:#111; }
+
+        .outfit-card { cursor:pointer; }
+
+        .action-bar { display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; }
+
+        .action-bar button { border:none; padding:12px 24px; border-radius:100px; font-weight:600; cursor:pointer; font-size:13px; font-family:'Inter',sans-serif; transition:all 0.2s; }
+
+        .like-btn-action { background:#f5f5f5; color:#555; font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+
+        .like-btn-action:hover { background:#e8e8e8; }
+
+        .like-btn-action.liked { background:#0a0a0a; color:#fff; }
+
+        .share-btn-action { background:#f5f5f5; color:#555; font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+
+        .share-btn-action:hover { background:#e8e8e8; }
+
+        .save-btn-action { background:#f5f5f5; color:#555; font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+
+        .save-btn-action:hover { background:#e8e8e8; }
+
+        .save-btn-action.saved { background:#c9a84c; color:#fff; }
+
+
+
+        /* COMMENTS */
+
+        .comments-box { max-width:700px; margin:0 auto; padding:32px 0; }
+
+        .comments-box h3 { font-size:18px; font-weight:700; margin-bottom:20px; }
+
+        .comment-input-wrap { display:flex; gap:12px; margin-bottom:24px; }
+
+        .comment-input-wrap input { flex:1; padding:12px 16px; border:1px solid #ddd; border-radius:8px; font-family:'Inter',sans-serif; font-size:14px; outline:none; transition:border 0.2s; }
+
+        .comment-input-wrap input:focus { border-color:#111; }
+
+        .comment-input-wrap button { padding:12px 20px; border:none; border-radius:8px; background:#111; color:#fff; font-weight:600; cursor:pointer; font-size:13px; font-family:'Inter',sans-serif; white-space:nowrap; }
+
+        .comment-item { display:flex; gap:12px; padding:16px 0; border-bottom:1px solid #eee; }
+
+        .comment-avatar { width:36px; height:36px; border-radius:50%; background:#111; color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
+
+        .comment-body { flex:1; }
+
+        .comment-author { font-size:13px; font-weight:700; }
+
+        .comment-text { font-size:14px; color:#444; margin-top:4px; line-height:1.5; }
+
+        .comment-date { font-size:11px; color:#999; margin-top:4px; }
+
+        .dark .comment-item { border-bottom-color:#333; }
+
+        .dark .comment-text { color:#bbb; }
+
+        .dark .comment-input-wrap input { background:#333; color:#eee; border-color:#444; }
+
+        .dark .comments-box { background:transparent; }
+
+        .dark .comment-input-wrap input:focus { border-color:#888; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html">Kesfet</a></li>
+
+                <li><a href="kombinler.html" style="color:#111;font-weight:600;">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html">Clothink</a></li>
+
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+
+                <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
+
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="page-section" id="detailSection">
+
+        <div class="container" id="detailContainer"></div>
+
+    </section>
+
+
+
+    <section class="page-section" style="padding-top:0;">
+
+        <div class="container">
+
+            <h2 style="font-size:22px;font-weight:700;margin-bottom:24px;">Diger Kombinler</h2>
+
+            <div class="outfit-grid" id="otherGrid"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="page-section" id="commentsSection" style="background:#fafafa;padding-top:0;">
+
+        <div class="container">
+
+            <div id="commentsArea"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini olustur, tarzn kesfet.</p></div>
+
+                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="#">Trendler</a></div>
+
+                <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a><a href="#">Kullanm artlar</a><a href="#">Gizlilik</a></div>
+
+                <div><h5>Sosyal</h5><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a><a href="#">X</a></div>
+
+            </div>
+
+            <p class="footer-bottom"> 2026 Clothink. Tm haklar sakldr.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    function findEmailByUsername(username) {
+
+        var clean = username.replace('@','').toLowerCase();
+
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+        var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+        for (var i = 0; i < users.length; i++) {
+
+            var p = profiles[users[i].email] || {};
+
+            if (p.username && p.username.toLowerCase() === clean) return users[i].email;
+
+        }
+
+        return null;
+
+    }
+
+    function authorLink(author) {
+
+        var email = findEmailByUsername(author);
+
+        if (email) return 'kullanici.htmlSu=' + encodeURIComponent(email);
+
+        return 'kullanici.htmlSuser=' + encodeURIComponent(author.replace('@',''));
+
+    }
+
+    (function() {
+
+        var data = JSON.parse(localStorage.getItem('clothink_viewing_outfit') || 'null');
+
+        var container = document.getElementById('detailContainer');
+
+        if (!data) {
+
+            container.innerHTML = '<div class="empty-detail"><p>Kombin bulunamad.</p><a href="../index.html" class="btn-primary" style="margin-top:16px;">Ana Sayfaya Dn</a></div>';
+
+            return;
+
+        }
+
+        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+        var likes = user ? JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]') : [];
+
+        var saved = user ? (JSON.parse(localStorage.getItem('clothink_saves_' + user.email) || '[]')).indexOf(data.img) > -1 : false;
+
+        var liked = likes.indexOf(data.img) > -1;
+
+        // increment view count
+
+        var views = parseInt(localStorage.getItem('clothink_views_' + data.img.replace(/[^a-z0-9]/gi,'_')) || '0') + 1;
+
+        localStorage.setItem('clothink_views_' + data.img.replace(/[^a-z0-9]/gi,'_'), String(views));
+
+        var authorHtml = '<a href="' + authorLink(data.author) + '" class="outfit-author-link">' + data.author + '</a>';
+
+        var tagsHtml = data.tags && data.tags.length ? '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">' + data.tags.map(function(t){return '<span style="font-size:11px;color:#555;background:#f0f0f0;padding:4px 10px;border-radius:100px;">'+t+'</span>';}).join('') + '</div>' : '';
+
+        container.innerHTML = '<a href="javascript:history.back()" class="back-link">?? Geri</a><div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url(\'' + data.img + '\')"></div><div class="outfit-hero-info"><h1>' + (data.title || 'Kombin') + '</h1>' + tagsHtml + '<p class="outfit-author">' + authorHtml + '  ' + data.likes + ' begeni  ' + views + ' grntlenme</p><p style="color:#666;line-height:1.7;margin-bottom:24px;">' + (data.desc || '') + '</p><h5 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:12px;">KOMBNDEK ?RUNLER</h5><div class="product-list" id="productList"></div><div class="action-bar"><button id="detailLikeBtn" class="' + (liked ? 'like-btn-action liked' : 'like-btn-action') + '" onclick="toggleLike()">' + (data.likes || 0) + '</button><button id="detailSaveBtn" class="' + (saved ? 'save-btn-action saved' : 'save-btn-action') + '" onclick="toggleSave()">' + (saved ? 'Kaydedildi' : 'Kaydet') + '</button><button class="share-btn-action" onclick="shareOutfit()">Payla?</button><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Satn alma islemi iin markann sitesine ynlendirileceksiniz.\')">Kombini Satn Al</button></div></div></div>';
+
+        var list = document.getElementById('productList');
+
+        if (data.products && data.products.length) {
+
+            data.products.forEach(function(p) {
+
+                var div = document.createElement('div');
+
+                div.className = 'product-item';
+
+                var shopLink = p.url ? ' <a href="' + p.url + '" target="_blank" style="color:#111;font-weight:600;text-decoration:none;font-size:12px;">Satn Al ?</a>' : '';
+
+                var cartBtn = ' <button onclick="event.stopPropagation();addToCart(\'' + p.name.replace(/'/g,"\\'") + '\',\'' + p.brand.replace(/'/g,"\\'") + '\',\'' + (p.price||'??0') + '\',\'' + p.img + '\')" style="background:none;border:none;cursor:pointer;font-size:11px;padding:2px 8px;letter-spacing:1px;text-transform:uppercase;color:#888;transition:color 0.2s;" title="Sepete Ekle">Sepet</button>';
+
+                div.innerHTML = '<div class="product-thumb" style="background-image:url(\'' + p.img + '\')"></div><div style="flex:1;"><h4>' + p.name + '</h4><p>' + p.brand + '  ' + p.price + shopLink + cartBtn + '</p></div>';
+
+                list.appendChild(div);
+
+            });
+
+        }
+
+        window.toggleLike = function() {
+
+            user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+            if (!user) { window.location.href = 'giris.html'; return; }
+
+            likes = JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]');
+
+            var idx = likes.indexOf(data.img);
+
+            var btn = document.getElementById('detailLikeBtn');
+
+            if (idx > -1) { likes.splice(idx, 1); btn.classList.remove('liked'); data.likes = Math.max(0, (data.likes || 0) - 1); }
+
+            else { likes.push(data.img); btn.classList.add('liked'); data.likes = (data.likes || 0) + 1; }
+
+            localStorage.setItem('clothink_likes_' + user.email, JSON.stringify(likes));
+
+            btn.textContent = '' + data.likes + '';
+
+        };
+
+        window.shareOutfit = function() {
+
+            var text = (data.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
+
+            if (navigator.share) { navigator.share({ title: data.title || 'Kombin', text: text }); }
+
+            else { prompt('Linki kopyala:', window.location.href); }
+
+        };
+
+        var grid = document.getElementById('otherGrid');
+
+        var allOutfits = [];
+
+        ['kadin','erkek','cocuk'].forEach(function(g) {
+
+            var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
+
+            if (cat) allOutfits = allOutfits.concat(cat);
+
+        });
+
+        if (allOutfits.length === 0) {
+
+            grid.innerHTML = '<p style="color:#999;grid-column:1/-1;text-align:center;padding:40px 0;">Diger kombinler yklenemedi.</p>';
+
+            return;
+
+        }
+
+        var others = allOutfits.filter(function(o) { return o.img !== data.img; }).slice(0, 4);
+
+        others.forEach(function(o) {
+
+            var div = document.createElement('div');
+
+            div.className = 'outfit-card';
+
+            div.dataset.img = o.img;
+
+            var liked2 = likes.indexOf(o.img) > -1;
+
+            var authorHtml2 = '<a href="' + authorLink(o.author) + '" class="outfit-author-link" onclick="event.stopPropagation()">' + o.author + '</a>';
+
+            div.innerHTML = '<div class="outfit-photo" style="background-image:url(\'' + o.img + '\')"></div><div class="outfit-info"><div><p class="outfit-author">' + authorHtml2 + '</p><p class="outfit-items">' + o.items + '</p></div><p class="outfit-like" style="' + (liked2 ? 'color:#e74c3c' : '') + '">' + o.likes + '</p></div>';
+
+            div.addEventListener('click', function(e) {
+
+                if (e.target.closest('.outfit-author-link')) return;
+
+                localStorage.setItem('clothink_viewing_outfit', JSON.stringify(o));
+
+                window.location.reload();
+
+            });
+
+            grid.appendChild(div);
+
+        });
+
+
+
+        // toggle save
+
+        window.toggleSave = function() {
+
+            user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+            if (!user) { window.location.href = 'giris.html'; return; }
+
+            var saves = JSON.parse(localStorage.getItem('clothink_saves_' + user.email) || '[]');
+
+            var idx = saves.indexOf(data.img);
+
+            var btn = document.getElementById('detailSaveBtn');
+
+            if (idx > -1) { saves.splice(idx, 1); btn.classList.remove('saved'); btn.textContent = 'Kaydet'; }
+
+            else { saves.push(data.img); btn.classList.add('saved'); btn.textContent = 'Kaydedildi'; }
+
+            localStorage.setItem('clothink_saves_' + user.email, JSON.stringify(saves));
+
+        };
+
+
+
+        // COMMENTS
+
+        var commentKey = 'clothink_comments_' + data.img.replace(/[^a-z0-9]/gi,'_');
+
+        var comments = JSON.parse(localStorage.getItem(commentKey) || '[]');
+
+        var ca = document.getElementById('commentsArea');
+
+        function renderComments() {
+
+            var html = '<div class="comments-box"><h3>Yorumlar (' + comments.length + ')</h3><div class="comment-input-wrap"><input id="commentInput" placeholder="Yorum yaz..." onkeydown="if(event.key===\'Enter\')postComment()"><button onclick="postComment()">Gnder</button></div>';
+
+            if (comments.length === 0) html += '<p style="color:#999;font-size:14px;">Henz yorum yok. lk yorumu sen yap!</p>';
+
+            comments.forEach(function(c) {
+
+                var initial = (c.name || '?').charAt(0).toUpperCase();
+
+                html += '<div class="comment-item"><div class="comment-avatar">' + initial + '</div><div class="comment-body"><div class="comment-author">' + c.name + '</div><div class="comment-text">' + c.text + '</div><div class="comment-date">' + new Date(c.date).toLocaleDateString('tr-TR') + '</div></div></div>';
+
+            });
+
+            html += '</div>';
+
+            ca.innerHTML = html;
+
+        }
+
+        window.postComment = function() {
+
+            user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+            if (!user) { window.location.href = 'giris.html'; return; }
+
+            var input = document.getElementById('commentInput');
+
+            var text = input.value.trim();
+
+            if (!text) return;
+
+            comments.push({ name: user.name || 'Kullanc', text: text, date: new Date().toISOString() });
+
+            localStorage.setItem(commentKey, JSON.stringify(comments));
+
+            input.value = '';
+
+            renderComments();
+
+            // notify outfit author if different user
+
+            // (in a real app we'd look up the author email)
+
+        };
+
+        renderComments();
+
+    })();
+
+    </script>
+
+</body>
+
+</html>

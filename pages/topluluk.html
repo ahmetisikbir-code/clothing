@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Topluluk ? Clothink</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .challenge-card { padding:24px; background:#f5f5f5; border-radius:12px; margin-bottom:16px; }
+
+        .challenge-card h3 { font-size:18px; font-weight:700; margin-bottom:8px; }
+
+        .challenge-card p { color:#666; font-size:14px; line-height:1.6; }
+
+        .challenge-meta { display:flex; gap:16px; margin-top:12px; font-size:12px; color:#999; }
+
+        .join-btn { padding:6px 16px; border-radius:100px; background:#111; color:#fff; border:none; cursor:pointer; font-size:12px; font-family:'Inter',sans-serif; }
+
+        .dark .challenge-card { background:#252525; }
+
+        .dark .challenge-card h3 { color:#eee; }
+
+        .dark .challenge-card p { color:#999; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar"><div class="container"><div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><ul class="nav-links"><li><a href="kesfet.html">Kesfet</a></li><li><a href="kombinler.html">Kombinler</a></li><li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li><li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li><li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li><li><a href="giris.html" class="btn-primary">Giris</a></li><li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li></ul></div></nav>
+
+    <section class="page-header"><div class="container"><h1>Topluluk</h1><p>Challenge'lara katl, kombini gster!</p></div></section>
+
+    <section class="page-section">
+
+        <div class="container" id="challengeGrid"></div>
+
+    </section>
+
+    <footer class="footer">...</footer>
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    (function(){
+
+        var challenges = [
+
+            { title:'Yaz Kombini Challenge', desc:'En yaratc yaz kombinini olustur ve paylas! En ok begeni alan kazanr.', participants:12, deadline:'15 Haziran' },
+
+            { title:'? Sokak Stili Challenge', desc:'Gnlk sokak stilini yanstan bir kombin yap. ?zgnlk nemli!', participants:8, deadline:'20 Haziran' },
+
+            { title:' Ofis kls Challenge', desc:'? hayatnda ?k ve profesyonel bir kombin olustur.', participants:5, deadline:'25 Haziran' }
+
+        ];
+
+        var grid=document.getElementById('challengeGrid');
+
+        challenges.forEach(function(c){
+
+            var div=document.createElement('div');
+
+            div.className='challenge-card';
+
+            div.innerHTML='<h3>'+c.title+'</h3><p>'+c.desc+'</p><div class="challenge-meta"><span>'+c.participants+' katlmc</span><span>'+c.deadline+'</span><button class="join-btn" onclick="alert(\'Challenge\'a katldn!\\nKombinini olustur ve #\'+this.parentElement.parentElement.querySelector(\'h3\').textContent.split(\' \')[0]+\' etiketiyle paylas.\')">Katl</button></div>';
+
+            grid.appendChild(div);
+
+        });
+
+    })();
+
+    </script>
+
+</body>
+
+</html>

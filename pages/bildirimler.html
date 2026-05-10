@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bildirimler ? Clothink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .notif-item { display:flex; gap:12px; padding:16px; border-radius:8px; margin-bottom:8px; background:#f5f5f5; align-items:center; cursor:pointer; transition:background 0.2s; }
+
+        .notif-item:hover { background:#eee; }
+
+        .notif-item.unread { border-left:3px solid #e74c3c; background:#fdf2f2; }
+
+        .notif-icon { font-size:20px; }
+
+        .notif-body { flex:1; }
+
+        .notif-body p { font-size:14px; color:#333; margin-bottom:2px; }
+
+        .notif-body span { font-size:11px; color:#999; }
+
+        .notif-empty { text-align:center; padding:60px 0; color:#999; }
+
+        .dark .notif-item { background:#252525; }
+
+        .dark .notif-item:hover { background:#333; }
+
+        .dark .notif-item.unread { background:#2a1a1a; border-left-color:#e74c3c; }
+
+        .dark .notif-body p { color:#ccc; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html">Kesfet</a></li>
+
+                <li><a href="kombinler.html">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html">Clothink</a></li>
+
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+
+                <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
+
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="page-header">
+
+        <div class="container">
+
+            <h1>Bildirimler</h1>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="page-section">
+
+        <div class="container" id="notifList"></div>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini olustur, tarzn kesfet.</p></div>
+
+                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a></div>
+
+                <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a></div>
+
+                <div><h5>Sosyal</h5><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a></div>
+
+            </div>
+
+            <p class="footer-bottom"> 2026 Clothink. Tm haklar sakldr.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    (function() {
+
+        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+        if (!user) { document.getElementById('notifList').innerHTML = '<div class="notif-empty"><p>Bildirimleri grmek iin giri? yap.</p><a href="giris.html" class="btn-primary" style="margin-top:16px;">Giris Yap</a></div>'; return; }
+
+        var notifs = JSON.parse(localStorage.getItem('clothink_notifs_' + user.email) || '[]');
+
+        var list = document.getElementById('notifList');
+
+        if (notifs.length === 0) { list.innerHTML = '<div class="notif-empty"><p>Henz bildirimin yok.</p></div>'; return; }
+
+        var html = '';
+
+        notifs.forEach(function(n, i) {
+
+            var icon = n.type === 'like' ? '' : n.type === 'follow' ? '' : n.type === 'comment' ? '' : '';
+
+            html += '<div class="notif-item' + (!n.read ? ' unread' : '') + '" onclick="markRead(' + i + ')"><div class="notif-icon">' + icon + '</div><div class="notif-body"><p>' + n.message + '</p><span>' + new Date(n.date).toLocaleDateString('tr-TR') + '</span></div></div>';
+
+        });
+
+        list.innerHTML = html;
+
+        window.markRead = function(idx) {
+
+            var notifs = JSON.parse(localStorage.getItem('clothink_notifs_' + user.email) || '[]');
+
+            if (notifs[idx]) { notifs[idx].read = true; localStorage.setItem('clothink_notifs_' + user.email, JSON.stringify(notifs)); }
+
+            window.location.reload();
+
+        };
+
+        // mark all as read
+
+        notifs.forEach(function(n) { n.read = true; });
+
+        localStorage.setItem('clothink_notifs_' + user.email, JSON.stringify(notifs));
+
+    })();
+
+    </script>
+
+</body>
+
+</html>

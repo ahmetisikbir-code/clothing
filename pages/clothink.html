@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clothink ? Marka Profili</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .brand-hero { padding:80px 0 60px; text-align:center; background:#fff; border-bottom:1px solid #eee; }
+
+        .brand-hero .logo-big { display:inline-flex; align-items:center; gap:12px; margin-bottom:16px; }
+
+        .brand-hero .logo-big .monogram { width:56px; height:56px; background:#111; color:#fff; border-radius:14px; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:28px; font-weight:700; }
+
+        .brand-hero .logo-big .brand-name { font-size:36px; font-weight:800; letter-spacing:4px; }
+
+        .brand-hero h1 { font-size:48px; font-weight:700; letter-spacing:-1px; margin-bottom:12px; }
+
+        .brand-hero p { color:#888; font-size:16px; max-width:560px; margin:0 auto 24px; line-height:1.7; }
+
+        .brand-hero .brand-badge { display:inline-block; padding:6px 16px; border-radius:100px; font-size:12px; font-weight:600; background:#f0f0f0; color:#555; margin-bottom:20px; }
+
+
+
+        .stats-row { display:flex; gap:48px; justify-content:center; padding:40px 0; background:#fafafa; border-bottom:1px solid #eee; }
+
+        .stat-item { text-align:center; }
+
+        .stat-item .num { font-size:32px; font-weight:700; }
+
+        .stat-item .label { font-size:13px; color:#888; margin-top:4px; }
+
+
+
+        .about-section { padding:80px 0; background:#fff; }
+
+        .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+
+        .about-text h2 { font-size:32px; font-weight:700; margin-bottom:20px; }
+
+        .about-text p { color:#666; line-height:1.8; font-size:15px; margin-bottom:16px; }
+
+        .about-visual { border-radius:16px; overflow:hidden; height:400px; background-size:cover; background-position:center; }
+
+
+
+        .team-section { padding:80px 0; background:#fafafa; }
+
+        .team-section h2 { text-align:center; font-size:32px; font-weight:700; margin-bottom:40px; }
+
+        .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+
+        .team-card { text-align:center; background:#fff; border-radius:12px; padding:32px 20px; }
+
+        .team-avatar { width:72px; height:72px; border-radius:50%; background:#111; color:#fff; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:700; font-family:'Playfair Display',serif; margin:0 auto 12px; }
+
+        .team-card h4 { font-size:15px; font-weight:600; }
+
+        .team-card p { font-size:13px; color:#888; }
+
+
+
+        .featured-outfits { padding:80px 0; background:#fff; }
+
+        .featured-outfits h2 { text-align:center; font-size:32px; font-weight:700; margin-bottom:40px; }
+
+        .outfit-card { cursor:pointer; }
+
+
+
+        .cta-brand { padding:80px 0; background:#111; color:#fff; text-align:center; }
+
+        .cta-brand h2 { font-size:36px; font-weight:700; margin-bottom:12px; letter-spacing:-1px; }
+
+        .cta-brand p { color:rgba(255,255,255,0.6); font-size:15px; margin-bottom:24px; }
+
+        .cta-brand .btn-primary { background:#fff; color:#111; }
+
+        .cta-brand .btn-primary:hover { background:#eee; }
+
+
+
+        .brand-footer-links { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
+
+        .brand-footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:13px; transition:color 0.2s; }
+
+        .brand-footer-links a:hover { color:#fff; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html">Kesfet</a></li>
+
+                <li><a href="kombinler.html">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html" style="color:#111;font-weight:600;">Clothink</a></li>
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+                <li><button id="darkToggle" style="background:none;border:none;font-size:11px;cursor:pointer;padding:4px 10px;letter-spacing:1px;text-transform:uppercase;border:1px solid #ddd;color:#666;transition:all 0.3s;">Koyu</button></li>
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="brand-hero">
+
+        <div class="container">
+
+            <div class="logo-big">
+
+                <div class="monogram" id="brandAvatar"><img id="brandAvatarImg" style="width:56px;height:56px;border-radius:14px;display:none;"><span id="brandAvatarFallback" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;">CT</span></div>
+
+                <span class="brand-name">CLOTHINK</span>
+
+            </div>
+
+            <p>Moday herkes iin erisilebilir ve yaratc klmak iin kurulduk. Clothink, dnyann drt bir yanndaki moda severleri bir araya getiren bir platformdur.</p>
+
+            <div class="brand-badge">? stanbul, Trkiye</div>
+
+            <div class="brand-badge" style="margin-left:8px;"> 2024'ten beri</div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="stats-row" id="statsRow">
+
+        <div class="stat-item"><div class="num" id="statUsers">0</div><div class="label">kullanc</div></div>
+
+        <div class="stat-item"><div class="num" id="statOutfits">0</div><div class="label">kombin</div></div>
+
+        <div class="stat-item"><div class="num" id="statLikes">0</div><div class="label">begeni</div></div>
+
+        <div class="stat-item"><div class="num" id="statBrands">24</div><div class="label">marka</div></div>
+
+    </section>
+
+
+
+    <section class="about-section">
+
+        <div class="container">
+
+            <div class="about-grid">
+
+                <div class="about-text">
+
+                    <h2>Hikayemiz</h2>
+
+                    <p>Clothink, moda tutkunlarnn kendi tarzlarn yaratabilecegi, kombinlerini paylasabileceSi ve ilham alabileceSi bir platform olarak dogdu.</p>
+
+                    <p>Nike'tan Zara'ya, Adidas'tan Mango'ya yzlerce markann rnn tek bir tuvalde birlestiriyor, kullanclarmzn kendi tarzlarn zgrce ifade etmelerine olanak tanyoruz.</p>
+
+                    <p>Herkesin bir moda ikonu olabileceSine inanyoruz. Clothink ile ifadeni zgrce yarat.</p>
+
+                </div>
+
+                <div class="about-visual" style="background-image:url('https://images.pexels.com/photos/996329/pexels-photo-996329.jpegSauto=compress&cs=tinysrgb&w=700&h=500&dpr=1')"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="team-section">
+
+        <div class="container">
+
+            <h2>Ekibimiz</h2>
+
+            <div class="team-grid">
+
+                <div class="team-card"><div class="team-avatar">A</div><h4>Ahmet Y.</h4><p>Kurucu & CEO</p></div>
+
+                <div class="team-card"><div class="team-avatar">E</div><h4>Elif D.</h4><p>Creative Director</p></div>
+
+                <div class="team-card"><div class="team-avatar">C</div><h4>Can K.</h4><p>Lead Developer</p></div>
+
+                <div class="team-card"><div class="team-avatar">Z</div><h4>Zeynep A.</h4><p>Community Manager</p></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="featured-outfits">
+
+        <div class="container">
+
+            <h2>?ne ?kan Kombinler</h2>
+
+            <div class="outfit-grid" id="brandFeed"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <div style="text-align:center;padding:20px 0;background:#f5f5f5;">
+
+        <button onclick="localStorage.removeItem('clothink_brand_outfits_v3');localStorage.removeItem('clothink_avatar_clothink@brand.clothink');localStorage.removeItem('clothink_outfits_clothink@brand.clothink');window.location.reload();" style="padding:8px 20px;border:1px solid #ddd;border-radius:100px;background:transparent;color:#888;cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;">Marka Verilerini Sfrla</button>
+
+    </div>
+
+    <section class="cta-brand">
+
+        <div class="container">
+
+            <h2>Sen de katl</h2>
+
+            <p>Binlerce kullancya katl, kombinini olustur ve dnyayla paylas.</p>
+
+            <a href="kaydol.html" class="btn-primary btn-large">?cretsiz Katl</a>
+
+            <div class="brand-footer-links">
+
+                <a href="#">Instagram</a>
+
+                <a href="#">TikTok</a>
+
+                <a href="#">Pinterest</a>
+
+                <a href="#">X</a>
+
+                <a href="#">YouTube</a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini olustur, tarzn kesfet.</p></div>
+
+                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="blog.html">Blog</a><a href="topluluk.html">Topluluk</a><a href="admin.html">Admin</a></div>
+
+                <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a><a href="#">Kullanm artlar</a><a href="#">Gizlilik</a></div>
+
+                <div><h5>Sosyal</h5><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a><a href="#">X</a></div>
+
+            </div>
+
+            <p class="footer-bottom"> 2026 Clothink. Tm haklar sakldr.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    (function() {
+
+        var BRAND_EMAIL = 'clothink@brand.clothink';
+
+
+
+        // generate CT logo avatar if not exists
+
+        (function() {
+
+            var avatar = localStorage.getItem('clothink_avatar_' + BRAND_EMAIL);
+
+            if (!avatar) {
+
+                var c = document.createElement('canvas'); c.width = 160; c.height = 160;
+
+                var ctx = c.getContext('2d');
+
+                ctx.fillStyle = '#111'; ctx.beginPath();
+
+                var r = 32, w = 160, h = 160;
+
+                ctx.moveTo(r, 0); ctx.lineTo(w - r, 0); ctx.quadraticCurveTo(w, 0, w, r);
+
+                ctx.lineTo(w, h - r); ctx.quadraticCurveTo(w, h, w - r, h);
+
+                ctx.lineTo(r, h); ctx.quadraticCurveTo(0, h, 0, h - r);
+
+                ctx.lineTo(0, r); ctx.quadraticCurveTo(0, 0, r, 0);
+
+                ctx.closePath(); ctx.fill();
+
+                ctx.fillStyle = '#fff'; ctx.font = 'bold 64px "Playfair Display", serif';
+
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('CT', 80, 84);
+
+                localStorage.setItem('clothink_avatar_' + BRAND_EMAIL, c.toDataURL('image/png'));
+
+            }
+
+        })();
+
+
+
+        // show avatar on page
+
+        var avatarData = localStorage.getItem('clothink_avatar_' + BRAND_EMAIL);
+
+        if (avatarData) {
+
+            document.getElementById('brandAvatarImg').src = avatarData;
+
+            document.getElementById('brandAvatarImg').style.display = 'block';
+
+            document.getElementById('brandAvatarFallback').style.display = 'none';
+
+        }
+
+
+
+        // count stats
+
+        function countAll() {
+
+            var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+            var totalOutfits = 0;
+
+            var totalLikes = 0;
+
+            users.forEach(function(u) {
+
+                var o = JSON.parse(localStorage.getItem('clothink_outfits_' + u.email) || '[]');
+
+                totalOutfits += o.length;
+
+                o.forEach(function(oo) { totalLikes += oo.likes || 0; });
+
+                var l = JSON.parse(localStorage.getItem('clothink_likes_' + u.email) || '[]');
+
+                totalLikes += l.length;
+
+            });
+
+            ['kadin','erkek','cocuk'].forEach(function(g) {
+
+                var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
+
+                if (cat) totalOutfits += cat.length;
+
+            });
+
+            return { users: users.length, outfits: totalOutfits, likes: totalLikes };
+
+        }
+
+        var stats = countAll();
+
+        document.getElementById('statUsers').textContent = stats.users;
+
+        document.getElementById('statOutfits').textContent = stats.outfits;
+
+        document.getElementById('statLikes').textContent = stats.likes;
+
+
+
+        // add profile button
+
+</body>
+
+</html>

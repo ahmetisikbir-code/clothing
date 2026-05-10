@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin ? Clothink</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .admin-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:40px; }
+
+        .admin-card { padding:24px; background:#f5f5f5; border-radius:12px; text-align:center; }
+
+        .admin-card .num { font-size:36px; font-weight:700; }
+
+        .admin-card .label { font-size:13px; color:#888; margin-top:4px; }
+
+        .admin-table { width:100%; border-collapse:collapse; }
+
+        .admin-table th, .admin-table td { padding:10px 16px; text-align:left; border-bottom:1px solid #eee; font-size:13px; }
+
+        .admin-table th { font-weight:600; color:#555; text-transform:uppercase; font-size:11px; letter-spacing:1px; }
+
+        .admin-actions { display:flex; gap:8px; }
+
+        .admin-actions button { padding:4px 12px; border-radius:6px; border:1px solid #ddd; background:transparent; cursor:pointer; font-size:12px; font-family:'Inter',sans-serif; }
+
+        .admin-actions .del:hover { background:#ffe0e0; border-color:#e74c3c; color:#e74c3c; }
+
+        .dark .admin-card { background:#252525; }
+
+        .dark .admin-card .num { color:#fff; }
+
+        .dark .admin-table td { border-color:#333; color:#ccc; }
+
+        .dark .admin-table th { color:#999; }
+
+        .dark .admin-actions button { border-color:#444; color:#ccc; }
+
+        .dark .admin-actions .del:hover { background:#2a1a1a; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar"><div class="container"><div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><ul class="nav-links"><li><a href="kesfet.html">Kesfet</a></li><li><a href="kombinler.html">Kombinler</a></li><li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li><li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li><li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li><li><a href="giris.html" class="btn-primary">Giris</a></li><li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li></ul></div></nav>
+
+    <section class="page-header"><div class="container"><h1>Admin Paneli</h1><p>Platform istatistikleri ve ynetim</p></div></section>
+
+    <section class="page-section">
+
+        <div class="container">
+
+            <div class="admin-grid" id="statsGrid"></div>
+
+            <h2 style="font-size:20px;font-weight:700;margin-bottom:16px;">Kullanclar</h2>
+
+            <table class="admin-table" id="userTable"><thead><tr><th>sim</th><th>Email</th><th>Kombin</th><th>BeSeni</th><th>?lem</th></tr></thead><tbody id="userTableBody"></tbody></table>
+
+        </div>
+
+    </section>
+
+    <br><br>
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    (function(){
+
+        var users=JSON.parse(localStorage.getItem('clothink_users')||'[]');
+
+        var profiles=JSON.parse(localStorage.getItem('clothink_profiles')||'{}');
+
+        var totalOutfits=0, totalLikes=0;
+
+        users.forEach(function(u){
+
+            var o=JSON.parse(localStorage.getItem('clothink_outfits_'+u.email)||'[]');
+
+            totalOutfits+=o.length;
+
+            o.forEach(function(oo){totalLikes+=oo.likes||0;});
+
+            var l=JSON.parse(localStorage.getItem('clothink_likes_'+u.email)||'[]');
+
+            totalLikes+=l.length;
+
+        });
+
+        ['kadin','erkek','cocuk'].forEach(function(g){
+
+            var c=JSON.parse(localStorage.getItem('clothink_catalog_'+g)||'null');
+
+            if(c) totalOutfits+=c.length;
+
+        });
+
+        document.getElementById('statsGrid').innerHTML='<div class="admin-card"><div class="num">'+users.length+'</div><div class="label">Kullanc</div></div><div class="admin-card"><div class="num">'+totalOutfits+'</div><div class="label">Kombin</div></div><div class="admin-card"><div class="num">'+totalLikes+'</div><div class="label">BeSeni</div></div>';
+
+
+
+        var tbody=document.getElementById('userTableBody');
+
+        users.forEach(function(u){
+
+            var p=profiles[u.email]||{};
+
+            var o=JSON.parse(localStorage.getItem('clothink_outfits_'+u.email)||'[]');
+
+            var l=JSON.parse(localStorage.getItem('clothink_likes_'+u.email)||'[]');
+
+            var tr=document.createElement('tr');
+
+            tr.innerHTML='<td>'+(p.username||u.name||'?')+'</td><td>'+u.email+'</td><td>'+o.length+'</td><td>'+l.length+'</td><td class="admin-actions"><button onclick="window.location.href=\'kullanici.htmlSu='+encodeURIComponent(u.email)+'\'">Git</button><button class="del" onclick="if(confirm(\'Kullanc silinsin mi?\')){var us=JSON.parse(localStorage.getItem(\'clothink_users\')||\'[]\');var idx=us.findIndex(function(x){return x.email===\''+u.email+'\'});if(idx>-1){us.splice(idx,1);localStorage.setItem(\'clothink_users\',JSON.stringify(us));localStorage.removeItem(\'clothink_outfits_\'+u.email);localStorage.removeItem(\'clothink_likes_\'+u.email);localStorage.removeItem(\'clothink_profiles_\'+u.email);window.location.reload();}}">Sil</button></td>';
+
+            tbody.appendChild(tr);
+
+        });
+
+    })();
+
+    </script>
+
+    <footer class="footer" style="background:#0a0a0a;"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="footer-logo" style="color:#fff;"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c" style="-webkit-text-stroke-color:#fff;">C</span><span class="ct-t" style="color:#fff;">T</span></span></span><span class="logo-text" style="color:#fff;">CLOTHINK</span></div><p style="color:rgba(255,255,255,0.3);">Kombinini olustur, tarzini kesfet.</p></div><div><h5 style="color:rgba(255,255,255,0.3);">Platform</h5><a href="kesfet.html" style="color:rgba(255,255,255,0.5);">Kesfet</a><a href="kombinler.html" style="color:rgba(255,255,255,0.5);">Kombinler</a><a href="markalar.html" style="color:rgba(255,255,255,0.5);">Markalar</a><a href="clothink.html" style="color:rgba(255,255,255,0.5);">Clothink</a></div><div><h5 style="color:rgba(255,255,255,0.3);">Topluluk</h5><a href="#" style="color:rgba(255,255,255,0.5);">Blog</a><a href="#" style="color:rgba(255,255,255,0.5);">Yardim</a></div><div><h5 style="color:rgba(255,255,255,0.3);">Sosyal</h5><a href="#" style="color:rgba(255,255,255,0.5);">Instagram</a><a href="#" style="color:rgba(255,255,255,0.5);">X</a></div></div><p class="footer-bottom" style="color:rgba(255,255,255,0.15);border-top-color:rgba(255,255,255,0.06);">© 2026 Clothink</p></div></footer>
+</body>
+
+</html>

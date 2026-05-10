@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sepet ? Clothink</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .cart-item { display:flex; gap:16px; padding:16px; background:#f5f5f5; border-radius:12px; margin-bottom:12px; align-items:center; }
+
+        .cart-thumb { width:64px; height:64px; border-radius:8px; background-size:cover; background-position:center; flex-shrink:0; }
+
+        .cart-info { flex:1; }
+
+        .cart-info h4 { font-size:14px; font-weight:600; }
+
+        .cart-info p { font-size:12px; color:#888; }
+
+        .cart-remove { background:none; border:none; font-size:18px; cursor:pointer; color:#999; padding:8px; }
+
+        .cart-remove:hover { color:#e74c3c; }
+
+        .cart-summary { padding:24px; background:#f5f5f5; border-radius:12px; margin-top:24px; text-align:center; }
+
+        .cart-summary h3 { font-size:20px; margin-bottom:8px; }
+
+        .cart-empty { text-align:center; padding:80px 0; color:#999; }
+
+        .dark .cart-item { background:#252525; }
+
+        .dark .cart-summary { background:#252525; }
+
+        .dark .cart-info h4 { color:#eee; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar"><div class="container"><div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><ul class="nav-links"><li><a href="kesfet.html">Kesfet</a></li><li><a href="kombinler.html">Kombinler</a></li><li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li><li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li><li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li><li><a href="giris.html" class="btn-primary">Giris</a></li><li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li></ul></div></nav>
+
+    <section class="page-header"><div class="container"><h1>Sepet</h1></div></section>
+
+    <section class="page-section"><div class="container" id="cartContainer"></div></section>
+
+    <footer class="footer" style="background:#0a0a0a;"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="footer-logo" style="color:#fff;"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c" style="-webkit-text-stroke-color:#fff;">C</span><span class="ct-t" style="color:#fff;">T</span></span></span><span class="logo-text" style="color:#fff;">CLOTHINK</span></div><p style="color:rgba(255,255,255,0.3);">Kombinini olustur, tarzn kesfet.</p></div><div><h5 style="color:rgba(255,255,255,0.3);">Platform</h5><a href="kesfet.html" style="color:rgba(255,255,255,0.5);">Kesfet</a><a href="kombinler.html" style="color:rgba(255,255,255,0.5);">Kombinler</a><a href="markalar.html" style="color:rgba(255,255,255,0.5);">Markalar</a><a href="clothink.html" style="color:rgba(255,255,255,0.5);">Clothink</a></div><div><h5 style="color:rgba(255,255,255,0.3);">Topluluk</h5><a href="#" style="color:rgba(255,255,255,0.5);">Blog</a><a href="#" style="color:rgba(255,255,255,0.5);">Yardm</a></div><div><h5 style="color:rgba(255,255,255,0.3);">Sosyal</h5><a href="#" style="color:rgba(255,255,255,0.5);">Instagram</a><a href="#" style="color:rgba(255,255,255,0.5);">X</a></div></div><p class="footer-bottom" style="color:rgba(255,255,255,0.15);border-top-color:rgba(255,255,255,0.06);"> 2026 Clothink</p></div></footer>
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    (function() {
+
+        var user = JSON.parse(localStorage.getItem('clothink_user')||'null');
+
+        var container = document.getElementById('cartContainer');
+
+        if (!user) { container.innerHTML='<div class="cart-empty"><p>Sepeti grmek iin giri? yap.</p><a href="giris.html" class="btn-primary" style="margin-top:16px;">Giris Yap</a></div>'; return; }
+
+        var cart = JSON.parse(localStorage.getItem('clothink_cart_'+user.email)||'[]');
+
+        if (cart.length===0) { container.innerHTML='<div class="cart-empty"><p>Sepetin bo?.</p><a href="kesfet.html" class="btn-primary" style="margin-top:16px;">Kombinleri Kesfet</a></div>'; return; }
+
+        var html=''; var total=0;
+
+        cart.forEach(function(item,i){
+
+            total += parseInt((item.price||'0').replace(/[^0-9]/g,''));
+
+            html+='<div class="cart-item"><div class="cart-thumb" style="background-image:url(\''+item.img+'\')"></div><div class="cart-info"><h4>'+item.name+'</h4><p>'+item.brand+'  '+item.price+'</p></div><button class="cart-remove" onclick="removeFromCart('+i+')">?</button></div>';
+
+        });
+
+        html+='<div class="cart-summary"><h3>Toplam: ??'+total.toLocaleString('tr-TR')+'</h3><p style="color:#888;font-size:13px;margin-bottom:16px;">'+cart.length+' rn</p><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Sipari? alnd! (Demo)\');localStorage.removeItem(\'clothink_cart_'+user.email+'\');window.location.reload();">SipariSi Tamamla</button></div>';
+
+        container.innerHTML=html;
+
+        window.removeFromCart=function(idx){
+
+            var c=JSON.parse(localStorage.getItem('clothink_cart_'+user.email)||'[]');
+
+            c.splice(idx,1); localStorage.setItem('clothink_cart_'+user.email,JSON.stringify(c)); window.location.reload();
+
+        };
+
+    })();
+
+    </script>
+
+</body>
+
+</html>

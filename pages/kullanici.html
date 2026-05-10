@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kullanc ? Clothink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .profile-header { display:flex; align-items:center; gap:32px; padding:60px 0 40px; border-bottom:1px solid #eee; }
+
+        .profile-avatar { width:80px; height:80px; border-radius:50%; background:#111; color:#fff; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:700; font-family:'Playfair Display',serif; overflow:hidden; flex-shrink:0; }
+
+        .profile-avatar img { width:100%; height:100%; object-fit:cover; }
+
+        .profile-info h1 { font-size:28px; font-weight:700; margin-bottom:4px; }
+
+        .profile-info .username { color:#888; font-size:14px; margin-bottom:4px; }
+
+        .profile-info .bio { color:#555; font-size:14px; line-height:1.6; }
+
+        .profile-stats { display:flex; gap:32px; margin-top:12px; }
+
+        .profile-stats span { font-size:14px; color:#555; }
+
+        .profile-stats strong { font-weight:700; color:#111; }
+
+        .back-link { display:inline-block; margin-bottom:24px; font-size:13px; color:#888; text-decoration:none; }
+
+        .back-link:hover { color:#111; }
+
+        .outfit-card { cursor:pointer; }
+
+        .empty-state { text-align:center; padding:48px 0; color:#999; font-size:14px; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html">Kesfet</a></li>
+
+                <li><a href="kombinler.html">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html">Clothink</a></li>
+
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+
+                <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
+
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="page-section" style="padding:0;">
+
+        <div class="container">
+
+            <a href="javascript:history.back()" class="back-link">?? Geri</a>
+
+            <div class="profile-header" id="profileHeader"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="page-section" style="padding-top:0;">
+
+        <div class="container">
+
+            <h2 style="font-size:22px;font-weight:700;margin-bottom:24px;">Kombinler</h2>
+
+            <div class="outfit-grid" id="userOutfitsGrid"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div>
+
+                    <p>Kombinini olustur, tarzn kesfet.</p>
+
+                </div>
+
+                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="#">Trendler</a></div>
+
+                <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a><a href="#">Kullanm artlar</a><a href="#">Gizlilik</a></div>
+
+                <div><h5>Sosyal</h5><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a><a href="#">X</a></div>
+
+            </div>
+
+            <p class="footer-bottom"> 2026 Clothink. Tm haklar sakldr.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    function findEmailByUsername(username) {
+
+        var clean = username.replace('@','').toLowerCase();
+
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+        var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+        for (var i = 0; i < users.length; i++) {
+
+            var p = profiles[users[i].email] || {};
+
+            if (p.username && p.username.toLowerCase() === clean) return users[i].email;
+
+        }
+
+        return null;
+
+    }
+
+
+
+    (function() {
+
+        var params = new URLSearchParams(window.location.search);
+
+        var targetEmail = params.get('u');
+
+
+
+        if (!targetEmail) {
+
+            var targetUser = params.get('user');
+
+            if (targetUser) targetEmail = findEmailByUsername(targetUser);
+
+        }
+
+
+
+        var targetUsername = params.get('user');
+
+
+
+        if (!targetEmail && !targetUsername) {
+
+            document.getElementById('profileHeader').innerHTML = '<div style="text-align:center;padding:60px 0;color:#999;"><p>Kullanc bulunamad.</p><a href="../index.html" class="btn-primary" style="margin-top:16px;">Ana Sayfaya Dn</a></div>';
+
+            return;
+
+        }
+
+
+
+        var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+
+
+        // Try to find user by email, or by username
+
+        var userData = null;
+
+        if (targetEmail) {
+
+            for (var i = 0; i < users.length; i++) {
+
+                if (users[i].email === targetEmail) { userData = users[i]; break; }
+
+            }
+
+        }
+
+
+
+        // If email not found, try username
+
+        if (!userData && targetUsername) {
+
+            var cleanTarget = targetUsername.replace('@','').toLowerCase();
+
+            for (var i = 0; i < users.length; i++) {
+
+                var p = profiles[users[i].email] || {};
+
+                if (p.username && p.username.toLowerCase() === cleanTarget) {
+
+                    userData = users[i];
+
+                    targetEmail = users[i].email;
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+
+        var fallbackUsername = (targetUsername || '').replace('@','');
+
+        var fallbackMode = !userData;
+
+        var profile;
+
+
+
+        // auto-create brand user profile if visiting clothink profile (run even in fallback mode)
+
+        if (targetEmail === 'clothink@brand.clothink') {
+
+            if (!userData) {
+
+                users.push({ name:'Clothink', email:targetEmail, password:'clothink123' });
+
+                profiles[targetEmail] = { username:'clothink', bio:'Kombinini olustur, tarzn kesfet.', gender:'kadin' };
+
+                localStorage.setItem('clothink_users', JSON.stringify(users));
+
+                localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
+
+                userData = { name:'Clothink', email:targetEmail, password:'clothink123' };
+
+                profile = profiles[targetEmail];
+
+                fallbackMode = false;
+
+            }
+
+            var brandAvatar = localStorage.getItem('clothink_avatar_' + targetEmail);
+
+            if (!brandAvatar) {
+
+                var c = document.createElement('canvas'); c.width=160; c.height=160;
+
+                var ctx=c.getContext('2d');
+
+                ctx.fillStyle='#111'; ctx.beginPath();
+
+                var r=32,w=160,h=160; ctx.moveTo(r,0); ctx.lineTo(w-r,0); ctx.quadraticCurveTo(w,0,w,r);
+
+                ctx.lineTo(w,h-r); ctx.quadraticCurveTo(w,h,w-r,h); ctx.lineTo(r,h);
+
+                ctx.quadraticCurveTo(0,h,0,h-r); ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0);
+
+                ctx.closePath(); ctx.fill();
+
+                ctx.fillStyle='#fff'; ctx.font='bold 64px "Playfair Display", serif';
+
+                ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('CT',80,84);
+
+                brandAvatar = c.toDataURL('image/png');
+
+                localStorage.setItem('clothink_avatar_' + targetEmail, brandAvatar);
+
+            }
+
+            // always write celebrity looks (overwrites old data)
+
+            var brandLooks = [
+
+                { title:'Gigi Hadid ? Sokak Stili', image:'https://images.pexels.com/photos/14669417/pexels-photo-14669417.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', items:5, likes:234, desc:'Oversize blazer, crop top, bol paa pantolon ve sneaker.', products:[{name:'Siyah Oversize Blazer',brand:'ZARA',price:'??1.599',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop',url:'https://zara.com/tr/blazer-oversize'},{name:'Beyaz Crop Top',brand:'H&M',price:'??249',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop',url:'https://hm.com/tr/crop-top'},{name:'Bol Paa Pantolon',brand:'MANGO',price:'??799',img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop',url:'https://mango.com/tr/bol-paca'},{name:'Air Force 1',brand:'NIKE',price:'??2.499',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop',url:'https://nike.com/tr/air-force'},{name:'Mini Santa',brand:'ZARA',price:'??599',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop',url:'https://zara.com/tr/canta'}] },
+
+                { title:'Hailey Bieber ? Rahat klk', image:'https://images.pexels.com/photos/9509649/pexels-photo-9509649.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', items:5, likes:198, desc:'Deri ceket, basic tisort, straight jean ve bot.', products:[{name:'Siyah Deri Ceket',brand:'ZARA',price:'??1.899',img:'https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=100&h=100&fit=crop',url:'https://zara.com/tr/deri-ceket'},{name:'Basic Tisort',brand:'NIKE',price:'??399',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop',url:'https://nike.com/tr/tshirt'},{name:'Straight Jean',brand:"LEVI'S",price:'??999',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop',url:'https://levi.com/tr/jean'},{name:'Bilekte Bot',brand:'MANGO',price:'??1.499',img:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=100&h=100&fit=crop',url:'https://mango.com/tr/bot'},{name:'Gne? Gzls',brand:'DIOR',price:'??3.499',img:'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=100&h=100&fit=crop',url:'https://dior.com/tr/gozluk'}] },
+
+                { title:'Bella Hadid ? 90s', image:'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop', items:5, likes:176, desc:'Baby tee, dusuk bel jean, kemer ve sneaker.', products:[{name:'Baby Tee',brand:'H&M',price:'??179',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop',url:'https://hm.com/tr/baby-tee'},{name:'Dusuk Bel Jean',brand:"LEVI'S",price:'??899',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop',url:'https://levi.com/tr/dusuk-bel'},{name:'Deri Kemer',brand:'ZARA',price:'??329',img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=100&h=100&fit=crop',url:'https://zara.com/tr/kemer'},{name:'NB 550',brand:'NEW BALANCE',price:'??2.299',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop',url:'https://newbalance.com/tr/550'},{name:'Gm? Kpe',brand:'MANGO',price:'??149',img:'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=100&h=100&fit=crop',url:'https://mango.com/tr/kupe'}] },
+
+                { title:'Zendaya ? Krmz Hal', image:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop', items:4, likes:312, desc:'Blazer elbise ve stiletto ile byleyici bir kombini.', products:[{name:'Blazer Elbise',brand:'COS',price:'??2.299',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop',url:'https://cos.com/tr/blazer-elbise'},{name:'Stiletto',brand:'MANGO',price:'??1.299',img:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop',url:'https://mango.com/tr/stiletto'},{name:'Altn Kolye',brand:'ARMANI',price:'??2.999',img:'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=100&h=100&fit=crop',url:'https://armani.com/tr/kolye'},{name:'Clutch',brand:'ZARA',price:'??699',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop',url:'https://zara.com/tr/clutch'}] },
+
+                { title:'Kendall Jenner ? Model Off Duty', image:'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=600&fit=crop', items:5, likes:267, desc:'Trenkot, deri Sort ve izme.', products:[{name:'Bej Trenkot',brand:'MANGO',price:'??1.799',img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=100&h=100&fit=crop',url:'https://mango.com/tr/trenckot'},{name:'Kolsuz ?st',brand:'COS',price:'??399',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop',url:'https://cos.com/tr/kolsuz'},{name:'Deri ort',brand:'ZARA',price:'??649',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop',url:'https://zara.com/tr/sort'},{name:'Diz ?st Sizme',brand:'MANGO',price:'??2.499',img:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=100&h=100&fit=crop',url:'https://mango.com/tr/cizme'},{name:'Srt Santas',brand:'NIKE',price:'??899',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop',url:'https://nike.com/tr/sirt-cantasi'}] },
+
+                { title:'David Beckham ? Klasik', image:'https://images.pexels.com/photos/26524770/pexels-photo-26524770.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', items:5, likes:189, desc:'Navy blazer, chinos ve loafer ile zamansz siklik.', products:[{name:'Lacivert Blazer',brand:'ARMANI',price:'??4.999',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop',url:'https://armani.com/tr/blazer'},{name:'pek Gmlek',brand:'ZARA',price:'??799',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop',url:'https://zara.com/tr/gomlek'},{name:'Chinos',brand:'COS',price:'??799',img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop',url:'https://cos.com/tr/chinos'},{name:'Loafer',brand:'ZARA',price:'??999',img:'https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop',url:'https://zara.com/tr/loafer'},{name:'Klasik Saat',brand:'ARMANI',price:'??3.499',img:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=100&h=100&fit=crop',url:'https://armani.com/tr/saat'}] },
+
+                { title:'Timothe Chalamet ? Modern', image:'https://images.pexels.com/photos/1099957/pexels-photo-1099957.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', items:4, likes:145, desc:'Desenli gmlek, bol kesim pantolon ve bot.', products:[{name:'Desenli Gmlek',brand:'COS',price:'??699',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop',url:'https://cos.com/tr/desenli-gomlek'},{name:'Bol Kesim Pantolon',brand:'ZARA',price:'??699',img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop',url:'https://zara.com/tr/bol-paca-erkek'},{name:'Deri Bot',brand:'ZARA',price:'??1.499',img:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=100&h=100&fit=crop',url:'https://zara.com/tr/bot-erkek'},{name:'Gm? Zincir',brand:'BERSHKA',price:'??399',img:'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=100&h=100&fit=crop',url:'https://bershka.com/tr/zincir'}] },
+
+                { title:'North West ? Cool Kid', image:'https://images.pexels.com/photos/6334338/pexels-photo-6334338.jpegSauto=compress&cs=tinysrgb&w=400&h=600&dpr=1', items:5, likes:89, desc:'Grafik tisort, kargo pantolon ve renkli sneaker.', products:[{name:'Grafik Tisort',brand:'ZARA',price:'??349',img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop',url:'https://zara.com/tr/baskili-tisort'},{name:'Kargo Pantolon',brand:'H&M',price:'??449',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop',url:'https://hm.com/tr/kargo'},{name:'Renkli Sneaker',brand:'NIKE',price:'??1.299',img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop',url:'https://nike.com/tr/sneaker'},{name:'apka',brand:'ADIDAS',price:'??299',img:'https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=100&h=100&fit=crop',url:'https://adidas.com/tr/sapka'},{name:'Srt Santas',brand:'NIKE',price:'??599',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop',url:'https://nike.com/tr/sirt-cantasi'}] }
+
+            ];
+
+            localStorage.setItem('clothink_outfits_' + targetEmail, JSON.stringify(brandLooks));
+
+            var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + targetEmail) || '[]');
+
+            var avatarData = localStorage.getItem('clothink_avatar_' + targetEmail) || brandAvatar;
+
+            profile = profiles[targetEmail] || {};
+
+        }
+
+
+
+        if (!fallbackMode) {
+
+            var profile = profile || profiles[targetEmail] || {};
+
+            var outfits = outfits || JSON.parse(localStorage.getItem('clothink_outfits_' + targetEmail) || '[]');
+
+            var avatarData = avatarData || localStorage.getItem('clothink_avatar_' + targetEmail) || '';
+
+            var name = profile.name || userData.name || targetEmail.split('@')[0];
+
+            var username = profile.username || '';
+
+            var bio = profile.bio || '';
+
+            var totalLikes = 0;
+
+            outfits.forEach(function(o) { totalLikes += o.likes || 0; });
+
+
+
+            var header = document.getElementById('profileHeader');
+
+            var letter = name.charAt(0).toUpperCase();
+
+            var avatarHtml = avatarData ? '<img src="' + avatarData + '" alt="' + name + '">' : letter;
+
+            // follow data
+
+            var myUser = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+            var myEmail = myUser ? myUser.email : null;
+
+            var myFollowing = myEmail ? JSON.parse(localStorage.getItem('clothink_following_' + myEmail) || '[]') : [];
+
+            var isFollowing = myEmail && myFollowing.indexOf(targetEmail) > -1;
+
+            // count followers
+
+            var followerCount = 0;
+
+            var allUsersList = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+            allUsersList.forEach(function(uu) {
+
+                var fl = JSON.parse(localStorage.getItem('clothink_following_' + uu.email) || '[]');
+
+                if (fl.indexOf(targetEmail) > -1) followerCount++;
+
+            });
+
+            var followBtnHtml = '';
+
+            if (myEmail && myEmail !== targetEmail) {
+
+                followBtnHtml = '<button id="followBtn" class="' + (isFollowing ? 'btn-secondary' : 'btn-primary') + '" style="margin-top:8px;border:none;cursor:pointer;" onclick="toggleFollow(\'' + targetEmail + '\')">' + (isFollowing ? 'Takip Ediliyor' : 'Takip Et') + '</button>';
+
+            }
+
+            header.innerHTML = '<div class="profile-avatar">' + avatarHtml + '</div><div class="profile-info"><h1>' + name + '</h1>' + (username ? '<p class="username">@' + username + '</p>' : '') + (bio ? '<p class="bio">' + bio + '</p>' : '') + '<div class="profile-stats"><span><strong>' + outfits.length + '</strong> kombin</span><span><strong>' + totalLikes + '</strong> begeni</span><span><strong>' + followerCount + '</strong> takipi</span></div>' + followBtnHtml + '</div>';
+
+
+
+            renderOutfits(outfits, username || name);
+
+        } else {
+
+            // Fallback: scan all catalog data for outfits by this author
+
+            var catalogOutfits = [];
+
+            ['kadin','erkek','cocuk'].forEach(function(g) {
+
+                var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
+
+                if (cat) {
+
+                    cat.forEach(function(o) {
+
+                        var oAuthor = (o.author || '').replace('@','').toLowerCase();
+
+                        if (oAuthor === fallbackUsername.toLowerCase()) {
+
+                            catalogOutfits.push(o);
+
+                        }
+
+                    });
+
+                }
+
+            });
+
+
+
+            var header = document.getElementById('profileHeader');
+
+            header.innerHTML = '<div class="profile-avatar">' + fallbackUsername.charAt(0).toUpperCase() + '</div><div class="profile-info"><h1>' + fallbackUsername.charAt(0).toUpperCase() + fallbackUsername.slice(1) + '</h1><p class="username">@' + fallbackUsername + '</p><p class="bio">Clothink kullancs</p><div class="profile-stats"><span><strong>' + catalogOutfits.length + '</strong> kombin</span></div></div>';
+
+
+
+            renderOutfits(catalogOutfits, fallbackUsername);
+
+        }
+
+
+
+        window.toggleFollow = function(email) {
+
+            var myUser = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+            if (!myUser) { window.location.href = 'giris.html'; return; }
+
+            var following = JSON.parse(localStorage.getItem('clothink_following_' + myUser.email) || '[]');
+
+            var idx = following.indexOf(email);
+
+            if (idx > -1) { following.splice(idx, 1); }
+
+            else { following.push(email); }
+
+            localStorage.setItem('clothink_following_' + myUser.email, JSON.stringify(following));
+
+            // add notification
+
+            if (typeof addNotification === 'function' && idx === -1) {
+
+                addNotification(email, 'follow', myUser.email, myUser.name + ' seni takip etmeye baslad!');
+
+            }
+
+            window.location.reload();
+
+        };
+
+
+
+        function renderOutfits(outfits, displayName) {
+
+            var grid = document.getElementById('userOutfitsGrid');
+
+            grid.innerHTML = '';
+
+            var myUser = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+            var myLikes = myUser ? JSON.parse(localStorage.getItem('clothink_likes_' + myUser.email) || '[]') : [];
+
+
+
+            if (outfits.length === 0) {
+
+                grid.innerHTML = '<div class="empty-state">Bu kullancnn henz kombin paylasm yok.</div>';
+
+                return;
+
+            }
+
+
+
+            outfits.forEach(function(o) {
+
+                if (!o.img && !o.image) return;
+
+                var imgUrl = o.img || o.image;
+
+                var div = document.createElement('div');
+
+                div.className = 'outfit-card';
+
+                div.dataset.img = imgUrl;
+
+                var liked = myLikes.indexOf(imgUrl) > -1;
+
+                var tagsHtml = o.tags && o.tags.length ? '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;">' + o.tags.map(function(t){return '<span style="font-size:10px;color:#888;background:#f0f0f0;padding:2px 6px;border-radius:100px;">'+t+'</span>';}).join('') + '</div>' : '';
+
+                div.innerHTML = '<div class="outfit-photo" style="background-image:url(\'' + imgUrl + '\')"></div><div class="outfit-info"><div><p class="outfit-author">@' + displayName + '</p><p class="outfit-items">' + (o.items || '0') + ' rn</p>' + tagsHtml + '</div><p class="outfit-like like-btn" style="cursor:pointer;' + (liked ? 'color:#e74c3c' : '') + '">' + (o.likes || 0) + '</p></div>';
+
+                div.addEventListener('click', function(e) {
+
+                    if (e.target.closest('.like-btn')) return;
+
+                    var od = { title: o.title, author: '@' + displayName, items: (o.items || '0') + ' rn', likes: o.likes || 0, img: imgUrl, desc: o.desc || '', products: o.products || [] };
+
+                    localStorage.setItem('clothink_viewing_outfit', JSON.stringify(od));
+
+                    window.location.href = 'kombinler.html';
+
+                });
+
+                grid.appendChild(div);
+
+            });
+
+
+
+            grid.addEventListener('click', function(e) {
+
+                var btn = e.target.closest('.like-btn');
+
+                if (!btn) return;
+
+                myUser = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+                if (!myUser) { window.location.href = 'giris.html'; return; }
+
+                var card = btn.closest('.outfit-card');
+
+                var url = card ? card.dataset.img : '';
+
+                if (!url) return;
+
+                myLikes = JSON.parse(localStorage.getItem('clothink_likes_' + myUser.email) || '[]');
+
+                var idx = myLikes.indexOf(url);
+
+                if (idx > -1) { myLikes.splice(idx, 1); btn.style.color = '#777'; }
+
+                else { myLikes.push(url); btn.style.color = '#e74c3c'; }
+
+                localStorage.setItem('clothink_likes_' + myUser.email, JSON.stringify(myLikes));
+
+                var match = btn.textContent.match(/(\d+)/);
+
+                if (match) btn.textContent = '' + (idx > -1 ? parseInt(match[1]) - 1 : parseInt(match[1]) + 1);
+
+            });
+
+        }
+
+    })();
+
+    </script>
+
+</body>
+
+</html>

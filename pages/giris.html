@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Giris Yap ? Clothink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct">
+
+                    <span class="ct-monogram">
+
+                        <span class="ct-c">C</span>
+
+                        <span class="ct-t">T</span>
+
+                    </span>
+
+                </span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html">Kesfet</a></li>
+
+                <li><a href="kombinler.html">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html">Clothink</a></li>
+
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+
+                <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
+
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="page-section" style="padding:80px 0;">
+
+        <div class="container">
+
+            <div class="auth-wrapper">
+
+                <div class="auth-visual" style="background-image: url('https://images.pexels.com/photos/17218059/pexels-photo-17218059.jpegSauto=compress&cs=tinysrgb&w=600&h=800&dpr=1');"></div>
+
+                <div class="auth-form">
+
+                    <h2>Hos geldin</h2>
+
+                    <p>Devam etmek iin giri? yap.</p>
+
+                    <form id="loginForm">
+
+                        <div class="form-group">
+
+                            <label>E-posta</label>
+
+                            <input id="loginEmail" type="email" placeholder="ornek@email.com" required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>ifre</label>
+
+                            <input id="loginPassword" type="password" placeholder="????????????????" required>
+
+                        </div>
+
+                        <p id="loginError" style="color:#e74c3c;font-size:13px;margin-bottom:16px;display:none;"></p>
+
+                        <button type="submit" class="btn-primary" style="border:none;cursor:pointer;">Giris Yap</button>
+
+                    </form>
+
+                    <div class="auth-divider">veya</div>
+
+                    <div class="auth-alt">
+
+                        Hesabn yok mu? <a href="kaydol.html">Kaydol</a><br>
+
+                        <a href="sifre-sifirla.html" style="font-size:12px;color:#888;text-decoration:underline;margin-top:8px;display:inline-block;">ifremi Unuttum</a>
+
+                    </div>
+
+                    <p style="text-align:center;margin-top:16px;"><a href="#" id="demoLogin" style="font-size:12px;color:#999;">Demo hesapla giri? yap</a></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <div class="footer-logo">
+
+                        <span class="logo-ct">
+
+                            <span class="ct-monogram">
+
+                                <span class="ct-c">C</span>
+
+                                <span class="ct-t">T</span>
+
+                            </span>
+
+                        </span>
+
+                        <span class="logo-text">CLOTHINK</span>
+
+                    </div>
+
+                    <p>Kombinini olustur, tarzn kesfet.</p>
+
+                </div>
+
+                <div>
+
+                    <h5>Platform</h5>
+
+                    <a href="kesfet.html">Kesfet</a>
+
+                    <a href="kombinler.html">Kombinler</a>
+
+                    <a href="markalar.html">Markalar</a>
+
+                    <a href="clothink.html">Clothink</a>
+
+                    <a href="#">Trendler</a>
+
+                </div>
+
+                <div>
+
+                    <h5>Topluluk</h5>
+
+                    <a href="#">Blog</a>
+
+                    <a href="#">Yardm Merkezi</a>
+
+                    <a href="#">Kullanm artlar</a>
+
+                    <a href="#">Gizlilik</a>
+
+                </div>
+
+                <div>
+
+                    <h5>Sosyal</h5>
+
+                    <a href="#">Instagram</a>
+
+                    <a href="#">TikTok</a>
+
+                    <a href="#">Pinterest</a>
+
+                    <a href="#">X</a>
+
+                </div>
+
+            </div>
+
+            <p class="footer-bottom"> 2026 Clothink. Tm haklar sakldr.</p>
+
+        </div>
+
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+
+        e.preventDefault();
+
+        var email = document.getElementById('loginEmail').value.trim();
+
+        var password = document.getElementById('loginPassword').value;
+
+        var error = document.getElementById('loginError');
+
+        var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+        var user = users.find(function(u) { return u.email === email && u.password === password; });
+
+        if (!user) {
+
+            error.textContent = 'E-posta veya Sifre hatal.';
+
+            error.style.display = 'block';
+
+            return;
+
+        }
+
+        localStorage.setItem('clothink_user', JSON.stringify({ name: user.name, email: user.email }));
+
+        window.location.href = '../index.html';
+
+    });
+
+    document.getElementById('demoLogin').addEventListener('click', function(e) {
+
+        e.preventDefault();
+
+        var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+        if (!users.find(function(u) { return u.email === 'demo@clothink.com'; })) {
+
+            users.push({ name: 'Demo', email: 'demo@clothink.com', password: 'demo123' });
+
+            localStorage.setItem('clothink_users', JSON.stringify(users));
+
+        }
+
+        localStorage.setItem('clothink_user', JSON.stringify({ name: 'Demo', email: 'demo@clothink.com' }));
+
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+        if (!profiles['demo@clothink.com']) profiles['demo@clothink.com'] = {};
+
+        if (!profiles['demo@clothink.com'].gender) profiles['demo@clothink.com'].gender = 'kadin';
+
+        localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
+
+        window.location.href = '../index.html';
+
+    });
+
+    </script>
+
+</body>
+
+</html>

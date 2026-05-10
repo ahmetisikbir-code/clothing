@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kesfet ? Clothink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/pages.css">
+
+    <style>
+
+        .search-bar { display:flex; gap:12px; margin-bottom:24px; }
+
+        .search-bar input { flex:1; padding:12px 16px; border:1px solid #ddd; border-radius:0; font-family:'Inter',sans-serif; font-size:14px; outline:none; }
+
+        .search-bar input:focus { border-color:#c9a84c; }
+
+        .search-bar button { padding:12px 24px; border:none; border-radius:0; background:#0a0a0a; color:#fff; font-weight:600; cursor:pointer; font-size:12px; font-family:'Inter',sans-serif; letter-spacing:2px; text-transform:uppercase; }
+
+        .search-bar button:hover { background:#c9a84c; }
+
+        .outfit-card { cursor:pointer; }
+
+        .outfit-author-link { color:#555; text-decoration:none; font-weight:600; }
+
+        .outfit-author-link:hover { color:#111; text-decoration:underline; }
+
+        .share-btn { cursor:pointer; font-size:13px; color:#888; transition:color 0.2s; }
+
+        .share-btn:hover { color:#111; }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+
+                <span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span>
+
+                <span class="logo-text">CLOTHINK</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="kesfet.html" style="color:#111;font-weight:600;">Kesfet</a></li>
+
+                <li><a href="kombinler.html">Kombinler</a></li>
+
+                <li><a href="markalar.html">Markalar</a></li>
+
+                <li><a href="clothink.html">Clothink</a></li>
+
+                <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+
+                <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
+
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+
+                <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="page-header">
+
+        <div class="container">
+
+            <h1>Kesfet</h1>
+
+            <p>lham veren kombinleri kesfet, yeni stiller bul.</p>
+
+            <a href="olustur.html" class="btn-primary btn-large" style="margin-top:16px;">+ Kombin Olustur</a>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="filter-bar">
+
+        <div class="container">
+
+            <div class="filter-group">
+
+                <select class="filter-select" id="genderFilter">
+
+                    <option value="all">Tm Cinsiyetler</option>
+
+                    <option value="kadin">Kadn</option>
+
+                    <option value="erkek">Erkek</option>
+
+                    <option value="cocuk">Socuk</option>
+
+                </select>
+
+                <select class="filter-select" id="categoryFilter">
+
+                    <option value="all">Kategori</option>
+
+                    <option>Gnlk</option>
+
+                    <option>k</option>
+
+                    <option>Spor</option>
+
+                    <option>Ofis</option>
+
+                </select>
+
+                <select class="filter-select" id="sortFilter">
+
+                    <option value="popular">En Popler</option>
+
+                    <option value="new">En Yeni</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="page-section">
+
+        <div class="container">
+
+            <div class="search-bar">
+
+                <input type="text" id="searchInput" placeholder="Marka veya rn ara...">
+
+                <button onclick="searchOutfits()">Ara</button>
+
+            </div>
+
+            <div class="outfit-grid" id="kesfetGrid"></div>
+
+            <div id="loadMoreWrap" style="text-align:center;margin-top:32px;display:none;">
+
+                <button id="loadMoreBtn" class="btn-secondary" onclick="loadMore()" style="cursor:pointer;">Daha Fazla Gster +</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini olustur, tarzn kesfet.</p></div>
+
+                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="#">Trendler</a></div>
+
+                <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a><a href="#">Kullanm artlar</a><a href="#">Gizlilik</a></div>
+
+                <div><h5>Sosyal</h5><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a><a href="#">X</a></div>
+
+            </div>
+
+            <p class="footer-bottom"> 2026 Clothink. Tm haklar sakldr.</p>
+
+        </div>
+
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+
+    var PAGE_SIZE = 8;
+
+    var allFilteredItems = [];
+
+    var renderedCount = 0;
+
+
+
+    function findEmailByUsername(username) {
+
+        var clean = username.replace('@','').toLowerCase();
+
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+        var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+        for (var i = 0; i < users.length; i++) {
+
+            var p = profiles[users[i].email] || {};
+
+            if (p.username && p.username.toLowerCase() === clean) return users[i].email;
+
+        }
+
+        return null;
+
+    }
+
+    function authorLink(author) {
+
+        var email = findEmailByUsername(author);
+
+        if (email) return 'kullanici.htmlSu=' + encodeURIComponent(email);
+
+        return 'kullanici.htmlSuser=' + encodeURIComponent(author.replace('@',''));
+
+    }
+
+    function shareOutfit(o) {
+
+        var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
+
+        var url = window.location.origin + '/Clothink/pages/kombinler.html';
+
+        if (navigator.share) { navigator.share({ title: o.title || 'Kombin', text: text, url: url }); }
+
+        else { prompt('Linki kopyala:', url); }
+
+    }
+
+    function getCatalog() {
+
+        var all = [];
+
+        ['kadin','erkek','cocuk'].forEach(function(g) {
+
+            var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
+
+            if (cat) cat.forEach(function(o) { o._gender = g; all.push(o); });
+
+        });
+
+        return all;
+
+    }
+
+    function renderGrid(items) {
+
+        allFilteredItems = items;
+
+        renderedCount = 0;
+
+        var grid = document.getElementById('kesfetGrid');
+
+        grid.innerHTML = '';
+
+        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+        var likes = user ? JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]') : [];
+
+        if (items.length === 0) {
+
+            grid.innerHTML = '<p style="color:#999;grid-column:1/-1;text-align:center;padding:60px 0;">Sonu bulunamad.</p>';
+
+            return;
+
+        }
+
+        renderNextBatch();
+
+    }
+
+
+
+    function renderNextBatch() {
+
+        var items = allFilteredItems;
+
+        var grid = document.getElementById('kesfetGrid');
+
+        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+        var likes = user ? JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]') : [];
+
+        var end = Math.min(renderedCount + PAGE_SIZE, items.length);
+
+        for (var i = renderedCount; i < end; i++) {
+
+            var o = items[i];
+
+            var div = document.createElement('div');
+
+            div.className = 'outfit-card';
+
+            div.dataset.img = o.img;
+
+            var liked = likes.indexOf(o.img) > -1;
+
+            var authorHtml = '<a href="' + authorLink(o.author) + '" class="outfit-author-link" onclick="event.stopPropagation()">' + o.author + '</a>';
+
+            var tagsHtml = o.tags && o.tags.length ? '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;">' + o.tags.map(function(t){return '<span style="font-size:10px;color:#888;background:#f0f0f0;padding:2px 6px;border-radius:100px;">'+t+'</span>';}).join('') + '</div>' : '';
+
+            div.innerHTML = '<div class="outfit-photo" style="background-image:url(\'' + o.img + '\')"></div><div class="outfit-info"><div><p class="outfit-author">' + authorHtml + '</p><p class="outfit-items">' + o.items + '</p>' + tagsHtml + '</div><div style="display:flex;align-items:center;gap:8px;"><p class="outfit-like like-btn" style="cursor:pointer;' + (liked ? 'color:#e74c3c' : '') + '">' + o.likes + '</p><span class="share-btn" onclick="event.stopPropagation();shareOutfit(' + JSON.stringify(o).replace(/"/g,'&quot;') + ')" style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#999;cursor:pointer;">Payla?</span></div></div>';
+
+            div.addEventListener('click', function(e) {
+
+                if (e.target.closest('.like-btn')) return;
+
+                if (e.target.closest('.share-btn')) return;
+
+                if (e.target.closest('.outfit-author-link')) return;
+
+                localStorage.setItem('clothink_viewing_outfit', JSON.stringify(o));
+
+                window.location.href = 'kombinler.html';
+
+            });
+
+            grid.appendChild(div);
+
+        }
+
+        renderedCount = end;
+
+        document.getElementById('loadMoreWrap').style.display = end < items.length ? 'block' : 'none';
+
+    }
+
+
+
+    function loadMore() { renderNextBatch(); }
+
+
+
+    function shareOutfit(o) {
+
+        var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
+
+        var url = window.location.origin + '/Clothink/pages/kombinler.html';
+
+        if (navigator.share) { navigator.share({ title: o.title || 'Kombin', text: text, url: url }); }
+
+        else { prompt('Linki kopyala:', url); }
+
+    }
+
+
+
+    // global like handler for grid
+
+    document.getElementById('kesfetGrid').addEventListener('click', function(e) {
+
+        var btn = e.target.closest('.like-btn');
+
+        if (!btn) return;
+
+        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+        if (!user) { window.location.href = 'giris.html'; return; }
+
+        var card = btn.closest('.outfit-card');
+
+        var url = card ? card.dataset.img : '';
+
+        if (!url) return;
+
+        var likes = JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]');
+
+        var idx = likes.indexOf(url);
+
+        if (idx > -1) { likes.splice(idx, 1); btn.style.color = '#777'; }
+
+        else { likes.push(url); btn.style.color = '#e74c3c'; }
+
+        localStorage.setItem('clothink_likes_' + user.email, JSON.stringify(likes));
+
+        var match = btn.textContent.match(/(\d+)/);
+
+        if (match) btn.textContent = '' + (idx > -1 ? parseInt(match[1]) - 1 : parseInt(match[1]) + 1);
+
+    });
+
+    function filterAndRender() {
+
+        var gender = document.getElementById('genderFilter').value;
+
+        var sort = document.getElementById('sortFilter').value;
+
+        var query = (document.getElementById('searchInput').value || '').toLowerCase();
+
+        var all = getCatalog();
+
+        var filtered = all;
+
+        if (gender !== 'all') filtered = filtered.filter(function(o) { return o._gender === gender; });
+
+        if (query) filtered = filtered.filter(function(o) {
+
+            return (o.title && o.title.toLowerCase().includes(query)) ||
+
+                   (o.author && o.author.toLowerCase().includes(query)) ||
+
+                   (o.products && o.products.some(function(p) { return (p.name && p.name.toLowerCase().includes(query)) || (p.brand && p.brand.toLowerCase().includes(query)); }));
+
+        });
+
+        if (sort === 'popular') filtered.sort(function(a,b) { return b.likes - a.likes; });
+
+        renderGrid(filtered);
+
+    }
+
+    function searchOutfits() { filterAndRender(); }
+
+    document.getElementById('genderFilter').addEventListener('change', filterAndRender);
+
+    document.getElementById('sortFilter').addEventListener('change', filterAndRender);
+
+    document.getElementById('searchInput').addEventListener('keyup', function(e) { if (e.key === 'Enter') filterAndRender(); });
+
+    (function() {
+
+        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+
+        var all = getCatalog();
+
+        if (all.length === 0) {
+
+            ['kadin','erkek','cocuk'].forEach(function(g) {
+
+                var d = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
+
+                if (d) d.forEach(function(o) { o._gender = g; all.push(o); });
+
+            });
+
+        }
+
+        var genderMap = { kadin: 'kadin', erkek: 'erkek', cocuk: 'cocuk' };
+
+        var userGender = null;
+
+        if (user) {
+
+            var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+            if (profiles[user.email] && profiles[user.email].gender) userGender = profiles[user.email].gender;
+
+        }
+
+        if (!userGender) userGender = localStorage.getItem('clothink_gender') || 'kadin';
+
+        if (userGender && genderMap[userGender]) document.getElementById('genderFilter').value = userGender;
+
+        filterAndRender();
+
+        var allUsers = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+
+        var grid2 = document.getElementById('kesfetGrid');
+
+        allUsers.forEach(function(u) {
+
+            var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + u.email) || '[]');
+
+            var profs = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+
+            var p = profs[u.email] || {};
+
+            var name = p.username || u.name || u.email.split('@')[0];
+
+            outfits.forEach(function(o) {
+
+                if (!o.image) return;
+
+                var div = document.createElement('div');
+
+                div.className = 'outfit-card';
+
+                div.dataset.img = o.image;
+
+                var authorHtml = '<a href="kullanici.htmlSu=' + encodeURIComponent(u.email) + '" class="outfit-author-link" onclick="event.stopPropagation()">@' + name + '</a>';
+
+                div.innerHTML = '<div class="outfit-photo" style="background-image:url(\'' + o.image + '\')"></div><div class="outfit-info"><div><p class="outfit-author">' + authorHtml + '</p><p class="outfit-items">' + o.items + ' rn</p></div><p class="outfit-like like-btn" style="cursor:pointer;">' + (o.likes || 0) + '</p></div>';
+
+                div.addEventListener('click', function(e) {
+
+                    if (e.target.closest('.like-btn')) return;
+
+                    if (e.target.closest('.outfit-author-link')) return;
+
+                    var od = { title: o.title, author: '@' + name, items: o.items + ' rn', likes: o.likes || 0, img: o.image, desc: '', products: [] };
+
+                    localStorage.setItem('clothink_viewing_outfit', JSON.stringify(od));
+
+                    window.location.href = 'kombinler.html';
+
+                });
+
+                grid2.appendChild(div);
+
+            });
+
+        });
+
+    })();
+
+    </script>
+
+</body>
+
+</html>
