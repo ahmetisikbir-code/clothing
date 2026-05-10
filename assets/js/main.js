@@ -64,6 +64,37 @@
     var dm = localStorage.getItem('clothink_darkmode');
     if (dm === '1') document.body.classList.add('dark');
 
+    // SCROLL TO TOP BUTTON
+    (function addScrollTop() {
+        var btn = document.createElement('div');
+        btn.id = 'scrollTopBtn';
+        btn.innerHTML = '↑';
+        btn.style.cssText = 'position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:#0a0a0a;color:#c9a84c;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:20px;font-weight:700;z-index:999;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:all 0.3s;';
+        btn.onclick = function() { window.scrollTo({top:0,behavior:'smooth'}); };
+        document.body.appendChild(btn);
+        window.addEventListener('scroll', function() {
+            btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        });
+    })();
+
+    // TOAST NOTIFICATIONS
+    window.showToast = function(msg) {
+        var toast = document.createElement('div');
+        toast.textContent = msg;
+        toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#0a0a0a;color:#c9a84c;padding:12px 24px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:1px;z-index:9999;text-align:center;text-transform:uppercase;animation:toastIn 0.3s ease;box-shadow:0 8px 32px rgba(0,0,0,0.3);';
+        document.body.appendChild(toast);
+        setTimeout(function() { toast.remove(); }, 2000);
+    };
+
+    // RECENTLY VIEWED
+    window.addRecentView = function(imgUrl, title) {
+        var rv = JSON.parse(localStorage.getItem('clothink_recent_views') || '[]');
+        rv = rv.filter(function(v) { return v.img !== imgUrl; });
+        rv.unshift({ img: imgUrl, title: title || '', date: Date.now() });
+        if (rv.length > 8) rv = rv.slice(0, 8);
+        localStorage.setItem('clothink_recent_views', JSON.stringify(rv));
+    };
+
     // NAVBAR INJECTIONS (search + cart icons)
     var navLinks = document.querySelector('.nav-links');
     if (navLinks && !document.getElementById('searchLink')) {
