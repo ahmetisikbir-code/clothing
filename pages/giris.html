@@ -9,7 +9,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Giris Yap ? Clothink</title>
+    <title>Giriş Yap ? Clothink</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -47,7 +47,7 @@
 
             <ul class="nav-links">
 
-                <li><a href="kesfet.html">Kesfet</a></li>
+                <li><a href="kesfet.html">Keşfet</a></li>
 
                 <li><a href="kombinler.html">Kombinler</a></li>
 
@@ -59,7 +59,7 @@
 
                 <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
 
-                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+                <li><a href="giris.html" class="btn-primary">Giriş Yap</a></li>
 
                 <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
 
@@ -105,7 +105,7 @@
 
                         <p id="loginError" style="color:#e74c3c;font-size:13px;margin-bottom:16px;display:none;"></p>
 
-                        <button type="submit" class="btn-primary" style="border:none;cursor:pointer;">Giris Yap</button>
+                        <button type="submit" class="btn-primary" style="border:none;cursor:pointer;">Giriş Yap</button>
 
                     </form>
 
@@ -157,7 +157,7 @@
 
                     </div>
 
-                    <p>Kombinini olustur, tarzn kesfet.</p>
+                    <p>Kombinini oluştur, tarzn keşfet.</p>
 
                 </div>
 
@@ -165,7 +165,7 @@
 
                     <h5>Platform</h5>
 
-                    <a href="kesfet.html">Kesfet</a>
+                    <a href="kesfet.html">Keşfet</a>
 
                     <a href="kombinler.html">Kombinler</a>
 
@@ -233,7 +233,7 @@
 
         if (!user) {
 
-            error.textContent = 'E-posta veya Sifre hatal.';
+            error.textContent = 'E-posta veya Şifre hatal.';
 
             error.style.display = 'block';
 
@@ -267,7 +267,7 @@
 
         if (!profiles['demo@clothink.com']) profiles['demo@clothink.com'] = {};
 
-        if (!profiles['demo@clothink.com'].gender) profiles['demo@clothink.com'].gender = 'kadin';
+        if (!profiles['demo@clothink.com'].gender) profiles['demo@clothink.com'].gender = 'kadın';
 
         localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
 

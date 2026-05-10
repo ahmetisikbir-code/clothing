@@ -125,7 +125,7 @@
 
             <ul class="nav-links">
 
-                <li><a href="kesfet.html">Kesfet</a></li>
+                <li><a href="kesfet.html">Keşfet</a></li>
 
                 <li><a href="kombinler.html" style="color:#111;font-weight:600;">Kombinler</a></li>
 
@@ -137,7 +137,7 @@
 
                 <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
 
-                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+                <li><a href="giris.html" class="btn-primary">Giriş Yap</a></li>
 
                 <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
 
@@ -189,9 +189,9 @@
 
             <div class="footer-grid">
 
-                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini olustur, tarzn kesfet.</p></div>
+                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini oluştur, tarzn keşfet.</p></div>
 
-                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="#">Trendler</a></div>
+                <div><h5>Platform</h5><a href="kesfet.html">Keşfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="#">Trendler</a></div>
 
                 <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a><a href="#">Kullanm artlar</a><a href="#">Gizlilik</a></div>
 
@@ -273,7 +273,7 @@
 
         var tagsHtml = data.tags && data.tags.length ? '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">' + data.tags.map(function(t){return '<span style="font-size:11px;color:#555;background:#f0f0f0;padding:4px 10px;border-radius:100px;">'+t+'</span>';}).join('') + '</div>' : '';
 
-        container.innerHTML = '<a href="javascript:history.back()" class="back-link">?? Geri</a><div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url(\'' + data.img + '\')"></div><div class="outfit-hero-info"><h1>' + (data.title || 'Kombin') + '</h1>' + tagsHtml + '<p class="outfit-author">' + authorHtml + '  ' + data.likes + ' begeni  ' + views + ' grntlenme</p><p style="color:#666;line-height:1.7;margin-bottom:24px;">' + (data.desc || '') + '</p><h5 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:12px;">KOMBNDEK ?RUNLER</h5><div class="product-list" id="productList"></div><div class="action-bar"><button id="detailLikeBtn" class="' + (liked ? 'like-btn-action liked' : 'like-btn-action') + '" onclick="toggleLike()">' + (data.likes || 0) + '</button><button id="detailSaveBtn" class="' + (saved ? 'save-btn-action saved' : 'save-btn-action') + '" onclick="toggleSave()">' + (saved ? 'Kaydedildi' : 'Kaydet') + '</button><button class="share-btn-action" onclick="shareOutfit()">Payla?</button><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Satn alma islemi iin markann sitesine ynlendirileceksiniz.\')">Kombini Satn Al</button></div></div></div>';
+        container.innerHTML = '<a href="javascript:history.back()" class="back-link">?? Geri</a><div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url(\'' + data.img + '\')"></div><div class="outfit-hero-info"><h1>' + (data.title || 'Kombin') + '</h1>' + tagsHtml + '<p class="outfit-author">' + authorHtml + '  ' + data.likes + ' beğeni  ' + views + ' grntlenme</p><p style="color:#666;line-height:1.7;margin-bottom:24px;">' + (data.desc || '') + '</p><h5 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:12px;">KOMBNDEK ?RÜNLER</h5><div class="product-list" id="productList"></div><div class="action-bar"><button id="detailLikeBtn" class="' + (liked ? 'like-btn-action liked' : 'like-btn-action') + '" onclick="toggleLike()">' + (data.likes || 0) + '</button><button id="detailSaveBtn" class="' + (saved ? 'save-btn-action saved' : 'save-btn-action') + '" onclick="toggleSave()">' + (saved ? 'Kaydedildi' : 'Kaydet') + '</button><button class="share-btn-action" onclick="shareOutfit()">Payla?</button><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Satn alma islemi iin markann sitesine ynlendirileceksiniz.\')">Kombini Satn Al</button></div></div></div>';
 
         var list = document.getElementById('productList');
 
@@ -321,7 +321,7 @@
 
         window.shareOutfit = function() {
 
-            var text = (data.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
+            var text = (data.title || 'Kombin') + ' ? Clothink\'te keşfettim!';
 
             if (navigator.share) { navigator.share({ title: data.title || 'Kombin', text: text }); }
 
@@ -333,7 +333,7 @@
 
         var allOutfits = [];
 
-        ['kadin','erkek','cocuk'].forEach(function(g) {
+        ['kadın','erkek','çocuk'].forEach(function(g) {
 
             var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
 

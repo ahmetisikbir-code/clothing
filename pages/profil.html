@@ -129,7 +129,7 @@
 
             <ul class="nav-links">
 
-                <li><a href="kesfet.html">Kesfet</a></li>
+                <li><a href="kesfet.html">Keşfet</a></li>
 
                 <li><a href="kombinler.html">Kombinler</a></li>
 
@@ -141,7 +141,7 @@
 
                 <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
 
-                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+                <li><a href="giris.html" class="btn-primary">Giriş Yap</a></li>
 
                 <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
 
@@ -181,13 +181,13 @@
 
                     <p id="profileEmail">ornek@email.com</p>
 
-                    <a id="publicProfileLink" class="public-profile-link" href="#" target="_blank">@kullaniciadi</a>
+                    <a id="publicProfileLink" class="public-profile-link" href="#" target="_blank">@kullanıcıadi</a>
 
                     <div class="profile-stats">
 
                         <span id="statOutfits"><strong>0</strong> kombin</span>
 
-                        <span id="statLikes"><strong>0</strong> begeni</span>
+                        <span id="statLikes"><strong>0</strong> beğeni</span>
 
                     </div>
 
@@ -217,11 +217,11 @@
 
                         <li><a data-tab="kombinler">Kombinlerim</a></li>
 
-                        <li><a data-tab="begeniler">BeSenilenler</a></li>
+                        <li><a data-tab="beğeniler">BeSenilenler</a></li>
 
                         <li><a data-tab="kaydedilenler">Kaydedilenler</a></li>
 
-                        <li><a data-tab="sifre">ifre Degistir</a></li>
+                        <li><a data-tab="şifre">ifre Degistir</a></li>
 
                     </ul>
 
@@ -241,7 +241,7 @@
 
                             <label>Kullanc ad</label>
 
-                            <input id="editUsername" type="text" placeholder="@kullaniciadi">
+                            <input id="editUsername" type="text" placeholder="@kullanıcıadi">
 
                             <label>Hakkmda</label>
 
@@ -251,9 +251,9 @@
 
                             <div style="display:flex;gap:12px;margin-bottom:20px;">
 
-                                <label id="genderKadin" style="flex:1;padding:10px;border:2px solid #ddd;border-radius:8px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">
+                                <label id="genderKadın" style="flex:1;padding:10px;border:2px solid #ddd;border-radius:8px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">
 
-                                    <input type="radio" name="gender" value="kadin" style="display:none;"> Kadn
+                                    <input type="radio" name="gender" value="kadın" style="display:none;"> Kadn
 
                                 </label>
 
@@ -263,9 +263,9 @@
 
                                 </label>
 
-                                <label id="genderCocuk" style="flex:1;padding:10px;border:2px solid #ddd;border-radius:8px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">
+                                <label id="genderÇocuk" style="flex:1;padding:10px;border:2px solid #ddd;border-radius:8px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">
 
-                                    <input type="radio" name="gender" value="cocuk" style="display:none;"> Socuk
+                                    <input type="radio" name="gender" value="çocuk" style="display:none;"> Socuk
 
                                 </label>
 
@@ -281,15 +281,15 @@
 
                         <div class="outfit-mini-grid" id="myOutfitsGrid"></div>
 
-                        <div class="empty-state" id="emptyOutfits">Henz kombin olusturmadn.</div>
+                        <div class="empty-state" id="emptyOutfits">Henz kombin oluşturmadn.</div>
 
                     </div>
 
-                    <div id="tabBegeniler" class="profile-tab">
+                    <div id="tabBeğeniler" class="profile-tab">
 
                         <div class="outfit-mini-grid" id="likedOutfitsGrid"></div>
 
-                        <div class="empty-state" id="emptyLikes">Henz begenilen kombin yok.</div>
+                        <div class="empty-state" id="emptyLikes">Henz beğenilen kombin yok.</div>
 
                     </div>
 
@@ -301,11 +301,11 @@
 
                     </div>
 
-                    <div id="tabSifre" class="profile-tab">
+                    <div id="tabŞifre" class="profile-tab">
 
                         <div class="profile-msg success" id="passwordSaved">ifre degistirildi.</div>
 
-                        <div class="profile-msg error" id="passwordError">Mevcut Sifre hatal.</div>
+                        <div class="profile-msg error" id="passwordError">Mevcut Şifre hatal.</div>
 
                         <form class="profile-form" id="passwordForm">
 
@@ -359,7 +359,7 @@
 
                     </div>
 
-                    <p>Kombinini olustur, tarzn kesfet.</p>
+                    <p>Kombinini oluştur, tarzn keşfet.</p>
 
                 </div>
 
@@ -367,7 +367,7 @@
 
                     <h5>Platform</h5>
 
-                    <a href="kesfet.html">Kesfet</a>
+                    <a href="kesfet.html">Keşfet</a>
 
                     <a href="kombinler.html">Kombinler</a>
 
@@ -535,7 +535,7 @@
 
 
 
-        var gender = profile.gender || 'kadin';
+        var gender = profile.gender || 'kadın';
 
         document.querySelector('input[name="gender"][value="' + gender + '"]').checked = true;
 
@@ -619,7 +619,7 @@
 
                 if (item.dataset.tab === 'kombinler') renderMyOutfits();
 
-                if (item.dataset.tab === 'begeniler') renderLikedOutfits();
+                if (item.dataset.tab === 'beğeniler') renderLikedOutfits();
 
                 if (item.dataset.tab === 'kaydedilenler') renderSavedOutfits();
 
@@ -775,7 +775,7 @@
 
                     var all = [];
 
-                    ['kadin','erkek','cocuk'].forEach(function(g) {
+                    ['kadın','erkek','çocuk'].forEach(function(g) {
 
                         var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
 

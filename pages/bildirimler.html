@@ -65,7 +65,7 @@
 
             <ul class="nav-links">
 
-                <li><a href="kesfet.html">Kesfet</a></li>
+                <li><a href="kesfet.html">Keşfet</a></li>
 
                 <li><a href="kombinler.html">Kombinler</a></li>
 
@@ -77,7 +77,7 @@
 
                 <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
 
-                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+                <li><a href="giris.html" class="btn-primary">Giriş Yap</a></li>
 
                 <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
 
@@ -115,9 +115,9 @@
 
             <div class="footer-grid">
 
-                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini olustur, tarzn kesfet.</p></div>
+                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini oluştur, tarzn keşfet.</p></div>
 
-                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a></div>
+                <div><h5>Platform</h5><a href="kesfet.html">Keşfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a></div>
 
                 <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a></div>
 
@@ -141,7 +141,7 @@
 
         var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
 
-        if (!user) { document.getElementById('notifList').innerHTML = '<div class="notif-empty"><p>Bildirimleri grmek iin giri? yap.</p><a href="giris.html" class="btn-primary" style="margin-top:16px;">Giris Yap</a></div>'; return; }
+        if (!user) { document.getElementById('notifList').innerHTML = '<div class="notif-empty"><p>Bildirimleri grmek iin giri? yap.</p><a href="giris.html" class="btn-primary" style="margin-top:16px;">Giriş Yap</a></div>'; return; }
 
         var notifs = JSON.parse(localStorage.getItem('clothink_notifs_' + user.email) || '[]');
 

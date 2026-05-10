@@ -9,7 +9,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kesfet ? Clothink</title>
+    <title>Keşfet ? Clothink</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -61,7 +61,7 @@
 
             <ul class="nav-links">
 
-                <li><a href="kesfet.html" style="color:#111;font-weight:600;">Kesfet</a></li>
+                <li><a href="kesfet.html" style="color:#111;font-weight:600;">Keşfet</a></li>
 
                 <li><a href="kombinler.html">Kombinler</a></li>
 
@@ -73,7 +73,7 @@
 
                 <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
 
-                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
+                <li><a href="giris.html" class="btn-primary">Giriş Yap</a></li>
 
                 <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
 
@@ -89,11 +89,11 @@
 
         <div class="container">
 
-            <h1>Kesfet</h1>
+            <h1>Keşfet</h1>
 
-            <p>lham veren kombinleri kesfet, yeni stiller bul.</p>
+            <p>lham veren kombinleri keşfet, yeni stiller bul.</p>
 
-            <a href="olustur.html" class="btn-primary btn-large" style="margin-top:16px;">+ Kombin Olustur</a>
+            <a href="olustur.html" class="btn-primary btn-large" style="margin-top:16px;">+ Kombin Oluştur</a>
 
         </div>
 
@@ -111,11 +111,11 @@
 
                     <option value="all">Tm Cinsiyetler</option>
 
-                    <option value="kadin">Kadn</option>
+                    <option value="kadın">Kadn</option>
 
                     <option value="erkek">Erkek</option>
 
-                    <option value="cocuk">Socuk</option>
+                    <option value="çocuk">Socuk</option>
 
                 </select>
 
@@ -161,7 +161,7 @@
 
             </div>
 
-            <div class="outfit-grid" id="kesfetGrid"></div>
+            <div class="outfit-grid" id="keşfetGrid"></div>
 
             <div id="loadMoreWrap" style="text-align:center;margin-top:32px;display:none;">
 
@@ -181,9 +181,9 @@
 
             <div class="footer-grid">
 
-                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini olustur, tarzn kesfet.</p></div>
+                <div class="footer-brand"><div class="footer-logo"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><p>Kombinini oluştur, tarzn keşfet.</p></div>
 
-                <div><h5>Platform</h5><a href="kesfet.html">Kesfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="#">Trendler</a></div>
+                <div><h5>Platform</h5><a href="kesfet.html">Keşfet</a><a href="kombinler.html">Kombinler</a><a href="markalar.html">Markalar</a><a href="clothink.html">Clothink</a><a href="#">Trendler</a></div>
 
                 <div><h5>Topluluk</h5><a href="#">Blog</a><a href="#">Yardm Merkezi</a><a href="#">Kullanm artlar</a><a href="#">Gizlilik</a></div>
 
@@ -241,7 +241,7 @@
 
     function shareOutfit(o) {
 
-        var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
+        var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te keşfettim!';
 
         var url = window.location.origin + '/Clothink/pages/kombinler.html';
 
@@ -255,7 +255,7 @@
 
         var all = [];
 
-        ['kadin','erkek','cocuk'].forEach(function(g) {
+        ['kadın','erkek','çocuk'].forEach(function(g) {
 
             var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
 
@@ -273,7 +273,7 @@
 
         renderedCount = 0;
 
-        var grid = document.getElementById('kesfetGrid');
+        var grid = document.getElementById('keşfetGrid');
 
         grid.innerHTML = '';
 
@@ -299,7 +299,7 @@
 
         var items = allFilteredItems;
 
-        var grid = document.getElementById('kesfetGrid');
+        var grid = document.getElementById('keşfetGrid');
 
         var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
 
@@ -357,7 +357,7 @@
 
     function shareOutfit(o) {
 
-        var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
+        var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te keşfettim!';
 
         var url = window.location.origin + '/Clothink/pages/kombinler.html';
 
@@ -371,7 +371,7 @@
 
     // global like handler for grid
 
-    document.getElementById('kesfetGrid').addEventListener('click', function(e) {
+    document.getElementById('keşfetGrid').addEventListener('click', function(e) {
 
         var btn = e.target.closest('.like-btn');
 
@@ -449,7 +449,7 @@
 
         if (all.length === 0) {
 
-            ['kadin','erkek','cocuk'].forEach(function(g) {
+            ['kadın','erkek','çocuk'].forEach(function(g) {
 
                 var d = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
 
@@ -459,7 +459,7 @@
 
         }
 
-        var genderMap = { kadin: 'kadin', erkek: 'erkek', cocuk: 'cocuk' };
+        var genderMap = { kadın: 'kadın', erkek: 'erkek', çocuk: 'çocuk' };
 
         var userGender = null;
 
@@ -471,7 +471,7 @@
 
         }
 
-        if (!userGender) userGender = localStorage.getItem('clothink_gender') || 'kadin';
+        if (!userGender) userGender = localStorage.getItem('clothink_gender') || 'kadın';
 
         if (userGender && genderMap[userGender]) document.getElementById('genderFilter').value = userGender;
 
@@ -479,7 +479,7 @@
 
         var allUsers = JSON.parse(localStorage.getItem('clothink_users') || '[]');
 
-        var grid2 = document.getElementById('kesfetGrid');
+        var grid2 = document.getElementById('keşfetGrid');
 
         allUsers.forEach(function(u) {
 
