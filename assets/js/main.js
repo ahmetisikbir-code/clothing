@@ -2,6 +2,30 @@
     var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
     var nav = document.querySelector('.nav-links');
 
+    // HAMBURGER MENU
+    var navbar = document.querySelector('.navbar');
+    if (navbar) {
+        var burger = document.createElement('button');
+        burger.id = 'burgerMenu';
+        burger.innerHTML = '<span></span><span></span><span></span>';
+        burger.style.cssText = 'display:none;background:none;border:none;cursor:pointer;padding:8px;position:relative;z-index:200;';
+        burger.onclick = function() {
+            nav.classList.toggle('open');
+            burger.classList.toggle('open');
+        };
+        var navContainer = navbar.querySelector('.container');
+        if (navContainer && navContainer.firstChild) {
+            navContainer.insertBefore(burger, navContainer.firstChild.nextSibling);
+        }
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-links') && !e.target.closest('#burgerMenu')) {
+                nav.classList.remove('open');
+                burger.classList.remove('open');
+            }
+        });
+    }
+
     if (nav && user) {
         var loginBtn = nav.querySelector('.btn-primary');
         var signupBtn = nav.querySelector('.btn-secondary');
