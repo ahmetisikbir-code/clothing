@@ -231,329 +231,233 @@
     <script src="../assets/js/main.js"></script>
 
     <script>
-
     (function() {
-
         var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
-
         if (!user) { window.location.href = 'giris.html'; return; }
 
-
-
         var products = [
-
             { id:1, name:'Siyah Deri Ceket', brand:'ZARA', cat:'ust', img:'https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=200&h=200&fit=crop' },
-
-            { id:2, name:'Beyaz Tişört', brand:'NIKE', cat:'ust', img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=200&h=200&fit=crop' },
-
-            { id:3, name:'Kot Ceket', brand:'LEVI\'S', cat:'ust', img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&h=200&fit=crop' },
-
+            { id:2, name:'Beyaz Tisort', brand:'NIKE', cat:'ust', img:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=200&h=200&fit=crop' },
+            { id:3, name:'Kot Ceket', brand:"LEVI'S", cat:'ust', img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&h=200&fit=crop' },
             { id:4, name:'Siyah Blazer', brand:'MANGO', cat:'ust', img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=200&h=200&fit=crop' },
-
-            { id:5, name:'Kot Pantolon', brand:'LEVI\'S', cat:'alt', img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=200&fit=crop' },
-
+            { id:5, name:'Kot Pantolon', brand:"LEVI'S", cat:'alt', img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=200&fit=crop' },
             { id:6, name:'Siyah Etek', brand:'ZARA', cat:'alt', img:'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=200&h=200&fit=crop' },
-
             { id:7, name:'Kargo Pantolon', brand:'BERSHKA', cat:'alt', img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=200&fit=crop' },
-
             { id:8, name:'Beyaz Kot', brand:'H&M', cat:'alt', img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=200&fit=crop' },
-
-            { id:9, name:'Beyaz Sneaker', brand:'NIKE', cat:'ayakkabı', img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=200&h=200&fit=crop' },
-
-            { id:10, name:'Siyah Bot', brand:'ADIDAS', cat:'ayakkabı', img:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=200&h=200&fit=crop' },
-
-            { id:11, name:'Loafers', brand:'ZARA', cat:'ayakkabı', img:'https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=200&h=200&fit=crop' },
-
-            { id:12, name:'Topuklu Ayakkab', brand:'MANGO', cat:'ayakkabı', img:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=200&h=200&fit=crop' },
-
-            { id:13, name:'Gne? Gzls', brand:'DIOR', cat:'aksesuar', img:'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200&h=200&fit=crop' },
-
-            { id:14, name:'Deri Santa', brand:'PRADA', cat:'aksesuar', img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200&h=200&fit=crop' },
-
+            { id:9, name:'Beyaz Sneaker', brand:'NIKE', cat:'ayakkabi', img:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=200&h=200&fit=crop' },
+            { id:10, name:'Siyah Bot', brand:'ADIDAS', cat:'ayakkabi', img:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=200&h=200&fit=crop' },
+            { id:11, name:'Loafers', brand:'ZARA', cat:'ayakkabi', img:'https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=200&h=200&fit=crop' },
+            { id:12, name:'Topuklu Ayakkabi', brand:'MANGO', cat:'ayakkabi', img:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=200&h=200&fit=crop' },
+            { id:13, name:'Gunes Gozlugu', brand:'DIOR', cat:'aksesuar', img:'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200&h=200&fit=crop' },
+            { id:14, name:'Deri Canta', brand:'PRADA', cat:'aksesuar', img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200&h=200&fit=crop' },
             { id:15, name:'Saat', brand:'ARMANI', cat:'aksesuar', img:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=200&h=200&fit=crop' },
-
-            { id:16, name:'Sapka', brand:'ADIDAS', cat:'aksesuar', img:'https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=200&h=200&fit=crop' },
-
+            { id:16, name:'Sapka', brand:'ADIDAS', cat:'aksesuar', img:'https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=200&h=200&fit=crop' }
         ];
 
+        // Load user's custom products
+        var customP = JSON.parse(localStorage.getItem('clothink_my_products_' + user.email) || '[]');
+        customP.forEach(function(cp) { products.push(cp); });
 
+        var selected = {};
+        var currentCat = 'all';
+        var outfitPhotoData = null;
 
-        
+        function renderProducts(cat) {
+            var grid = document.getElementById('productGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            var filtered = cat === 'all' ? products : products.filter(function(p) { return p.cat === cat; });
+            filtered.forEach(function(p) {
+                var div = document.createElement('div');
+                div.className = 'product-option' + (selected[p.cat] && selected[p.cat].id === p.id ? ' selected' : '');
+                div.innerHTML = '<div class="thumb" style="background-image:url(' + p.img + ')"></div><h4>' + p.name + '</h4><p>' + p.brand + '</p>';
+                div.onclick = function() {
+                    selected[p.cat] = p;
+                    renderProducts(currentCat);
+                    updateCanvas();
+                };
+                grid.appendChild(div);
+            });
+        }
 
-        // USER UPLOADS
-        var outfitPhotoData = null; // data URL for outfit cover
-        var productPhotoData = null; // temp data URL for new product photo
-        var customProducts = JSON.parse(localStorage.getItem('clothink_my_products_' + user.email) || '[]');
+        function updateCanvas() {
+            var canvas = document.getElementById('creatorCanvas');
+            if (!canvas) return;
+            var cats = ['ust','alt','ayakkabi','aksesuar'];
 
-        // Load custom products into product list
-        customProducts.forEach(function(cp) { products.push(cp); });
+            // Remove old content
+            canvas.innerHTML = '';
 
-        function handlePhotoUpload(input) {
+            // Set background
+            if (outfitPhotoData) {
+                canvas.style.backgroundImage = 'url(' + outfitPhotoData + ')';
+                canvas.style.backgroundSize = 'cover';
+                canvas.style.backgroundPosition = 'center';
+            } else {
+                var isDark = document.body.classList.contains('dark');
+                canvas.style.backgroundImage = '';
+                canvas.style.background = isDark ? '#252525' : '#f0f0f0';
+            }
+
+            // Check if any product selected
+            var hasAny = false;
+            cats.forEach(function(c) { if (selected[c]) hasAny = true; });
+            if (!hasAny) {
+                canvas.textContent = 'Urun secin';
+                canvas.style.color = '#bbb';
+                canvas.style.fontSize = '14px';
+                return;
+            }
+
+            // Show product layers
+            var layers = document.createElement('div');
+            layers.className = 'canvas-layers';
+            layers.style.cssText = 'position:absolute;inset:0;pointer-events:none;';
+            cats.forEach(function(c) {
+                if (selected[c]) {
+                    var div = document.createElement('div');
+                    div.className = 'canvas-layer ' + c;
+                    div.style.backgroundImage = 'url(' + selected[c].img + ')';
+                    layers.appendChild(div);
+                }
+            });
+            canvas.appendChild(layers);
+        }
+
+        function showMsg(text, isError) {
+            var msg = document.getElementById('outfitMsg');
+            if (!msg) return;
+            msg.textContent = text;
+            msg.style.display = 'block';
+            msg.style.color = isError ? '#e74c3c' : '#2e7d32';
+            msg.style.fontSize = '13px';
+            msg.style.marginTop = '16px';
+            setTimeout(function() { msg.style.display = 'none'; }, 3000);
+        }
+
+        // PHOTO UPLOAD
+        window.handlePhotoUpload = function(input) {
             var file = input.files[0];
             if (!file) return;
             var reader = new FileReader();
             reader.onload = function(e) {
                 outfitPhotoData = e.target.result;
                 var preview = document.getElementById('photoPreview');
-                preview.src = outfitPhotoData;
-                preview.style.display = 'block';
-                document.getElementById('photoLabel').textContent = 'Fotograf degistir';
+                if (preview) {
+                    preview.src = outfitPhotoData;
+                    preview.style.display = 'block';
+                }
+                var label = document.getElementById('photoLabel');
+                if (label) label.textContent = 'Fotograf Yuklendi';
                 updateCanvas();
             };
             reader.readAsDataURL(file);
-        }
+        };
 
-        function handleProductPhoto(input) {
+        // PRODUCT PHOTO UPLOAD 
+        var productPhotoData = null;
+        window.handleProductPhoto = function(input) {
             var file = input.files[0];
             if (!file) return;
             var reader = new FileReader();
             reader.onload = function(e) {
                 productPhotoData = e.target.result;
                 var preview = document.getElementById('newProductPreview');
-                preview.src = productPhotoData;
-                preview.style.display = 'block';
+                if (preview) {
+                    preview.src = productPhotoData;
+                    preview.style.display = 'block';
+                }
             };
             reader.readAsDataURL(file);
-        }
+        };
 
-        function addCustomProduct() {
-            var name = document.getElementById('newProductName').value.trim();
-            var brand = document.getElementById('newProductBrand').value.trim();
-            var price = document.getElementById('newProductPrice').value.trim();
-            var cat = document.getElementById('newProductCat').value;
-            if (!name || !productPhotoData) { showMsg('Urun adi ve fotograf gerekli.', true); return; }
-            var newId = Date.now();
-            var newProduct = {
-                id: newId,
-                name: name,
-                brand: brand || 'Kendi Markam',
-                price: price || '_0',
-                cat: cat,
-                img: productPhotoData
-            };
-            products.unshift(newProduct);
-            customProducts.push(newProduct);
-            localStorage.setItem('clothink_my_products_' + user.email, JSON.stringify(customProducts));
+        window.addCustomProduct = function() {
+            var nameEl = document.getElementById('newProductName');
+            var brandEl = document.getElementById('newProductBrand');
+            var priceEl = document.getElementById('newProductPrice');
+            var catEl = document.getElementById('newProductCat');
+            if (!nameEl) return;
+            var name = nameEl.value.trim();
+            var brand = brandEl.value.trim() || 'Kendi Markam';
+            var price = priceEl.value.trim() || '0 TL';
+            var cat = catEl.value || 'ust';
+            if (!name || !productPhotoData) { showMsg('Urun adi ve fotograf gerekli', true); return; }
+            var newProduct = { id: Date.now(), name: name, brand: brand, price: price, cat: cat, img: productPhotoData };
+            products.push(newProduct);
+            customP.push(newProduct);
+            localStorage.setItem('clothink_my_products_' + user.email, JSON.stringify(customP));
             // Clear form
-            document.getElementById('newProductName').value = '';
-            document.getElementById('newProductBrand').value = '';
-            document.getElementById('newProductPrice').value = '';
+            nameEl.value = ''; brandEl.value = ''; priceEl.value = '';
             productPhotoData = null;
-            document.getElementById('newProductPreview').style.display = 'none';
+            var preview = document.getElementById('newProductPreview');
+            if (preview) preview.style.display = 'none';
             renderProducts(currentCat);
-            showMsg('Urun eklendi!', false);
-        }
+            showMsg('Urun eklendi', false);
+        };
 
-        var selected = {};
-
-        var currentCat = 'all';
-
-
-
-        function renderProducts(cat) {
-
-            var grid = document.getElementById('productGrid');
-
-            grid.innerHTML = '';
-
-            var filtered = cat === 'all' ? products : products.filter(function(p) { return p.cat === cat; });
-
-            filtered.forEach(function(p) {
-
-                var div = document.createElement('div');
-
-                div.className = 'product-option' + (selected[p.cat] && selected[p.cat].id === p.id ? ' selected' : '');
-
-                div.innerHTML = '<div class="thumb" style="background-image:url(\'' + p.img + '\')"></div><h4>' + p.name + '</h4><p>' + p.brand + '</p>';
-
-                div.addEventListener('click', function() {
-
-                    selected[p.cat] = p;
-
-                    renderProducts(currentCat);
-
-                    updateCanvas();
-
-                });
-
-                grid.appendChild(div);
-
-            });
-
-        }
-
-
-
-        function updateCanvas() {
-            var canvas = document.getElementById('creatorCanvas');
-            var cats = ['ust','alt','ayakkabı','aksesuar'];
-            
-            // Set background from uploaded photo
-            if (outfitPhotoData) {
-                canvas.style.backgroundImage = 'url(' + outfitPhotoData + ')';
-                canvas.style.backgroundSize = 'cover';
-                canvas.style.backgroundPosition = 'center';
-            } else {
-                canvas.style.backgroundImage = '';
-                canvas.style.background = '#f0f0f0';
-                var d = document.body.classList.contains('dark');
-                if (d) canvas.style.background = '#252525';
-            }
-            
-            // Clean old layers
-            var existing = canvas.querySelector('.canvas-layers');
-            if (existing) existing.remove();
-            var empty = canvas.querySelector('.canvas-empty');
-            if (empty) empty.remove();
-
-
-
-            var hasAny = false;
-
-            cats.forEach(function(c) {
-
-                if (selected[c]) hasAny = true;
-
-            });
-
-            if (!hasAny) {
-                canvas.textContent = 'Kombinini olusturmak icin urun sec';
-                return;
-            }
-
-            canvas.textContent = '';
-
-
-
-            var layers = document.createElement('div');
-
-            layers.className = 'canvas-layers';
-
-            cats.forEach(function(c) {
-
-                if (selected[c]) {
-
-                    var div = document.createElement('div');
-
-                    div.className = 'canvas-layer ' + c;
-
-                    div.style.backgroundImage = 'url(\'' + selected[c].img + '\')';
-
-                    layers.appendChild(div);
-
-                }
-
-            });
-
-            canvas.appendChild(layers);
-
-        }
-
-
-
-        renderProducts('all');
-
-
-
-        document.querySelectorAll('[data-cat]').forEach(function(el) {
-
-            el.addEventListener('click', function() {
-
-                document.querySelectorAll('[data-cat]').forEach(function(e) {
-
-                    e.style.background = '#fff';
-
-                    e.style.color = '#333';
-
-                    e.style.borderColor = '#ddd';
-
-                });
-
-                el.style.background = '#111';
-
-                el.style.color = '#fff';
-
-                el.style.borderColor = '#111';
-
-                currentCat = el.dataset.cat;
-
-                renderProducts(currentCat);
-
-            });
-
-        });
-
-
-
-        document.getElementById('clearBtn').addEventListener('click', function() {
-
-            selected = {};
-
-            renderProducts(currentCat);
-
-            updateCanvas();
-
-        });
-
-
-
+        // SAVE OUTFIT
         document.getElementById('saveOutfitBtn').addEventListener('click', function() {
-
-            var title = document.getElementById('outfitTitle').value.trim();
-
-            if (!title) { showMsg('Ltfen bir baslik girin.', true); return; }
-
-            var tags = document.getElementById('outfitTags').value.trim().split(',').map(function(t){return t.trim();}).filter(function(t){return t;});
-
-            var cats = ['ust','alt','ayakkabı','aksesuar'];
-
+            var titleEl = document.getElementById('outfitTitle');
+            var tagsEl = document.getElementById('outfitTags');
+            if (!titleEl) return;
+            var title = titleEl.value.trim();
+            if (!title) { showMsg('Baslik girin', true); return; }
+            var tags = tagsEl.value.trim().split(',').map(function(t){return t.trim();}).filter(function(t){return t;});
+            var cats = ['ust','alt','ayakkabi','aksesuar'];
             var count = 0;
-
             cats.forEach(function(c) { if (selected[c]) count++; });
-
-            if (count === 0 && !outfitPhotoData) { showMsg('Lutfen en az bir urun secin veya fotograf yukleyin.', true); return; }
-
-            var imgs = [];
-
-            cats.forEach(function(c) { if (selected[c]) imgs.push(selected[c].img); });
-
+            if (count === 0 && !outfitPhotoData) { showMsg('En az bir urun secin veya fotograf yukleyin', true); return; }
+            var coverImg = outfitPhotoData;
+            if (!coverImg) {
+                for (var i = 0; i < cats.length; i++) {
+                    if (selected[cats[i]]) { coverImg = selected[cats[i]].img; break; }
+                }
+            }
+            var prods = [];
+            cats.forEach(function(c) { if (selected[c]) prods.push(selected[c]); });
             var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + user.email) || '[]');
-
-            var coverImg = outfitPhotoData || imgs[0]; outfits.unshift({ title: title, image: coverImg, items: count, tags: tags, products: Object.values(JSON.parse(JSON.stringify(selected))) });
-
+            outfits.unshift({ title: title, image: coverImg, items: count, tags: tags, products: prods });
             localStorage.setItem('clothink_outfits_' + user.email, JSON.stringify(outfits));
-
-            showMsg('Kombin kaydedildi!', false);
-
-            document.getElementById('outfitTitle').value = '';
-
+            showMsg('Kombin kaydedildi! Profilinde goruntuleyebilirsin.', false);
+            titleEl.value = '';
+            if (tagsEl) tagsEl.value = '';
             selected = {};
-
+            outfitPhotoData = null;
+            var preview = document.getElementById('photoPreview');
+            if (preview) preview.style.display = 'none';
+            var label = document.getElementById('photoLabel');
+            if (label) label.textContent = 'Kombin Fotografi Yukle';
             renderProducts(currentCat);
-
             updateCanvas();
-
         });
 
+        // CATEGORY FILTER
+        var catButtons = document.querySelectorAll('[data-cat]');
+        catButtons.forEach(function(el) {
+            el.addEventListener('click', function() {
+                catButtons.forEach(function(e) {
+                    e.style.background = '#fff'; e.style.color = '#333'; e.style.borderColor = '#ddd';
+                });
+                el.style.background = '#111'; el.style.color = '#fff'; el.style.borderColor = '#111';
+                currentCat = el.dataset.cat;
+                renderProducts(currentCat);
+            });
+        });
 
+        // CLEAR
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            selected = {};
+            outfitPhotoData = null;
+            var preview = document.getElementById('photoPreview');
+            if (preview) preview.style.display = 'none';
+            renderProducts(currentCat);
+            updateCanvas();
+        });
 
-        function showMsg(text, isError) {
-
-            var msg = document.getElementById('outfitMsg');
-
-            msg.textContent = text;
-
-            msg.style.display = 'block';
-
-            msg.style.color = isError ? '#e74c3c' : '#2e7d32';
-
-            setTimeout(function() { msg.style.display = 'none'; }, 3000);
-
-        }
-
+        // INIT
+        renderProducts('all');
     })();
-
-    </script>
+</script></script>
 
 </body>
 
