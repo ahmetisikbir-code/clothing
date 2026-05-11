@@ -203,7 +203,89 @@ document.addEventListener("DOMContentLoaded",function(){
     localStorage.removeItem("clothink_viewing_outfit");
     var c=document.getElementById("detailContainer");
     var img=d.img||d.image||""; var title=d.title||"Kombin"; var author=d.author||""; var likes=d.likes||0; var desc=d.desc||"";
-    c.innerHTML='<a href="javascript:history.back()" class="back-link">Geri</a><div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url('+img+')"></div><div class="outfit-hero-info"><h1>'+title+'</h1><p class="outfit-author">'+author+' &middot; '+likes+' begeni</p><p style="color:#666;line-height:1.7;margin-bottom:24px;">'+desc+'</p><div class="action-bar"><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Paylas\')">Paylas</button></div></div></div>';
+    var prods=d.products||[];
+    
+    // View count
+    var vk='clothink_views_'+img.replace(/[^a-z0-9]/gi,'_');
+    var views=(parseInt(localStorage.getItem(vk)||'0')+1);localStorage.setItem(vk,views);
+    
+    // Product list HTML
+    var pHtml='';
+    prods.forEach(function(p){pHtml+='<div class="product-item"><div class="product-thumb" style="background-image:url('+(p.img||'')+')"></div><div><h4>'+(p.name||p.n||'')+'</h4><p>'+(p.brand||p.b||'')+' &middot; '+(p.price||p.pr||'')+'</p></div></div>';});
+    
+    // Build detail HTML with all features
+    c.innerHTML='<a href="javascript:history.back()" class="back-link">Geri</a>'+
+    '<div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url('+img+')"></div>'+
+    '<div class="outfit-hero-info"><h1>'+title+'</h1>'+
+    '<p class="outfit-author">'+author+' &middot; '+likes+' begeni &middot; '+views+' goruntuleme</p>'+
+    '<p style="color:#666;line-height:1.7;margin-bottom:24px;">'+desc+'</p>'+
+    (prods.length?'<h5 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:12px;">KOMBINDEKI URUNLER</h5><div class="product-list">'+pHtml+'</div>':'')+
+    '<div class="action-bar">'+
+    '<button id="detailLikeBtn" class="like-btn-action" onclick="toggleLike()">'+likes+'</button>'+
+    '<button id="detailSaveBtn" class="save-btn-action" onclick="toggleSave()">Kaydet</button>'+
+    '<button class="share-btn-action" onclick="shareOutfit()">Paylas</button>'+
+    '<button class="share-btn-action" style="background:#f9f6f0;color:#c9a84c;" onclick="aiReview()">AI Yorumla</button>'+
+    '</div></div></div>';
+    
+    // Like/Save state from user
+    var user=JSON.parse(localStorage.getItem("clothink_user")||"null");
+    if(user){
+        var ulikes=JSON.parse(localStorage.getItem("clothink_likes_"+user.email)||"[]");
+        if(ulikes.indexOf(img)>-1)document.getElementById("detailLikeBtn").classList.add("liked");
+        var usaves=JSON.parse(localStorage.getItem("clothink_saves_"+user.email)||"[]");
+        if(usaves.indexOf(img)>-1){var sb=document.getElementById("detailSaveBtn");sb.classList.add("saved");sb.textContent="Kaydedildi";}
+    }
+    
+    // Toggle like
+    window.toggleLike=function(){
+        var u=JSON.parse(localStorage.getItem("clothink_user")||"null");if(!u)return;
+        var ul=JSON.parse(localStorage.getItem("clothink_likes_"+u.email)||"[]");
+        var idx=ul.indexOf(img);var btn=document.getElementById("detailLikeBtn");
+        if(idx>-1){ul.splice(idx,1);btn.classList.remove("liked");likes--}else{ul.push(img);btn.classList.add("liked");likes++}
+        localStorage.setItem("clothink_likes_"+u.email,JSON.stringify(ul));btn.textContent=likes;
+    };
+    // Toggle save
+    window.toggleSave=function(){
+        var u=JSON.parse(localStorage.getItem("clothink_user")||"null");if(!u)return;
+        var us=JSON.parse(localStorage.getItem("clothink_saves_"+u.email)||"[]");
+        var idx=us.indexOf(img);var btn=document.getElementById("detailSaveBtn");
+        if(idx>-1){us.splice(idx,1);btn.classList.remove("saved");btn.textContent="Kaydet"}else{us.push(img);btn.classList.add("saved");btn.textContent="Kaydedildi"}
+        localStorage.setItem("clothink_saves_"+u.email,JSON.stringify(us));
+    };
+    // Share
+    window.shareOutfit=function(){var t=title+" - Clothink";if(navigator.share)navigator.share({title:title,text:t});else prompt("Link:",location.href)};
+    // AI Review
+    window.aiReview=function(){
+        var items=prods.length||0;
+        var reviews=["Bu minimalist bir kombin. Az parca ile cok sey anlatmak ustalik ister.","Dengeli bir secim. "+items+" parca ile gunluk kullanim icin ideal.","Zengin bir kombin! "+items+" parca ile detayli bir stil ortaya cikmis."];
+        var r=reviews[Math.min(items-1,2)]||reviews[2];
+        var ca=document.getElementById("commentsArea");
+        var ck='clothink_comments_'+img.replace(/[^a-z0-9]/gi,'_');
+        var comments=JSON.parse(localStorage.getItem(ck)||"[]");
+        comments.unshift({name:"Clothink AI",text:r,date:new Date().toISOString(),isAI:true});
+        localStorage.setItem(ck,JSON.stringify(comments));
+        renderComments();
+    };
+    // Comments
+    var ca=document.getElementById("commentsArea");
+    var ck='clothink_comments_'+img.replace(/[^a-z0-9]/gi,'_');
+    var comments=JSON.parse(localStorage.getItem(ck)||"[]");
+    function renderComments(){
+        var h='<div class="comments-box"><h3>Yorumlar ('+comments.length+')</h3><div class="comment-input-wrap"><input id="commentInput" placeholder="Yorum yaz..." onkeydown="if(event.key==\'Enter\')postComment()"><button onclick="postComment()">Gonder</button></div>';
+        comments.forEach(function(cm){
+            var init=(cm.name||"?")[0].toUpperCase();
+            if(cm.isAI)h+='<div class="comment-item" style="background:#f9f6f0;border-left:2px solid #c9a84c;"><div class="comment-avatar" style="background:#c9a84c;color:#fff;">AI</div><div class="comment-body"><div class="comment-author" style="color:#c9a84c;">Clothink AI</div><div class="comment-text">'+cm.text+'</div><div class="comment-date">AI Analizi</div></div></div>';
+            else h+='<div class="comment-item"><div class="comment-avatar">'+init+'</div><div class="comment-body"><div class="comment-author">'+cm.name+'</div><div class="comment-text">'+cm.text+'</div><div class="comment-date">'+new Date(cm.date).toLocaleDateString("tr-TR")+'</div></div></div>';
+        });
+        h+='</div>';ca.innerHTML=h;
+    }
+    window.postComment=function(){
+        var u=JSON.parse(localStorage.getItem("clothink_user")||"null");if(!u)return;
+        var input=document.getElementById("commentInput");var t=input.value.trim();if(!t)return;
+        comments.push({name:u.name||"Kullanici",text:t,date:new Date().toISOString()});
+        localStorage.setItem(ck,JSON.stringify(comments));input.value="";renderComments();
+    };
+    renderComments();
 });
 </script>
 </body>
