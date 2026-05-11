@@ -101,7 +101,7 @@ body {
 .btn-outline:hover { border-color: #c9a84c; color: #c9a84c; }
 
 /* HERO */
-.hero {
+.hero { min-height: 85vh; 
     position: relative;
     min-height: 620px;
     color: #fff;
@@ -142,7 +142,7 @@ body {
     pointer-events: none;
 }
 
-.hero .container {
+.hero .container { padding: 180px 24px 120px; 
     position: relative;
     z-index: 2;
     text-align: center;
@@ -158,23 +158,24 @@ body {
 }
 
 .hero h1 {
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 1.1;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1.05;
     letter-spacing: -2px;
     margin-bottom: 20px;
 }
 
 .hero h1 span {
+    font-size: 68px;
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 400;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.6);
 }
 
 .hero-desc {
     font-size: 17px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.6);
     max-width: 500px;
     margin: 0 auto 40px;
     line-height: 1.7;
@@ -210,14 +211,16 @@ body {
 }
 
 .mission h2 {
-    font-size: 40px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: #0a0a0a;
     letter-spacing: -1px;
     margin-bottom: 24px;
 }
 
 .mission h2 span {
+    color: #c9a84c;
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 400;
@@ -225,8 +228,9 @@ body {
 }
 
 .mission-desc {
-    font-size: 16px;
-    color: #444;
+    font-size: 15px;
+    color: #777;
+    font-weight: 300;
     line-height: 1.8;
     font-weight: 400;
 }
@@ -277,8 +281,9 @@ body {
 
 .how-it-works h2 {
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 300;
     letter-spacing: -1px;
+    color: #0a0a0a;
     margin-bottom: 56px;
 }
 
@@ -338,8 +343,9 @@ body {
 
 .feed h2 {
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 300;
     letter-spacing: -1px;
+    color: #0a0a0a;
     margin-bottom: 8px;
 }
 
@@ -413,8 +419,9 @@ body {
 
 .cta h2 {
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 300;
     letter-spacing: -1px;
+    color: #0a0a0a;
     margin-bottom: 12px;
 }
 
@@ -553,8 +560,7 @@ body.dark, .dark .navbar, .dark .page-header, .dark .page-section,
 .dark .outfit-photo { background-color: #333; }
 .dark p, .dark .outfit-items, .dark .footer p, .dark .step p,
 .dark .brands p, .dark .auth-form p, .dark .form-group label { color: #999; }
-.dark h1, .dark h2, .dark h3, .dark .auth-form h2,
-.dark .profile-info h1, .dark .outfit-hero-info h1 { color: #eee; }
+.dark h1, .dark h2, .dark h3 { color: #eee; }
 .dark .filter-select, .dark .search-bar input, .dark .form-group input,
 .dark .profile-form input, .dark .profile-form textarea {
     background: #333; color: #eee; border-color: #444;
@@ -619,7 +625,7 @@ body.dark, .dark .navbar, .dark .page-header, .dark .page-section,
     .nav-links li { width: 100%; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
     .nav-links a, .nav-links button { font-size: 14px !important; width: 100%; display: block; padding: 8px 0; }
     .dark .nav-links { background: #1a1a1a; } .dark .nav-links li { border-bottom-color: #333; }
-    .hero { min-height: 60vh; } .hero .container { padding: 100px 16px 60px !important; }
+    .hero { min-height: 85vh;  min-height: 60vh; } .hero .container { padding: 180px 24px 120px;  padding: 100px 16px 60px !important; }
     .hero h1 { font-size: 36px !important; } .hero h1 span { font-size: 32px !important; }
     .hero-label { font-size: 9px; letter-spacing: 4px; margin-bottom: 16px; }
     .hero-desc { font-size: 13px; line-height: 1.6; max-width: 100%; }
@@ -664,7 +670,7 @@ body.dark, .dark .navbar, .dark .page-header, .dark .page-section,
     .logo-text { font-size: 15px; letter-spacing: 4px; }
     .ct-monogram { width: 36px; height: 36px; } .ct-c { font-size: 32px; transform-origin: 18px 18px; } .ct-t { font-size: 24px; }
     .navbar { padding: 10px 0; }
-    .hero { min-height: 50vh; } .hero .container { padding: 80px 16px 48px !important; }
+    .hero { min-height: 85vh;  min-height: 50vh; } .hero .container { padding: 180px 24px 120px;  padding: 80px 16px 48px !important; }
     .hero h1 { font-size: 26px !important; } .hero h1 span { font-size: 24px !important; }
     .outfit-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
     .outfit-info { padding: 8px 10px 6px; } .outfit-author { font-size: 10px; } .outfit-items { font-size: 10px; } .outfit-like { font-size: 10px; }

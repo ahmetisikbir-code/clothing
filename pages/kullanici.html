@@ -13,7 +13,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/style.css">
 
@@ -494,7 +494,7 @@
 
                 var tagsHtml = o.tags && o.tags.length ? '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;">' + o.tags.map(function(t){return '<span style="font-size:10px;color:#888;background:#f0f0f0;padding:2px 6px;border-radius:100px;">'+t+'</span>';}).join('') + '</div>' : '';
 
-                div.innerHTML = '<div class="outfit-photo" style="background-image:url(\'' + imgUrl + '\')"></div><div class="outfit-info"><div><p class="outfit-author">@' + displayName + '</p><p class="outfit-items">' + (o.items || '0') + ' rn</p>' + tagsHtml + '</div><p class="outfit-like like-btn" style="cursor:pointer;' + (liked ? 'color:#e74c3c' : '') + '">' + (o.likes || 0) + '</p></div>';
+                div.innerHTML = '<div class="outfit-photo" style="background-image:url(\'' + imgUrl + '\')"></div><div class="outfit-info"><div><p class="outfit-author">@' + displayName + '</p><p class="outfit-items">' + (o.items || '0') + ' rn</p>' + tagsHtml + '</div><p class="outfit-like like-btn" style="cursor:pointer;' + (liked ? 'color:#c9a84c' : '') + '">' + (o.likes || 0) + '</p></div>';
 
                 div.addEventListener('click', function(e) {
 
