@@ -93,7 +93,7 @@
 
             <ul class="nav-links">
 
-                <li><a href="kesfet.html">Keşfet</a></li>
+                <li><a href="kesfet.html">Kesfet</a></li>
 
                 <li><a href="kombinler.html">Kombinler</a></li>
 
@@ -107,7 +107,7 @@
 
                 <li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li>
 
-                <li><a href="giris.html" class="btn-primary">Giriş Yap</a></li>
+                <li><a href="giris.html" class="btn-primary">Giris Yap</a></li>
 
                 <li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li>
 
@@ -186,7 +186,7 @@
 
         // search catalog outfits
 
-        ['kadın','erkek','çocuk'].forEach(function(g) {
+        ['kadin','erkek','cocuk'].forEach(function(g) {
 
             var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || '[]');
 
@@ -246,11 +246,11 @@
 
         results.slice(0,30).forEach(function(r) {
 
-            if (r._type==='outfit') html += '<div class="result-item" onclick="localStorage.setItem(\'clothink_viewing_outfit\',JSON.stringify('+JSON.stringify(r).replace(/"/g,'&quot;')+'));window.location.href=\'kombinler.html\'"><div class="result-photo" style="background-image:url(\''+r.img+'\')"></div><div class="result-info"><h4>'+r.title+'</h4><p>'+r.author+'  '+r.likes+' beğeni</p><span class="result-tag">kombin</span></div></div>';
+            if (r._type==='outfit') html += '<div class="result-item" onclick="localStorage.setItem(\'clothink_viewing_outfit\',JSON.stringify('+JSON.stringify(r).replace(/"/g,'&quot;')+'));window.location.href=\'kombinler.html\'"><div class="result-photo" style="background-image:url(\''+r.img+'\')"></div><div class="result-info"><h4>'+r.title+'</h4><p>'+r.author+'  '+r.likes+' begeni</p><span class="result-tag">kombin</span></div></div>';
 
             else if (r._type==='product') html += '<div class="result-item"><div class="result-photo" style="background-image:url(\''+r.img+'\')"></div><div class="result-info"><h4>'+r.name+'</h4><p>'+r.brand+'</p><span class="result-tag">rn  '+ (r._outfitTitle||'') +'</span></div></div>';
 
-            else if (r._type==='user') html += '<div class="result-item" onclick="window.location.href=\'kullanici.htmlSu='+encodeURIComponent(r.email)+'\'"><div class="result-photo" style="display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-size:24px;font-weight:700;">'+r.name.charAt(0).toUpperCase()+'</div><div class="result-info"><h4>'+r.name+'</h4><p>@'+(r.username||r.email.split('@')[0])+'</p><span class="result-tag">kullanıcı</span></div></div>';
+            else if (r._type==='user') html += '<div class="result-item" onclick="window.location.href=\'kullanici.htmlSu='+encodeURIComponent(r.email)+'\'"><div class="result-photo" style="display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-size:24px;font-weight:700;">'+r.name.charAt(0).toUpperCase()+'</div><div class="result-info"><h4>'+r.name+'</h4><p>@'+(r.username||r.email.split('@')[0])+'</p><span class="result-tag">kullanici</span></div></div>';
 
             else if (r._type==='brand') html += '<div class="result-item"><div class="result-photo" style="display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#111;font-size:16px;font-weight:700;">'+r.name.charAt(0)+'</div><div class="result-info"><h4>'+r.name+'</h4><span class="result-tag">marka</span></div></div>';
 

@@ -51,9 +51,9 @@
 
 <body>
 
-    <nav class="navbar"><div class="container"><div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><ul class="nav-links"><li><a href="kesfet.html">Keşfet</a></li><li><a href="kombinler.html">Kombinler</a></li><li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li>
+    <nav class="navbar"><div class="container"><div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><ul class="nav-links"><li><a href="kesfet.html">Kesfet</a></li><li><a href="kombinler.html">Kombinler</a></li><li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li>
             <li><a href="trend.html">Trendler</a></li>
-            <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li><li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li><li><a href="giris.html" class="btn-primary">Giriş</a></li><li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li></ul></div></nav>
+            <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li><li><button id="darkToggle" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Koyu</button></li><li><a href="giris.html" class="btn-primary">Giris</a></li><li><a href="kaydol.html" class="btn-secondary">Kaydol</a></li></ul></div></nav>
 
     <section class="page-header"><div class="container"><h1>Sepet</h1></div></section>
 
@@ -70,11 +70,11 @@
 
         var container = document.getElementById('cartContainer');
 
-        if (!user) { container.innerHTML='<div class="cart-empty"><p>Sepeti grmek iin giri? yap.</p><a href="giris.html" class="btn-primary" style="margin-top:16px;">Giriş Yap</a></div>'; return; }
+        if (!user) { container.innerHTML='<div class="cart-empty"><p>Sepeti grmek iin giri? yap.</p><a href="giris.html" class="btn-primary" style="margin-top:16px;">Giris Yap</a></div>'; return; }
 
         var cart = JSON.parse(localStorage.getItem('clothink_cart_'+user.email)||'[]');
 
-        if (cart.length===0) { container.innerHTML='<div class="cart-empty"><p>Sepetin bo?.</p><a href="kesfet.html" class="btn-primary" style="margin-top:16px;">Kombinleri Keşfet</a></div>'; return; }
+        if (cart.length===0) { container.innerHTML='<div class="cart-empty"><p>Sepetin bo?.</p><a href="kesfet.html" class="btn-primary" style="margin-top:16px;">Kombinleri Kesfet</a></div>'; return; }
 
         var html=''; var total=0;
 
