@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded",function(){
     var ca=document.getElementById("commentsArea");
     var ck='clothink_comments_'+img.replace(/[^a-z0-9]/gi,'_');
     var comments=JSON.parse(localStorage.getItem(ck)||"[]");
-    function renderComments(){
+    function renderComments(){var comments=JSON.parse(localStorage.getItem(ck)||"[]");
         var h='<div class="comments-box"><h3>Yorumlar ('+comments.length+')</h3><div class="comment-input-wrap"><input id="commentInput" placeholder="Yorum yaz..." onkeydown="if(event.key==\'Enter\')postComment()"><button onclick="postComment()">Gonder</button></div>';
         comments.forEach(function(cm){
             var init=(cm.name||"?")[0].toUpperCase();
