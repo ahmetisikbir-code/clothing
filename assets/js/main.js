@@ -1,3 +1,12 @@
+
+// SAFE JSON PARSE with fallback
+window.safeParse = function(key, fallback) {
+  try {
+    var v = localStorage.getItem(key);
+    return v ? JSON.parse(v) : fallback;
+  } catch(e) { console.warn('Data error:', key); return fallback; }
+};
+
 (function() {
     var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
     var nav = document.querySelector('.nav-links');
