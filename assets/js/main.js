@@ -6,7 +6,7 @@
     if (!document.getElementById('skipLink')) {
         var skip = document.createElement('a');
         skip.id = 'skipLink';
-        skip.href = '#mainContent';
+        skip.href = '#homeFeed';
         skip.textContent = 'Ana icerige gec';
         skip.style.cssText = 'position:absolute;top:-100px;left:8px;background:#0a0a0a;color:#c9a84c;padding:8px 16px;z-index:9999;font-size:13px;text-decoration:none;transition:top 0.3s;';
         skip.onfocus = function() { skip.style.top = '8px'; };
@@ -237,5 +237,5 @@ if (window.innerWidth > 768) {
 
 // PWA service worker
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('../sw.js').catch(function() {});
+    navigator.serviceWorker.register((window.location.pathname.includes('/pages/') ? '../sw.js' : 'sw.js')).catch(function() {});
 }

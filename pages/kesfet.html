@@ -113,11 +113,11 @@
 
                     <option value="all">Tm Cinsiyetler</option>
 
-                    <option value="kadin">Kadn</option>
+                    <option value="kadin">Kadin</option>
 
                     <option value="erkek">Erkek</option>
 
-                    <option value="cocuk">Socuk</option>
+                    <option value="cocuk">Cocuk</option>
 
                 </select>
 
@@ -127,11 +127,11 @@
 
                     <option>Gnlk</option>
 
-                    <option>k</option>
+                    <option value="sik">Sik</option>
 
-                    <option>Spor</option>
+                    <option value="spor">Spor</option>
 
-                    <option>Ofis</option>
+                    <option value="ofis">Ofis</option>
 
                 </select>
 
@@ -224,7 +224,7 @@
 
         var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
 
-        var url = window.location.origin + '/Clothink/pages/kombinler.html';
+        var url = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/kombinler.html');
 
         if (navigator.share) { navigator.share({ title: o.title || 'Kombin', text: text, url: url }); }
 
@@ -336,54 +336,6 @@
 
 
 
-    function shareOutfit(o) {
-
-        var text = ' ' + (o.title || 'Kombin') + ' ? Clothink\'te kesfettim!';
-
-        var url = window.location.origin + '/Clothink/pages/kombinler.html';
-
-        if (navigator.share) { navigator.share({ title: o.title || 'Kombin', text: text, url: url }); }
-
-        else { prompt('Linki kopyala:', url); }
-
-    }
-
-
-
-    // global like handler for grid
-
-    document.getElementById('kesfetGrid').addEventListener('click', function(e) {
-
-        var btn = e.target.closest('.like-btn');
-
-        if (!btn) return;
-
-        var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
-
-        if (!user) { window.location.href = 'giris.html'; return; }
-
-        var card = btn.closest('.outfit-card');
-
-        var url = card ? card.dataset.img : '';
-
-        if (!url) return;
-
-        var likes = JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]');
-
-        var idx = likes.indexOf(url);
-
-        if (idx > -1) { likes.splice(idx, 1); btn.style.color = '#777'; }
-
-        else { likes.push(url); btn.style.color = '#e74c3c'; }
-
-        localStorage.setItem('clothink_likes_' + user.email, JSON.stringify(likes));
-
-        var match = btn.textContent.match(/(\d+)/);
-
-        if (match) btn.textContent = '' + (idx > -1 ? parseInt(match[1]) - 1 : parseInt(match[1]) + 1);
-
-    });
-
     function filterAndRender() {
 
         var gender = document.getElementById('genderFilter').value;
@@ -397,6 +349,16 @@
         var filtered = all;
 
         if (gender !== 'all') filtered = filtered.filter(function(o) { return o._gender === gender; });
+        if (cat && cat !== 'all') {
+            filtered = filtered.filter(function(o) {
+                var ct = (o.title || '').toLowerCase();
+                if (cat === 'gunluk') return ct.includes('gunluk') || ct.includes('casual') || ct.includes('daily');
+                if (cat === 'sik') return ct.includes('sik') || ct.includes('elegant') || ct.includes('class');
+                if (cat === 'spor') return ct.includes('spor') || ct.includes('sport') || ct.includes('athle');
+                if (cat === 'ofis') return ct.includes('ofis') || ct.includes('business') || ct.includes('office');
+                return true;
+            });
+        }
 
         if (query) filtered = filtered.filter(function(o) {
 
@@ -408,7 +370,7 @@
 
         });
 
-        if (sort === 'popular') filtered.sort(function(a,b) { return b.likes - a.likes; });
+        if (sort === 'popular') { filtered.sort(function(a,b) { return b.likes - a.likes; }); } else if (sort === 'new') { filtered.reverse(); }
 
         renderGrid(filtered);
 
@@ -419,6 +381,7 @@
     document.getElementById('genderFilter').addEventListener('change', filterAndRender);
 
     document.getElementById('sortFilter').addEventListener('change', filterAndRender);
+    document.getElementById('categoryFilter').addEventListener('change', filterAndRender);
 
     document.getElementById('searchInput').addEventListener('keyup', function(e) { if (e.key === 'Enter') filterAndRender(); });
 

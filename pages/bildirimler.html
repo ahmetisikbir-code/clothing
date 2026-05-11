@@ -132,7 +132,7 @@
 
         notifs.forEach(function(n, i) {
 
-            var icon = n.type === 'like' ? '' : n.type === 'follow' ? '' : n.type === 'comment' ? '' : '';
+            var icon = n.type === 'like' ? 'Like' : n.type === 'follow' ? 'Takip' : n.type === 'comment' ? 'Yorum' : 'Bilgi';
 
             html += '<div class="notif-item' + (!n.read ? ' unread' : '') + '" onclick="markRead(' + i + ')"><div class="notif-icon">' + icon + '</div><div class="notif-body"><p>' + n.message + '</p><span>' + new Date(n.date).toLocaleDateString('tr-TR') + '</span></div></div>';
 
@@ -152,7 +152,7 @@
 
         // mark all as read
 
-        notifs.forEach(function(n) { n.read = true; });
+        // Notifications: user must click to mark read
 
         localStorage.setItem('clothink_notifs_' + user.email, JSON.stringify(notifs));
 
