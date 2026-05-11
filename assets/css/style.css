@@ -36,9 +36,9 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 32px;
 }
 
 .italic {
@@ -65,7 +65,10 @@ body {
     top: 0;
     z-index: 100;
 }
-.navbar .container { display: flex; justify-content: space-between; align-items: center; }
+.navbar .container {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-left: 0;
+}
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo-ct { display: flex; align-items: center; }
 .logo-text {
