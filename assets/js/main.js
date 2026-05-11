@@ -193,9 +193,10 @@ function addToCart(name, brand, price, img) {
     var cart = JSON.parse(localStorage.getItem('clothink_cart_' + user.email) || '[]');
     cart.push({ name: name, brand: brand, price: price, img: img });
     localStorage.setItem('clothink_cart_' + user.email, JSON.stringify(cart));
-    alert('Sepet: "' + name + '" sepete eklendi!');
-    // reload to update cart badge
-    window.location.reload();
+    if (typeof window.showToast === 'function') window.showToast(name + ' sepete eklendi');
+    // update cart badge
+    var cl = document.getElementById('cartLink');
+    if (cl) { var cnt = cart.length; var badge = cl.querySelector('span'); if (badge) badge.textContent = cnt; else if (cnt > 0) cl.innerHTML = 'Sepet<span style="position:absolute;top:-6px;right:-12px;background:#0a0a0a;color:#fff;font-size:10px;font-weight:700;padding:2px 5px;border-radius:0;line-height:1;min-width:16px;text-align:center;">' + cnt + '</span>'; }
 }
 
 // GOOGLE LOGIN SIMULATION
@@ -213,7 +214,7 @@ function simulateGoogleLogin() {
         localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
     }
     localStorage.setItem('clothink_user', JSON.stringify({ name: name, email: email }));
-    window.location.href = (window.location.pathname.includes('/pages/') ? '' : 'pages/') + '../index.html';
+    window.location.href = window.location.pathname.includes('/pages/') ? '../index.html' : 'index.html';
 }
 
 // 3D TILT EFFECT - desktop only

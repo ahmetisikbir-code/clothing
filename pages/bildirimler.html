@@ -132,7 +132,7 @@
 
         notifs.forEach(function(n, i) {
 
-            var icon = n.type === 'like' ? 'Like' : n.type === 'follow' ? 'Takip' : n.type === 'comment' ? 'Yorum' : 'Bilgi';
+            var icon = n.type === 'like' ? 'L' : n.type === 'follow' ? 'T' : n.type === 'comment' ? 'Y' : 'B';
 
             html += '<div class="notif-item' + (!n.read ? ' unread' : '') + '" onclick="markRead(' + i + ')"><div class="notif-icon">' + icon + '</div><div class="notif-body"><p>' + n.message + '</p><span>' + new Date(n.date).toLocaleDateString('tr-TR') + '</span></div></div>';
 

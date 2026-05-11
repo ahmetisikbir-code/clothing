@@ -9,7 +9,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Clothinkr ? Marka Profili</title>
+    <title>Clothink ? Marka Profili</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -392,6 +392,26 @@
         document.getElementById('statOutfits').textContent = stats.outfits;
 
         document.getElementById('statLikes').textContent = stats.likes;
+
+        // Populate brand feed
+        var brandGrid = document.getElementById('brandFeed');
+        if (brandGrid) {
+            var allOutfits = [];
+            ['kadin','erkek','cocuk'].forEach(function(g) {
+                var cat = JSON.parse(localStorage.getItem('clothink_catalog_' + g) || 'null');
+                if (cat) cat.forEach(function(o) { allOutfits.push(o); });
+            });
+            allOutfits.sort(function(a,b) { return (b.likes || 0) - (a.likes || 0); });
+            var top8 = allOutfits.slice(0, 8);
+            top8.forEach(function(o) {
+                var div = document.createElement('div');
+                div.className = 'outfit-card';
+                div.style.cursor = 'pointer';
+                div.innerHTML = '<div class="outfit-photo" style="background-image:url(' + (o.img || o.image) + ')"></div><div class="outfit-info"><div><p class="outfit-author">' + (o.author || '') + '</p><p class="outfit-items">' + (o.items || '') + '</p></div><p class="outfit-like">' + (o.likes || 0) + '</p></div>';
+                div.onclick = function() { localStorage.setItem('clothink_viewing_outfit', JSON.stringify(o)); window.location.href = 'kombinler.html'; };
+                brandGrid.appendChild(div);
+            });
+        }
 
 
 
