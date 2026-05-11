@@ -1,12 +1,5 @@
-/* 3D TILT EFFECT */
-.outfit-card { perspective: 1000px; }
-.outfit-card .card-inner { transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); transform-style: preserve-3d; }
-/* 3D FLIP */
-.product-item-3d { perspective: 800px; }
-.product-flip { transition: transform 0.6s; transform-style: preserve-3d; position: relative; }
-.product-flip.flipped { transform: rotateY(180deg); }
-.product-flip-front, .product-flip-back { backface-visibility: hidden; position: absolute; inset: 0; }
-.product-flip-back { transform: rotateY(180deg); background: #f5f5f5; border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; }
-/* 3D CARD ENHANCEMENTS */
-.outfit-card { transform-style: preserve-3d; transition: transform 0.1s ease-out; }
-.outfit-card:hover { transform: scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,0.12); }
+/* 3D TILT - desktop only */
+@media (min-width: 769px) {
+    .outfit-card { transition: transform 0.1s ease-out, box-shadow 0.3s; }
+    .outfit-card:hover { transform: scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,0.12) !important; }
+}

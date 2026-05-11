@@ -216,22 +216,24 @@ function simulateGoogleLogin() {
     window.location.href = (window.location.pathname.includes('/pages/') ? '' : 'pages/') + '../index.html';
 }
 
-// 3D TILT EFFECT on outfit cards
-document.addEventListener('mouseover', function(e) {
-    var card = e.target.closest('.outfit-card');
-    if (!card) return;
-    var rect = card.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
-    var centerX = rect.width / 2, centerY = rect.height / 2;
-    var rotateX = (y - centerY) / centerY * -5;
-    var rotateY = (x - centerX) / centerX * 5;
-    card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.02)';
-});
-document.addEventListener('mouseout', function(e) {
-    var card = e.target.closest('.outfit-card');
-    if (card) card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-});
+// 3D TILT EFFECT - desktop only
+if (window.innerWidth > 768) {
+    document.addEventListener('mouseover', function(e) {
+        var card = e.target.closest('.outfit-card');
+        if (!card) return;
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var centerX = rect.width / 2, centerY = rect.height / 2;
+        var rotateX = (y - centerY) / centerY * -4;
+        var rotateY = (x - centerX) / centerX * 4;
+        card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.02)';
+    });
+    document.addEventListener('mouseout', function(e) {
+        var card = e.target.closest('.outfit-card');
+        if (card) card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+    });
+}
 
 // PWA service worker
 if ('serviceWorker' in navigator) {
