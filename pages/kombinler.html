@@ -193,7 +193,17 @@
 <script src="../assets/js/main.js"></script>
 <script>
 function openOutfit(p){localStorage.setItem("clothink_viewing_outfit",p);location.reload()}
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("#otherGrid .outfit-card").forEach(function(c){c.style.cursor="pointer";c.addEventListener("click",function(e){if(e.target.closest(".like-btn"))return;var d=this.getAttribute("data-outfit");if(d)openOutfit(d)})})});
+document.addEventListener("DOMContentLoaded",function(){
+    // Click handlers for cards
+    document.querySelectorAll("#otherGrid .outfit-card").forEach(function(c){c.style.cursor="pointer";c.addEventListener("click",function(e){if(e.target.closest(".like-btn"))return;var d=this.getAttribute("data-outfit");if(d)openOutfit(d)})});
+    
+    // Show detail if data exists
+    var d=null;try{d=JSON.parse(localStorage.getItem("clothink_viewing_outfit")||"null")}catch(e){}
+    if(!d)return;
+    localStorage.removeItem("clothink_viewing_outfit");
+    var c=document.getElementById("detailContainer");
+    c.innerHTML='<a href="javascript:history.back()" class="back-link">Geri</a><div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url('+d.img+')"></div><div class="outfit-hero-info"><h1>'+(d.title||'Kombin')+'</h1><p class="outfit-author">'+(d.author||'')+' · '+(d.likes||0)+' begeni</p><p>'+(d.desc||'')+'</p></div></div>';
+});
 </script>
 </body>
 
