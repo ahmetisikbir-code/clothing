@@ -385,19 +385,18 @@
 
 
         function updateCanvas() {
+            var canvas = document.getElementById('creatorCanvas');
+            canvas.style.backgroundImage = '';
             // If user uploaded a photo, show it on canvas
             if (outfitPhotoData) {
-                var canvas = document.getElementById('creatorCanvas');
                 canvas.textContent = '';
-                canvas.style.backgroundImage = 'url(\'' + outfitPhotoData + '\')';
+                canvas.style.backgroundImage = 'url(' + outfitPhotoData + ')';
                 canvas.style.backgroundSize = 'cover';
                 canvas.style.backgroundPosition = 'center';
+                var layers = canvas.querySelector('.canvas-layers');
+                if (layers) layers.remove();
                 return;
             }
-            canvas.style.backgroundImage = '';
-            
-
-            var canvas = document.getElementById('creatorCanvas');
 
             var cats = ['ust','alt','ayakkabı','aksesuar'];
 
