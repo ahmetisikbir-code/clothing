@@ -137,19 +137,31 @@
 
                     <h1>Kombin Oluştur</h1>
 
-                    <p class="sub">?rnleri se, kombinini oluştur ve paylaş.</p>
+                    <p class="sub">Urunleri sec, kombinini oluştur ve paylaş.</p>
 
 
+
+                    
+                    <div style="margin-bottom:20px;">
+                        <label for="outfitPhotoInput" style="display:block;cursor:pointer;padding:40px 20px;border:2px dashed #ddd;text-align:center;color:#888;font-size:13px;transition:all 0.2s;" 
+                            onmouseover="this.style.borderColor='#c9a84c';this.style.color='#c9a84c'" 
+                            onmouseout="this.style.borderColor='#ddd';this.style.color='#888'">
+                            <span style="font-size:28px;display:block;margin-bottom:8px;">&#x1F4F7;</span>
+                            <span id="photoLabel">Kombin Fotografi Yukle</span>
+                        </label>
+                        <input type="file" id="outfitPhotoInput" accept="image/*" style="display:none;" onchange="handlePhotoUpload(this)">
+                        <img id="photoPreview" style="display:none;width:100%;max-height:200px;object-fit:cover;margin-top:8px;">
+                    </div>
 
                     <div style="margin-bottom:16px;">
 
-                        <input id="outfitTitle" type="text" placeholder="Kombin basls (rn: Gnlk klk)" style="width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;outline:none;">
+                        <input id="outfitTitle" type="text" placeholder="Kombin basligi (orn: Gunluk Siklik)" style="width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;outline:none;">
 
                     </div>
 
                     <div style="margin-bottom:16px;">
 
-                        <input id="outfitTags" type="text" placeholder="Etiketler (virglle ayr: #yaz, #sokak, #?k)" style="width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;outline:none;">
+                        <input id="outfitTags" type="text" placeholder="Etiketler (virgulle ayir: #yaz, #sokak, #sik)" style="width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;outline:none;">
 
                     </div>
 
@@ -159,13 +171,13 @@
 
                     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">
 
-                        <span class="filter-select" data-cat="all" style="cursor:pointer;background:#111;color:#fff;border-color:#111;">Tm</span>
+                        <span class="filter-select" data-cat="all" style="cursor:pointer;background:#111;color:#fff;border-color:#111;">Tumu</span>
 
-                        <span class="filter-select" data-cat="ust" style="cursor:pointer;">?st</span>
+                        <span class="filter-select" data-cat="ust" style="cursor:pointer;">Ust</span>
 
                         <span class="filter-select" data-cat="alt" style="cursor:pointer;">Alt</span>
 
-                        <span class="filter-select" data-cat="ayakkabı" style="cursor:pointer;">Ayakkab</span>
+                        <span class="filter-select" data-cat="ayakkabı" style="cursor:pointer;">Ayakkabi</span>
 
                         <span class="filter-select" data-cat="aksesuar" style="cursor:pointer;">Aksesuar</span>
 
@@ -175,6 +187,24 @@
 
                     <div class="product-select" id="productGrid"></div>
 
+
+
+                    
+                    <div style="margin-top:32px;padding-top:24px;border-top:1px solid #eee;">
+                        <h5 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:16px;">URUN EKLE</h5>
+                        <input id="newProductName" type="text" placeholder="Urun adi" style="width:100%;padding:10px 12px;border:1px solid #ddd;font-family:'Inter',sans-serif;font-size:13px;outline:none;margin-bottom:8px;">
+                        <input id="newProductBrand" type="text" placeholder="Marka" style="width:100%;padding:10px 12px;border:1px solid #ddd;font-family:'Inter',sans-serif;font-size:13px;outline:none;margin-bottom:8px;">
+                        <input id="newProductPrice" type="text" placeholder="Fiyat" style="width:100%;padding:10px 12px;border:1px solid #ddd;font-family:'Inter',sans-serif;font-size:13px;outline:none;margin-bottom:8px;">
+                        <select id="newProductCat" style="width:100%;padding:10px 12px;border:1px solid #ddd;font-family:'Inter',sans-serif;font-size:13px;outline:none;margin-bottom:8px;">
+                            <option value="ust">Ust</option><option value="alt">Alt</option><option value="ayakkabi">Ayakkabi</option><option value="aksesuar">Aksesuar</option>
+                        </select>
+                        <label for="newProductPhoto" style="display:block;cursor:pointer;padding:12px;border:1px dashed #ddd;text-align:center;color:#888;font-size:12px;margin-bottom:8px;transition:border 0.2s;" onmouseover="this.style.borderColor='#c9a84c'" onmouseout="this.style.borderColor='#ddd'">
+                            Fotograf Sec
+                        </label>
+                        <input type="file" id="newProductPhoto" accept="image/*" style="display:none;" onchange="handleProductPhoto(this)">
+                        <img id="newProductPreview" style="display:none;width:100%;max-height:120px;object-fit:cover;margin-bottom:8px;">
+                        <button class="btn-secondary" onclick="addCustomProduct()" style="cursor:pointer;width:100%;">Urunu Ekle</button>
+                    </div>
 
 
                     <div style="display:flex;gap:12px;">
@@ -248,6 +278,72 @@
 
 
 
+        
+
+        // USER UPLOADS
+        var outfitPhotoData = null; // data URL for outfit cover
+        var productPhotoData = null; // temp data URL for new product photo
+        var customProducts = JSON.parse(localStorage.getItem('clothink_my_products_' + user.email) || '[]');
+
+        // Load custom products into product list
+        customProducts.forEach(function(cp) { products.push(cp); });
+
+        function handlePhotoUpload(input) {
+            var file = input.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                outfitPhotoData = e.target.result;
+                var preview = document.getElementById('photoPreview');
+                preview.src = outfitPhotoData;
+                preview.style.display = 'block';
+                document.getElementById('photoLabel').textContent = 'Fotograf degistir';
+                updateCanvas();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleProductPhoto(input) {
+            var file = input.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                productPhotoData = e.target.result;
+                var preview = document.getElementById('newProductPreview');
+                preview.src = productPhotoData;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addCustomProduct() {
+            var name = document.getElementById('newProductName').value.trim();
+            var brand = document.getElementById('newProductBrand').value.trim();
+            var price = document.getElementById('newProductPrice').value.trim();
+            var cat = document.getElementById('newProductCat').value;
+            if (!name || !productPhotoData) { showMsg('Urun adi ve fotograf gerekli.', true); return; }
+            var newId = Date.now();
+            var newProduct = {
+                id: newId,
+                name: name,
+                brand: brand || 'Kendi Markam',
+                price: price || '_0',
+                cat: cat,
+                img: productPhotoData
+            };
+            products.unshift(newProduct);
+            customProducts.push(newProduct);
+            localStorage.setItem('clothink_my_products_' + user.email, JSON.stringify(customProducts));
+            // Clear form
+            document.getElementById('newProductName').value = '';
+            document.getElementById('newProductBrand').value = '';
+            document.getElementById('newProductPrice').value = '';
+            productPhotoData = null;
+            document.getElementById('newProductPreview').style.display = 'none';
+            renderProducts(currentCat);
+            showMsg('Urun eklendi!', false);
+        }
+
         var selected = {};
 
         var currentCat = 'all';
@@ -289,6 +385,17 @@
 
 
         function updateCanvas() {
+            // If user uploaded a photo, show it on canvas
+            if (outfitPhotoData) {
+                var canvas = document.getElementById('creatorCanvas');
+                canvas.textContent = '';
+                canvas.style.backgroundImage = 'url(\'' + outfitPhotoData + '\')';
+                canvas.style.backgroundSize = 'cover';
+                canvas.style.backgroundPosition = 'center';
+                return;
+            }
+            canvas.style.backgroundImage = '';
+            
 
             var canvas = document.getElementById('creatorCanvas');
 
@@ -422,7 +529,7 @@
 
             var outfits = JSON.parse(localStorage.getItem('clothink_outfits_' + user.email) || '[]');
 
-            outfits.unshift({ title: title, image: imgs[0], items: count, tags: tags, products: JSON.parse(JSON.stringify(selected)) });
+            var coverImg = outfitPhotoData || imgs[0]; outfits.unshift({ title: title, image: coverImg, items: count, tags: tags, products: Object.values(JSON.parse(JSON.stringify(selected))) });
 
             localStorage.setItem('clothink_outfits_' + user.email, JSON.stringify(outfits));
 
