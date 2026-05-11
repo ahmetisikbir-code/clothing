@@ -208,7 +208,8 @@
     }
 
     (function() {
-        var data = JSON.parse(localStorage.getItem('clothink_viewing_outfit') || 'null');
+        var data = null;
+        try { data = JSON.parse(localStorage.getItem('clothink_viewing_outfit') || 'null'); } catch(e) { data = null; }
         var container = document.getElementById('detailContainer');
 
         // Always show catalog grid section
