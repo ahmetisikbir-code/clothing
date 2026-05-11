@@ -6,7 +6,7 @@
     if (!document.getElementById('skipLink')) {
         var skip = document.createElement('a');
         skip.id = 'skipLink';
-        skip.href = '#homeFeed';
+        skip.href = '#mainContent';
         skip.textContent = 'Ana icerige gec';
         skip.style.cssText = 'position:absolute;top:-100px;left:8px;background:#0a0a0a;color:#c9a84c;padding:8px 16px;z-index:9999;font-size:13px;text-decoration:none;transition:top 0.3s;';
         skip.onfocus = function() { skip.style.top = '8px'; };

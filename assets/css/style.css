@@ -534,7 +534,7 @@ body.dark, .dark .navbar, .dark .page-header, .dark .page-section,
 .dark .about-section, .dark .featured-outfits, .dark .brand-card,
 .dark .outfit-card, .dark .product-item, .dark .team-section,
 .dark .auth-wrapper, .dark .auth-form, .dark .profile-header,
-.dark .profile-sidebar, .dark .profile-msg.success {
+.dark .profile-sidebar {
     background: #1a1a1a !important;
     color: #eee;
     border-color: #333;
@@ -554,7 +554,7 @@ body.dark, .dark .navbar, .dark .page-header, .dark .page-section,
 .dark p, .dark .outfit-items, .dark .footer p, .dark .step p,
 .dark .brands p, .dark .auth-form p, .dark .form-group label { color: #999; }
 .dark h1, .dark h2, .dark h3, .dark .auth-form h2,
-.dark .profile-info h1, .dark .outfit-hero-info h1 { color: #fff; }
+.dark .profile-info h1, .dark .outfit-hero-info h1 { color: #eee; }
 .dark .filter-select, .dark .search-bar input, .dark .form-group input,
 .dark .profile-form input, .dark .profile-form textarea {
     background: #333; color: #eee; border-color: #444;
@@ -567,7 +567,7 @@ body.dark, .dark .navbar, .dark .page-header, .dark .page-section,
 .dark .footer h5, .dark .section-label { color: #777; }
 .dark .footer a:hover { color: #fff; }
 .dark .step-divider { background: #333; }
-.dark .step-number { color: #333; }
+.dark .step-number { color: #444; }
 .dark .footer-bottom, .dark .outfit-like, .dark .brand-logos span { color: #666; }
 .dark .brand-logos span:hover { color: #fff; }
 .dark .back-link:hover, .dark .public-profile-link:hover { color: #fff; }
@@ -656,7 +656,7 @@ body.dark, .dark .navbar, .dark .page-header, .dark .page-section,
     .reset-box { margin: 20px auto; padding: 0 16px; }
     .result-item { padding: 12px; } .result-photo { width: 56px; height: 56px; }
     .blog-card { padding: 16px; } .challenge-card { padding: 16px; }
-    .btn-primary, .btn-secondary, button { min-height: 44px; }
+    .btn-primary, .btn-secondary { min-height: 44px; }
     a.outfit-author-link { padding: 8px 0; display: inline-block; }
 }
 

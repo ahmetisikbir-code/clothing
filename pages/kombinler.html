@@ -426,7 +426,7 @@
 
         function renderComments() {
 
-            var html = '<div class="comments-box"><h3>Yorumlar (' + comments.length + ')</h3><div class="comment-input-wrap"><input id="commentInput" placeholder="Yorum yaz..." onkeydown="if(event.key===\'Enter\')postComment()"><button onclick="postComment()">Gnder</button></div>';
+            var html = '<div class="comments-box"><h3>Yorumlar (' + comments.length + ')</h3><div class="comment-input-wrap"><input id="commentInput" placeholder="Yorum yaz..." onkeydown="if(event.key==='Enter')postComment()"><button onclick="postComment()">Gnder</button></div>';
 
             if (comments.length === 0) html += '<p style="color:#999;font-size:14px;">Henz yorum yok. lk yorumu sen yap!</p>';
 

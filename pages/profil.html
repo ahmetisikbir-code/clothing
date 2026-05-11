@@ -772,7 +772,7 @@
             a.href = URL.createObjectURL(blob);
             a.download = 'clothink_yedek_' + new Date().toISOString().slice(0,10) + '.json';
             a.click();
-            if (typeof showToast === 'function') showToast('Verilerin indirildi');
+            if (typeof window.showToast === 'function') showToast('Verilerin indirildi');
         };
 
         document.getElementById('passwordForm').addEventListener('submit', function(e) {
