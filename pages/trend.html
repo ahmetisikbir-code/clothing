@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendler - Clothink</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+    <style>.trend-hero { padding:60px 0 40px; text-align:center; background:#fff; border-bottom:1px solid #eee; }
+    .trend-grid { padding:40px 0; }
+.dark .trend-hero { background:#1a1a1a; border-color:#333; }</style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'">
+            <span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="kesfet.html">Kesfet</a></li><li><a href="kombinler.html">Kombinler</a></li>
+            <li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li>
+            <li><a href="trend.html" style="color:#111;font-weight:600;">Trendler</a></li>
+            <li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🔔</button></li>
+            <li><button id="darkToggle" style="background:none;border:none;font-size:11px;cursor:pointer;padding:4px 10px;letter-spacing:1px;text-transform:uppercase;border:1px solid #ddd;color:#666;transition:all 0.3s;">Koyu</button></li>
+            <li><a href="giris.html" class="btn-primary">Giris</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="trend-hero">
+    <div class="container">
+        <h1 style="font-size:36px;font-weight:300;letter-spacing:-1px;">Trend <span style="font-family:'Playfair Display',serif;font-style:italic;color:#c9a84c;">Kombinler</span></h1>
+        <p style="color:#888;margin-top:8px;">En cok begenilen ve goruntulenen kombinler</p>
+    </div>
+</section>
+
+<section class="trend-grid">
+    <div class="container">
+        <div class="outfit-grid" id="trendFeed"></div>
+    </div>
+</section>
+
+<footer class="footer" style="background:#0a0a0a;">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><div class="footer-logo" style="color:#fff;"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c" style="-webkit-text-stroke-color:#fff;">C</span><span class="ct-t" style="color:#fff;">T</span></span></span><span class="logo-text" style="color:#fff;">CLOTHINK</span></div><p style="color:rgba(255,255,255,0.3);">Kombinini olustur, tarzini kesfet.</p></div>
+            <div><h5 style="color:rgba(255,255,255,0.3);">Platform</h5><a href="kesfet.html" style="color:rgba(255,255,255,0.5);">Kesfet</a><a href="kombinler.html" style="color:rgba(255,255,255,0.5);">Kombinler</a><a href="trend.html" style="color:rgba(255,255,255,0.5);">Trendler</a></div>
+            <div><h5 style="color:rgba(255,255,255,0.3);">Yasal</h5><a href="gizlilik.html" style="color:rgba(255,255,255,0.5);">Gizlilik</a><a href="sartlar.html" style="color:rgba(255,255,255,0.5);">Sartlar</a></div>
+        </div>
+        <p class="footer-bottom" style="color:rgba(255,255,255,0.15);border-top-color:rgba(255,255,255,0.06);">© 2026 Clothink</p>
+    </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+(function(){
+    var all = [];
+    ['kadin','erkek','cocuk'].forEach(function(g){
+        var cat = JSON.parse(localStorage.getItem('clothink_catalog_'+g)||'[]');
+        cat.forEach(function(o){ all.push(o); });
+    });
+    var users = JSON.parse(localStorage.getItem('clothink_users')||'[]');
+    users.forEach(function(u){
+        var oo = JSON.parse(localStorage.getItem('clothink_outfits_'+u.email)||'[]');
+        oo.forEach(function(o){ all.push(o); });
+    });
+    var ratings = JSON.parse(localStorage.getItem('clothink_ratings')||'{}');
+    all.sort(function(a,b){
+        var aRating = ratings[a.img || a.image] || 0;
+        var bRating = ratings[b.img || b.image] || 0;
+        return ((b.likes||0) + bRating*20) - ((a.likes||0) + aRating*20);
+    });
+    var top = all.slice(0, 12);
+    var grid = document.getElementById('trendFeed');
+    var user = JSON.parse(localStorage.getItem('clothink_user')||'null');
+    var likes = user ? JSON.parse(localStorage.getItem('clothink_likes_'+user.email)||'[]') : [];
+    top.forEach(function(o, idx){
+        if (!o.img && !o.image) return;
+        var imgUrl = o.img || o.image;
+        var div = document.createElement('div');
+        div.className = 'outfit-card';
+        div.innerHTML = '<div class="outfit-photo" style="background-image:url(\''+imgUrl+'\')"></div><div class="outfit-info"><div><p class="outfit-author">'+(o.author||'@clothink')+'</p><p class="outfit-items">#'+(idx+1)+' trend</p></div><p class="outfit-like">'+(o.likes||0)+'</p></div>';
+        div.addEventListener('click', function(){
+            localStorage.setItem('clothink_viewing_outfit', JSON.stringify({ title:o.title, author:o.author, items:o.items, likes:o.likes, img:imgUrl, desc:o.desc, products:o.products||[] }));
+            window.location.href = 'kombinler.html';
+        });
+        grid.appendChild(div);
+    });
+})();
+</script>
+</body>
+</html>

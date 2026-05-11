@@ -38,8 +38,10 @@
             if (logout) {
                 logout.addEventListener('click', function(e) {
                     e.preventDefault();
-                    localStorage.removeItem('clothink_user');
-                    window.location.reload();
+                    if (confirm('Cikis yapmak istediginize emin misiniz?')) {
+                        localStorage.removeItem('clothink_user');
+                        window.location.reload();
+                    }
                 });
             }
         }, 0);

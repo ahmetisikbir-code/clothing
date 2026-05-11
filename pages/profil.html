@@ -220,6 +220,7 @@
                         <li><a data-tab="beğeniler">BeSenilenler</a></li>
 
                         <li><a data-tab="kaydedilenler">Kaydedilenler</a></li>
+                        <li><a data-tab="gorsel">Son Görüntülenen</a></li>
 
                         <li><a data-tab="şifre">ifre Degistir</a></li>
 
@@ -294,11 +295,12 @@
                     </div>
 
                     <div id="tabKaydedilenler" class="profile-tab">
-
                         <div class="outfit-mini-grid" id="savedOutfitsGrid"></div>
-
-                        <div class="empty-state" id="emptySaves">Henz kaydedilen kombin yok.</div>
-
+                        <div class="empty-state" id="emptySaves">Henuz kaydedilen kombin yok.</div>
+                    </div>
+                    <div id="tabGorsel" class="profile-tab">
+                        <div class="outfit-mini-grid" id="recentGrid"></div>
+                        <div class="empty-state" id="emptyRecent">Henuz goruntulenen kombin yok.</div>
                     </div>
 
                     <div id="tabŞifre" class="profile-tab">
@@ -622,6 +624,7 @@
                 if (item.dataset.tab === 'beğeniler') renderLikedOutfits();
 
                 if (item.dataset.tab === 'kaydedilenler') renderSavedOutfits();
+                if (item.dataset.tab === 'gorsel') renderRecent();
 
             });
 
@@ -810,6 +813,25 @@
         }
 
 
+
+                function renderRecent() {
+            var recent = JSON.parse(localStorage.getItem('clothink_recent_views') || '[]');
+            var grid = document.getElementById('recentGrid');
+            var empty = document.getElementById('emptyRecent');
+            grid.innerHTML = '';
+            if (recent.length === 0) { empty.style.display = 'block'; return; }
+            empty.style.display = 'none';
+            recent.forEach(function(r) {
+                var div = document.createElement('div');
+                div.className = 'outfit-mini';
+                div.style.backgroundImage = "url('" + r.img + "')";
+                div.addEventListener('click', function() {
+                    localStorage.setItem('clothink_viewing_outfit', JSON.stringify({ title: r.title, img: r.img, items: '0', likes: 0, products: [] }));
+                    window.location.href = 'kombinler.html';
+                });
+                grid.appendChild(div);
+            });
+        }
 
         document.getElementById('passwordForm').addEventListener('submit', function(e) {
 
