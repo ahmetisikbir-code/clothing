@@ -386,27 +386,25 @@
 
         function updateCanvas() {
             var canvas = document.getElementById('creatorCanvas');
-            canvas.style.backgroundImage = '';
-            // If user uploaded a photo, show it on canvas
+            var cats = ['ust','alt','ayakkabı','aksesuar'];
+            
+            // Set background from uploaded photo
             if (outfitPhotoData) {
-                canvas.textContent = '';
                 canvas.style.backgroundImage = 'url(' + outfitPhotoData + ')';
                 canvas.style.backgroundSize = 'cover';
                 canvas.style.backgroundPosition = 'center';
-                var layers = canvas.querySelector('.canvas-layers');
-                if (layers) layers.remove();
-                return;
+            } else {
+                canvas.style.backgroundImage = '';
+                canvas.style.background = '#f0f0f0';
+                var d = document.body.classList.contains('dark');
+                if (d) canvas.style.background = '#252525';
             }
-
-            var cats = ['ust','alt','ayakkabı','aksesuar'];
-
+            
+            // Clean old layers
             var existing = canvas.querySelector('.canvas-layers');
-
             if (existing) existing.remove();
-
             var empty = canvas.querySelector('.canvas-empty');
-
-            if (!empty) { empty = document.createElement('div'); empty.className = 'canvas-empty'; canvas.appendChild(empty); }
+            if (empty) empty.remove();
 
 
 
@@ -418,19 +416,12 @@
 
             });
 
-
-
             if (!hasAny) {
-
-                empty.textContent = 'Kombinini oluşturmak iin rn se';
-
-                empty.style.display = 'block';
-
+                canvas.textContent = 'Kombinini olusturmak icin urun sec';
                 return;
-
             }
 
-            empty.style.display = 'none';
+            canvas.textContent = '';
 
 
 
@@ -520,7 +511,7 @@
 
             cats.forEach(function(c) { if (selected[c]) count++; });
 
-            if (count === 0) { showMsg('Ltfen en az bir rn sein.', true); return; }
+            if (count === 0 && !outfitPhotoData) { showMsg('Lutfen en az bir urun secin veya fotograf yukleyin.', true); return; }
 
             var imgs = [];
 
