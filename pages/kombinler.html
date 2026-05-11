@@ -214,7 +214,7 @@
 
         var email = findEmailByUsername(author);
 
-        if (email) return 'kullanici.htmlSu=' + encodeURIComponent(email);
+        if (email) return 'kullanici.html?u=' + encodeURIComponent(email);
 
         return 'kullanici.htmlSuser=' + encodeURIComponent(author.replace('@',''));
 

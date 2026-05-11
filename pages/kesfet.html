@@ -214,7 +214,7 @@
 
         var email = findEmailByUsername(author);
 
-        if (email) return 'kullanici.htmlSu=' + encodeURIComponent(email);
+        if (email) return 'kullanici.html?u=' + encodeURIComponent(email);
 
         return 'kullanici.htmlSuser=' + encodeURIComponent(author.replace('@',''));
 
@@ -482,7 +482,7 @@
 
                 div.dataset.img = o.image;
 
-                var authorHtml = '<a href="kullanici.htmlSu=' + encodeURIComponent(u.email) + '" class="outfit-author-link" onclick="event.stopPropagation()">@' + name + '</a>';
+                var authorHtml = '<a href="kullanici.html?u=' + encodeURIComponent(u.email) + '" class="outfit-author-link" onclick="event.stopPropagation()">@' + name + '</a>';
 
                 div.innerHTML = '<div class="outfit-photo" style="background-image:url(\'' + o.image + '\')"></div><div class="outfit-info"><div><p class="outfit-author">' + authorHtml + '</p><p class="outfit-items">' + o.items + ' rn</p></div><p class="outfit-like like-btn" style="cursor:pointer;">' + (o.likes || 0) + '</p></div>';
 

@@ -129,7 +129,7 @@
 
             var tr=document.createElement('tr');
 
-            tr.innerHTML='<td>'+(p.username||u.name||'?')+'</td><td>'+u.email+'</td><td>'+o.length+'</td><td>'+l.length+'</td><td class="admin-actions"><button onclick="window.location.href=\'kullanici.htmlSu='+encodeURIComponent(u.email)+'\'">Git</button><button class="del" onclick="if(confirm(\'Kullanc silinsin mi?\')){var us=JSON.parse(localStorage.getItem(\'clothink_users\')||\'[]\');var idx=us.findIndex(function(x){return x.email===\''+u.email+'\'});if(idx>-1){us.splice(idx,1);localStorage.setItem(\'clothink_users\',JSON.stringify(us));localStorage.removeItem(\'clothink_outfits_\'+u.email);localStorage.removeItem(\'clothink_likes_\'+u.email);localStorage.removeItem(\'clothink_profiles_\'+u.email);window.location.reload();}}">Sil</button></td>';
+            tr.innerHTML='<td>'+(p.username||u.name||'?')+'</td><td>'+u.email+'</td><td>'+o.length+'</td><td>'+l.length+'</td><td class="admin-actions"><button onclick="window.location.href=\'kullanici.html?u='+encodeURIComponent(u.email)+'\'">Git</button><button class="del" onclick="if(confirm(\'Kullanc silinsin mi?\')){var us=JSON.parse(localStorage.getItem(\'clothink_users\')||\'[]\');var idx=us.findIndex(function(x){return x.email===\''+u.email+'\'});if(idx>-1){us.splice(idx,1);localStorage.setItem(\'clothink_users\',JSON.stringify(us));localStorage.removeItem(\'clothink_outfits_\'+u.email);localStorage.removeItem(\'clothink_likes_\'+u.email);localStorage.removeItem(\'clothink_profiles_\'+u.email);window.location.reload();}}">Sil</button></td>';
 
             tbody.appendChild(tr);
 
