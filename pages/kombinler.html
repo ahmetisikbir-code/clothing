@@ -254,22 +254,6 @@
                 grid.appendChild(div);
             });
         }
-        });
-        if (allOutfits.length === 0) {
-            allOutfits = [
-                {author:'@clothink',items:'3 urun',likes:42,img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop',title:'Minimalist Chic'},
-                {author:'@clothink',items:'5 urun',likes:156,img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=600&fit=crop',title:'Business Elegance'},
-                {author:'@clothink',items:'4 urun',likes:89,img:'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=600&fit=crop',title:'Street Style'},
-                {author:'@clothink',items:'5 urun',likes:234,img:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&h=600&fit=crop',title:'Casual Friday'}
-            ];
-        }
-        allOutfits.forEach(function(o){
-            var div = document.createElement('div');
-            div.className = 'outfit-card'; div.style.cursor = 'pointer';
-            div.innerHTML = '<div class="outfit-photo" style="background-image:url('+(o.img||o.image)+')"></div><div class="outfit-info"><div><p class="outfit-author">'+(o.author||'')+'</p><p class="outfit-items">'+(o.items||'')+'</p></div><p class="outfit-like">'+(o.likes||0)+'</p></div>';
-            div.onclick = function(){ localStorage.setItem('clothink_viewing_outfit', JSON.stringify(o)); window.location.reload(); };
-            grid.appendChild(div);
-        });
 
         if (!data) { container.innerHTML = '<p style="color:#888;text-align:center;padding:40px;">Detay icin bir kombine tiklayin</p>'; return; }
 
