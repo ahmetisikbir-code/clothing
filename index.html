@@ -16,18 +16,47 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0a0a0a">
     <style>
-        .splash { position: fixed; top:0; left:0; width:100%; height:100%; background:#0a0a0a; z-index:9999; display:flex; flex-direction:column; transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s; }
-        .splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-        .splash-options { display:flex; width:100%; height:100%; }
-        .splash-card { flex:1; cursor:pointer; position:relative; background-size:cover; background-position:center; transition:all 0.8s cubic-bezier(0.4,0,0.2,1); text-decoration:none; display:flex; align-items:flex-end; justify-content:center; border-right:1px solid rgba(255,255,255,0.06); overflow:hidden; }
-        .splash-card:last-child { border-right:none; }
-        .splash-card::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); transition:all 0.5s; }
-        .splash-card:hover { flex:1.2; }
-        .splash-card:hover::after { background:linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 60%, transparent 100%); }
-        .splash-card .label { position:relative; z-index:2; width:100%; padding:40px 24px 32px; text-align:center; }
-        .splash-card .label h3 { font-family:'Playfair Display',serif; font-size:24px; font-weight:600; letter-spacing:6px; text-transform:uppercase; color:#fff; margin-bottom:6px; }
-        .splash-card .label p { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
-        .hero { position:relative; min-height:85vh; color:#fff; overflow:hidden; }
+        .splash {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            backdrop-filter: blur(8px);
+        }
+        .splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .splash-options { 
+            display: flex; gap: 2px; background: #333; 
+            max-width: 660px; width: 90%; 
+        }
+        .splash-card {
+            flex: 1; cursor: pointer; position: relative; 
+            aspect-ratio: 3/4; max-height: 360px;
+            background-size: cover; background-position: center; 
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            text-decoration: none; display: flex; align-items: flex-end; justify-content: center;
+            overflow: hidden;
+        }
+        .splash-card::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+        }
+        .splash-card:hover { flex: 1.3; }
+        .splash-card .label {
+            position: relative; z-index: 2; width: 100%; padding: 20px 12px 16px;
+            text-align: center;
+        }
+        .splash-card .label h3 {
+            font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600;
+            letter-spacing: 4px; text-transform: uppercase; color: #fff; margin-bottom: 4px;
+        }
+        .splash-card .label p { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+.hero { position:relative; min-height:85vh; color:#fff; overflow:hidden; }
         .hero-slider { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; }
         .slider-track { display:flex; width:500%; height:100%; animation:slide 20s cubic-bezier(0.4,0,0.2,1) infinite; }
         .slide { width:20%; height:100%; background-size:cover; background-position:center; }
@@ -104,6 +133,7 @@
             <div class="label"><h3>Cocuk</h3><p>Moda &amp; kombinler</p></div>
         </a>
     </div>
+    <a class="splash-skip" onclick="selectGender('kadin')">Atla →</a>
 </div>
 
 <script>(function(){if(localStorage.getItem('clothink_splash_v2'))document.getElementById('splash').style.display='none';else document.body.style.overflow='hidden';})();</script>
