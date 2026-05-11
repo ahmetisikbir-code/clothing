@@ -4,184 +4,112 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Clothink - Moda platformu. Kombin yap, paylas, satin al.">
-    <meta property="og:title" content="Demo-Data - Clothink">
-    <meta property="og:description" content="Tarzini Kesfet, Kombinini Yarat.">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary">
     <title>Demo Veri - Clothink</title>
     <style>
-        body { font-family:'Inter',sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; background:#0a0a0a; color:#fff; margin:0; padding:20px; }
-        .card { background:#1a1a1a; padding:40px; max-width:480px; text-align:center; border:1px solid #333; }
-        h1 { font-size:20px; font-weight:300; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; color:#c9a84c; }
-        p { color:#666; font-size:13px; margin-bottom:24px; line-height:1.6; }
-        button { background:#c9a84c; color:#0a0a0a; border:none; padding:14px 40px; font-weight:600; cursor:pointer; font-size:12px; letter-spacing:2px; text-transform:uppercase; transition:background 0.3s; }
-        button:hover { background:#b8963a; }
-        .success { color:#c9a84c; margin-top:16px; font-size:13px; display:none; }
-        .info { color:#666; font-size:12px; margin-top:8px; }
+        body{font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0a0a0a;color:#fff;margin:0;padding:20px}
+        .card{background:#1a1a1a;padding:40px;max-width:480px;text-align:center;border:1px solid #333}
+        h1{font-size:20px;font-weight:300;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:#c9a84c}
+        p{color:#666;font-size:13px;margin-bottom:24px;line-height:1.6}
+        button{background:#c9a84c;color:#0a0a0a;border:none;padding:14px 40px;font-weight:600;cursor:pointer;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:background .3s}
+        button:hover{background:#b8963a}
+        .success{color:#c9a84c;margin-top:16px;font-size:13px;display:none}
+        .info{color:#666;font-size:12px;margin-top:8px}
     </style>
 </head>
 <body>
 <div class="card">
     <h1>Demo Veri Olustur</h1>
-    <p>20 AI karakter, her biri 4-5 kombin,<br>begeniler, takipler ve profil bilgileri.</p>
+    <p>10 gercekci kullanici, 30 kombin,<br>cross-likes, takipler ve profil fotograflari.</p>
     <button onclick="generateData()">Verileri Olustur</button>
-    <p class="success" id="msg">20 AI kullanici olusturuldu</p>
+    <p class="success" id="msg">10 kullanici olusturuldu</p>
     <p class="info" id="info"></p>
 </div>
 <script>
-function generateData() {
-    var B = [
-        { n:'Selim Kara', e:'selim@ai.demo', g:'erkek', u:'selimk', b:'Mimarlik ofisi kurucusu | Modern erkek stili | Minimalizm tutkunu' },
-        { n:'Defne Yilmaz', e:'defne@ai.demo', g:'kadin', u:'defney', b:'Moda editoru @ Vogue TR | Paris & Istanbul | Kapsul gardrop' },
-        { n:'Kaya Ozden', e:'kaya@ai.demo', g:'erkek', u:'kayao', b:'Streetwear koleksiyoneri | Sneakerhead | Berlin & Tokyo' },
-        { n:'Aylin Su', e:'aylin@ai.demo', g:'kadin', u:'aylins', b:'Sanat galerisi küratoru | Avangart stil | Londra & New York' },
-        { n:'Ege Demir', e:'ege@ai.demo', g:'erkek', u:'eged', b:'Tech girisimci | Business casual expert | San Francisco' },
-        { n:'Zara Kaya', e:'zara@ai.demo', g:'kadin', u:'zarak', b:'Dansci & koreograf | Hareketli stil | Barcelona & Istanbul' },
-        { n:'Ruzgar Celik', e:'ruzgar@ai.demo', g:'erkek', u:'ruzgarc', b:'Fotograf sanatcisi | Vintage & thrift | Milano' },
-        { n:'Idil Karaca', e:'idil@ai.demo', g:'kadin', u:'idilk', b:'Mimar | Monokrom tutkusu | Iskandinav esintisi' },
-        { n:'Ozan Korkmaz', e:'ozan@ai.demo', g:'erkek', u:'ozank', b:'Sef | Mutfak & moda | Akdeniz stili' },
-        { n:'Lara Aksoy', e:'lara@ai.demo', g:'kadin', u:'laraa', b:'Dijital icerik ureticisi | Renkli & cesur stiller | Dubai' },
-        { n:'Tuna Yalcin', e:'tuna@ai.demo', g:'erkek', u:'tunay', b:'Yatirimci | Custom suit koleksiyonu | Zürih' },
-        { n:'Selin Aydin', e:'selin@ai.demo', g:'kadin', u:'selinaydn', b:'Psikolog | Soft power dressing | Amsterdam' },
-        { n:'Atlas Sonmez', e:'atlas@ai.demo', g:'erkek', u:'atlass', b:'Muzisyen | Rock & roll estetigi | Londra' },
-        { n:'Nisan Koc', e:'nisan@ai.demo', g:'kadin', u:'nisank', b:'Cicekci & botanik tutkunu | Romantik stil | Paris' },
-        { n:'Duru Akgun', e:'duru@ai.demo', g:'kadin', u:'durua', b:'Hukuk ogrencisi | Preppy & klasik | Boston' },
-        { n:'Mercan Ince', e:'mercan@ai.demo', g:'kadin', u:'mercani', b:'Surdurulebilir moda aktivisti | Vintage & ekolojik' },
-        { n:'Poyraz Erturk', e:'poyraz@ai.demo', g:'erkek', u:'poyraze', b:'Sorf egitmeni | Casual beach style | Bali' },
-        { n:'Doga Baran', e:'doga@ai.demo', g:'erkek', u:'dogab', b:'Yoga egitmeni | Athleisure & comfort | Goa' }
-    ];
+function U(n,e,g,u,b){return{name:n,email:e,gender:g,username:u,bio:b,outfits:[]}}
+function O(t,i,l,img,d,pr){return{title:t,image:img||i,items:(pr||[]).length,likes:l,desc:d||'',products:pr||[]}}
+function P(n,b,p,img){return{name:n,brand:b||'ZARA',price:p||'TL999',img:img||'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'}}
 
-    var C = {
-        kadin: [
-            { a:'@defney', t:'4 lu kombin', l:234, i:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop', T:'Kapsul Gardrop', d:'Minimalist bir is kadininin haftalik gardrobundan ilham alan zamansiz parcalar.', p:[
-                {n:'Oversize Blazer',b:'COS',pr:'TL2.499',i:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'},
-                {n:'Ipek Gomlek',b:'MANGO',pr:'TL899',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Wide Leg Pantolon',b:'ZARA',pr:'TL799',i:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'},
-                {n:'Leather Loafers',b:'MANGO',pr:'TL1.299',i:'https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop'}
-            ]},
-            { a:'@defney', t:'5 li kombin', l:312, i:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=600&fit=crop', T:'Business Elegance', d:'Ofiste ve sonrasinda sIk gorunmenin sifresi — blazer ve ipek kombinasyonu.', p:[
-                {n:'Tailored Blazer',b:'ARMANI',pr:'TL5.499',i:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'},
-                {n:'Beyaz Oxford',b:'ZARA',pr:'TL599',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Kalem Etek',b:'MANGO',pr:'TL649',i:'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=100&h=100&fit=crop'},
-                {n:'Stiletto',b:'JIMMY CHOO',pr:'TL4.999',i:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop'},
-                {n:'Tote Bag',b:'PRADA',pr:'TL8.999',i:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'}
-            ]},
-            { a:'@aylins', t:'3 lu kombin', l:189, i:'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=600&fit=crop', T:'Gallery Opening', d:'Sanat galerisi acilisinda fark yaratmanin yolu — avangart ve zarif.', p:[
-                {n:'Asimetrik Bluz',b:'COS',pr:'TL899',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Sirta Pileli Pantolon',b:'ZARA',pr:'TL699',i:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'},
-                {n:'Sculptural Heels',b:'MANGO',pr:'TL1.499',i:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop'}
-            ]},
-            { a:'@laraa', t:'5 li kombin', l:278, i:'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop', T:'Dubai Golden Hour', d:'Altin tonlari ve cesur aksesuarlarla Dubai esintili bir aksam kombinasyonu.', p:[
-                {n:'Slip Dress',b:'ZARA',pr:'TL699',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Oversize Deri Ceket',b:'ALLSAINTS',pr:'TL3.499',i:'https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=100&h=100&fit=crop'},
-                {n:'Strappy Heels',b:'MANGO',pr:'TL1.499',i:'https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop'},
-                {n:'Mini Crossbody',b:'GUCCI',pr:'TL5.999',i:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'},
-                {n:'Gold Chain Choker',b:'ZARA',pr:'TL349',i:'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=100&h=100&fit=crop'}
-            ]}
-        ],
-        erkek: [
-            { a:'@kayao', t:'5 li kombin', l:198, i:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&h=600&fit=crop', T:'Berlin Street', d:'Berlin sokaklarindan ilham alan rahat ama iddiali bir stil.', p:[
-                {n:'Deri Biker Ceket',b:'ZARA',pr:'TL2.299',i:'https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=100&h=100&fit=crop'},
-                {n:'Graphic Tee',b:'NIKE',pr:'TL549',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Cargo Pants',b:'BERSHKA',pr:'TL699',i:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'},
-                {n:'Air Max 97',b:'NIKE',pr:'TL3.499',i:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'},
-                {n:'Crossbody Bag',b:'ADIDAS',pr:'TL599',i:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'}
-            ]},
-            { a:'@eged', t:'4 lu kombin', l:267, i:'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=400&h=600&fit=crop', T:'Silicon Valley', d:'Tech konferanslarinda ve yatirimci toplantilarinda dikkat ceken modern bir is stili.', p:[
-                {n:'Navy Blazer',b:'BOSS',pr:'TL6.999',i:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'},
-                {n:'Beyaz Oxford Gomlek',b:'ZARA',pr:'TL649',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Tailored Chinos',b:'COS',pr:'TL849',i:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'},
-                {n:'Derby Ayakkabi',b:'ARMANI',pr:'TL3.999',i:'https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop'}
-            ]},
-            { a:'@tunay', t:'5 li kombin', l:156, i:'https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&dpr=1', T:'Zürih Klasik', d:'Isvicre bankacilik stili — kusursuz kesim, premium kumaslar.', p:[
-                {n:'Charcoal Blazer',b:'ARMANI',pr:'TL7.999',i:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'},
-                {n:'Mavi Oxford',b:'BOSS',pr:'TL899',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Wool Trousers',b:'COS',pr:'TL1.299',i:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'},
-                {n:'Oxford Ayakkabi',b:'ARMANI',pr:'TL4.999',i:'https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop'},
-                {n:'Ipek Kravat',b:'BOSS',pr:'TL599',i:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=100&h=100&fit=crop'}
-            ]},
-            { a:'@atlass', t:'3 lu kombin', l:134, i:'https://images.pexels.com/photos/1099957/pexels-photo-1099957.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&dpr=1', T:'Rockstar Casual', d:'Sahne arkasindan gunluk hayata — muzisyen stili.', p:[
-                {n:'Vintage Band Tee',b:'BERSHKA',pr:'TL349',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Slim Jeans',b:"LEVI'S",pr:'TL799',i:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop'},
-                {n:'Chelsea Boots',b:'ZARA',pr:'TL1.499',i:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=100&h=100&fit=crop'}
-            ]}
-        ],
-        cocuk: [
-            { a:'@minikmoda', t:'4 lu kombin', l:45, i:'https://images.pexels.com/photos/6334338/pexels-photo-6334338.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&dpr=1', T:'Playdate Ready', d:'Parkta oyun oynamak icin en rahat ve sevimli kombin.', p:[
-                {n:'Leopar Tisort',b:'ZARA Kids',pr:'TL299',i:'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'},
-                {n:'Cotton Leggings',b:'H&M Kids',pr:'TL149',i:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop'},
-                {n:'Velcro Sneaker',b:'NIKE Kids',pr:'TL599',i:'https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop'},
-                {n:'Mini Backpack',b:'ADIDAS Kids',pr:'TL299',i:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop'}
-            ]}
-        ]
-    };
+function generateData(){
+var users=[
+    U('Derya Yilmaz','derya@real.demo','kadin','deryayilmaz','Istanbulda yasayan 28 yasinda grafik tasarimci. Minimalist tarzi ve monokrom kombinleriyle taniniyor. Kahve tutkunu, kedi annesi.'),
+    U('Can Berk Aksoy','canberk@real.demo','erkek','canberkaksoy','34 yasinda yazilim muhendisi. Haftasonu sokak stili, haftaici smart casual. Sneaker koleksiyonu 40 cifti asti.'),
+    U('Zeynep Korkmaz','zeynep@real.demo','kadin','zeynepkorkmaz','Moda blog yazari ve dijital icerik ureticisi. Paris moda haftasini kacirmaz. Vintage ve modern parcalari harmanlamayi seviyor.'),
+    U('Emre Demirtas','emre@real.demo','erkek','emredemirtas','Mimar. Iskandinav estetigini gunluk stiline tasiyor. Temiz cizgiler, dogal renkler, kaliteli kumaslar.'),
+    U('Selin Kara','selin@real.demo','kadin','selinkara','Avukat. Ofiste guc luks, ofis disinda rahat. Dik kesim blazerler ve ipek bluzlar gardirobunun temeli.'),
+    U('Burak Ozkan','burak@real.demo','erkek','burakozkan','Fitness egitmeni. Athleisure stilin into passion. Spor giyimi gunluk hayata tasimanin yollarini kesfetti.'),
+    U('Melisa Aydin','melisa@real.demo','kadin','melisaaydin','Universite ogrencisi, part-time barista. Sokak modasini yakindan takip ediyor. Butce dostu ama cool kombinler.'),
+    U('Koray Sahin','koray@real.demo','erkek','koraysahin','Sef asci. Mutfakta oldugu kadar disarida da stiline onem veriyor. Akdeniz esintili rahat tarz.'),
+    U('Ece Gunduz','ece@real.demo','kadin','ecegunduz','Fotograf sanatcisi. Bohem ve eklektik stil. Seyahatlerinden topladigi parcalarla benzersiz kombinler yaratiyor.'),
+    U('Alper Tasci','alper@real.demo','erkek','alpertasci','Finans analisti. Klasik erkek giyiminin modern yorumcusu. Iyi bir saat ve iyi bir cift ayakkabi yatirimdir.')
+];
 
-    Object.keys(C).forEach(function(g) {
-        localStorage.setItem('clothink_catalog_' + g, JSON.stringify(C[g]));
-    });
+var outfits=[
+    O('Istanbul Morning',null,234,'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop','Kadikoyde bir pazar sabahi icin rahat ama stil sahibi bir secim.',[P('Oversize Blazer','COS','TL2.499','https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'),P('Beyaz Basic Tee','H&M','TL249','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Wide Leg Pantolon','ZARA','TL799','https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'),P('Platform Sneaker','ADIDAS','TL2.299','https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop')]),
+    O('Boardroom Power',null,312,'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=600&fit=crop','Toplanti gunu icin kendinden emin bir kombin. Ipek ve yun kumaslar.',[P('Tailored Blazer','ARMANI','TL5.499','https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'),P('Ipek Gomlek','MANGO','TL899','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Kalem Etek','BOSS','TL1.299','https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=100&h=100&fit=crop'),P('Stiletto','JIMMY CHOO','TL4.999','https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop'),P('Structured Tote','PRADA','TL8.999','https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop')]),
+    O('Sunday Brunch',null,189,'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=600&fit=crop','Arkadaslarla brunch icin effortless chic.',[P('Trench Coat','BURBERRY','TL12.999','https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=100&h=100&fit=crop'),P('Cashmere Sweater','COS','TL1.299','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Mom Jeans','LEVIS','TL899','https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop')]),
+    O('Date Night',null,278,'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop','Bogazda bir aksam yemegi icin romantik ve feminen.',[P('Slip Dress','ZARA','TL699','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Deri Ceket','ALLSAINTS','TL3.499','https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=100&h=100&fit=crop'),P('Strappy Heels','MANGO','TL1.499','https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop'),P('Mini Crossbody','GUCCI','TL5.999','https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=100&h=100&fit=crop')]),
+    O('Client Meeting',null,198,'https://images.pexels.com/photos/26524770/pexels-photo-26524770.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&dpr=1','Musteri toplantisi icin profesyonel ama rahat.',[P('Navy Blazer','BOSS','TL6.999','https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'),P('Beyaz Oxford Gomlek','ZARA','TL649','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Tailored Chinos','COS','TL849','https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'),P('Derby Ayakkabi','ARMANI','TL3.999','https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop')]),
+    O('Sneakerhead Flex',null,267,'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&h=600&fit=crop','Koleksiyonun en yeni parcasini gostermenin tam zamani.',[P('Deri Biker Ceket','ZARA','TL2.299','https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=100&h=100&fit=crop'),P('Graphic Tee','NIKE','TL549','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Cargo Pants','BERSHKA','TL699','https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'),P('Air Max 97','NIKE','TL3.499','https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop')]),
+    O('Coffee Run',null,145,'https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&dpr=1','Sabah kahvesi icin hizli ve rahat.',[P('Tech Jacket','THE NORTH FACE','TL2.999','https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=100&h=100&fit=crop'),P('Jogger Pant','NIKE','TL899','https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'),P('Ultraboost','ADIDAS','TL2.799','https://images.unsplash.com/photo-1542291026-3462bba1dd2d?w=100&h=100&fit=crop')]),
+    O('Gallery Walk',null,112,'https://images.pexels.com/photos/1099957/pexels-photo-1099957.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&dpr=1','Sanat galerisi acilisinda dikkat cek.',[P('Charcoal Blazer','ARMANI','TL7.999','https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'),P('Mavi Oxford','BOSS','TL899','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Wool Trousers','COS','TL1.299','https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=100&h=100&fit=crop'),P('Oxford Ayakkabi','ARMANI','TL4.999','https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop')]),
+    O('Beach Sunset',null,98,'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop','Kalamista gun batimi, ayaklar kumda.',[P('Linen Shirt','COS','TL599','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Denim Shorts','LEVIS','TL449','https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop'),P('Sandals','ZARA','TL399','https://images.unsplash.com/photo-1543163521-2bf539246bf6?w=100&h=100&fit=crop')]),
+    O('Cafe Writing',null,167,'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop','Moda blogu icin yazi yazarken rahat ama fotogenik.',[P('Oversize Cardigan','H&M','TL599','https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=100&h=100&fit=crop'),P('Basic Tank','ZARA','TL149','https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=100&h=100&fit=crop'),P('Straight Leg Jeans','MANGO','TL749','https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&h=100&fit=crop'),P('Loafers','MANGO','TL999','https://images.unsplash.com/photo-1614251055881-30d2856f13d1?w=100&h=100&fit=crop')])
+];
 
-    var allUsers = JSON.parse(localStorage.getItem('clothink_users') || '[]');
-    var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+function genAvatar(name,idx){
+    var c=document.createElement('canvas');c.width=160;c.height=160;
+    var ctx=c.getContext('2d');
+    var cols=['#c9a84c','#8b5e3c','#4a6d8c','#7d5a50','#2c3e50','#6b4c3a','#3a5a40','#5c3d5c','#1a1a2e','#16213e'];
+    ctx.fillStyle=cols[idx%cols.length];ctx.fillRect(0,0,160,160);
+    ctx.fillStyle='#fff';ctx.font='bold 64px Playfair Display,serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(name.charAt(0).toUpperCase(),80,84);
+    return c.toDataURL('image/png');
+}
 
-    function genAvatar(name, idx) {
-        var c = document.createElement('canvas'); c.width=160; c.height=160;
-        var ctx=c.getContext('2d');
-        var palette=['#c9a84c','#8b5e3c','#4a6d8c','#7d5a50','#2c3e50','#6b4c3a','#3a5a40','#5c3d5c','#1a1a2e','#16213e','#5c3a2e','#3a4a3c','#4a2e3c','#2e4a4c','#6a5a3c','#3c2a4e','#4a6a5e','#8a6a3c','#5a3a6e','#3a6a5c'];
-        ctx.fillStyle=palette[idx%palette.length];
-        ctx.fillRect(0,0,160,160);
-        ctx.fillStyle='#fff';
-        ctx.font='bold 64px \"Playfair Display\",serif';
-        ctx.textAlign='center';ctx.textBaseline='middle';
-        ctx.fillText(name.charAt(0).toUpperCase(),80,84);
-        return c.toDataURL('image/png');
+var allU=JSON.parse(localStorage.getItem('clothink_users')||'[]');
+var allP=JSON.parse(localStorage.getItem('clothink_profiles')||'{}');
+
+users.forEach(function(u,i){
+    var ex=allU.findIndex(function(e){return e.email===u.email;});
+    if(ex===-1) allU.push({name:u.name,email:u.email,password:'123456'});
+    allP[u.email]={username:u.username,bio:u.bio,gender:u.gender};
+    localStorage.setItem('clothink_avatar_'+u.email,genAvatar(u.name,i));
+
+    // Assign 3 outfits per user
+    var uo=[];
+    for(var j=0;j<3;j++){
+        var oi=(i*3+j)%outfits.length;
+        uo.push(outfits[oi]);
     }
+    localStorage.setItem('clothink_outfits_'+u.email,JSON.stringify(uo));
 
-    B.forEach(function(u, i) {
-        var ex = allUsers.findIndex(function(e){return e.email===u.email;});
-        if (ex===-1) allUsers.push({name:u.name, email:u.email, password:'123456'});
-        profiles[u.email]={username:u.username, bio:u.bio, gender:u.gender};
-        localStorage.setItem('clothink_avatar_'+u.email, genAvatar(u.name,i));
+    // Cross-likes: each user likes 5 random outfit images
+    var likes=[];
+    for(var k=0;k<5;k++){
+        var ri=Math.floor(Math.random()*outfits.length);
+        if(outfits[ri].image) likes.push(outfits[ri].image);
+    }
+    localStorage.setItem('clothink_likes_'+u.email,JSON.stringify(likes));
 
-        var cat=C[u.gender];
-        var outfits=[];
-        cat.forEach(function(c,ci){
-            outfits.push({title:c.T,image:c.i,items:c.p.length,products:c.p,likes:c.l});
-        });
-        localStorage.setItem('clothink_outfits_'+u.email, JSON.stringify(outfits));
+    // Follow: each user follows 3 others
+    var follow=[];
+    for(var f=0;f<3;f++){
+        var fi=(i+f+1)%users.length;
+        if(users[fi].email!==u.email) follow.push(users[fi].email);
+    }
+    localStorage.setItem('clothink_following_'+u.email,JSON.stringify(follow));
+});
 
-        // Cross-likes
-        var likes=[];
-        B.forEach(function(o){
-            if(o.email===u.email) return;
-            var oc=C[o.gender];
-            if(oc&&oc.length) {
-                likes.push(oc[0].i);
-                if(oc.length>1) likes.push(oc[1].i);
-            }
-        });
-        localStorage.setItem('clothink_likes_'+u.email, JSON.stringify(likes));
+localStorage.setItem('clothink_users',JSON.stringify(allU));
+localStorage.setItem('clothink_profiles',JSON.stringify(allP));
+localStorage.setItem('clothink_demo_ready','1');
 
-        // Follow a few others
-        var follow=[];
-        B.forEach(function(o,j){
-            if(o.email!==u.email&&j%3===i%3) follow.push(o.email);
-        });
-        localStorage.setItem('clothink_following_'+u.email, JSON.stringify(follow));
-    });
+var total=0;
+allU.forEach(function(u){var o=JSON.parse(localStorage.getItem('clothink_outfits_'+u.email)||'[]');total+=o.length;});
 
-    localStorage.setItem('clothink_users', JSON.stringify(allUsers));
-    localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
-    localStorage.setItem('clothink_demo_ready','1');
-
-    var total=0;
-    allUsers.forEach(function(u){
-        var o=JSON.parse(localStorage.getItem('clothink_outfits_'+u.email)||'[]');
-        total+=o.length;
-    });
-
-    document.getElementById('msg').style.display='block';
-    document.getElementById('info').textContent=allUsers.length+' AI karakter · '+total+' kombin · begeniler+takipler hazir';
+document.getElementById('msg').style.display='block';
+document.getElementById('info').textContent=allU.length+' gercekci kullanici · '+total+' kombin · begeniler + takipler hazir';
 }
 </script>
 </body>
