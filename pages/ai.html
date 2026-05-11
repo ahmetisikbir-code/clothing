@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ekibi - Clothinkr</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+    <style>
+        .agent-hero { padding:80px 0 60px; text-align:center; background:#0a0a0a; color:#fff; }
+        .agent-hero h1 { font-size:42px; font-weight:200; letter-spacing:4px; margin-bottom:8px; }
+        .agent-hero p { color:rgba(255,255,255,0.3); font-size:14px; letter-spacing:2px; }
+        .agent-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:#f5f5f5; padding:2px; }
+        .agent-card { background:#fff; padding:48px 32px; text-align:center; transition:all 0.3s; }
+        .agent-card:hover { transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,0.06); }
+        .agent-avatar { width:80px; height:80px; border-radius:0; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:700; font-family:'Playfair Display',serif; color:#fff; }
+        .agent-badge { display:inline-block; padding:4px 14px; font-size:10px; letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; border:1px solid #ddd; }
+        .agent-card h3 { font-size:18px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+        .agent-role { font-size:12px; color:#c9a84c; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; font-weight:500; }
+        .agent-card p { color:#888; font-size:13px; line-height:1.8; max-width:300px; margin:0 auto; }
+        .agent-skills { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+        .agent-skill { font-size:10px; padding:4px 10px; background:#f0f0f0; letter-spacing:1px; text-transform:uppercase; }
+        .dark .agent-card { background:#1a1a1a; }
+        .dark .agent-card p { color:#777; }
+        .dark .agent-skill { background:#252525; color:#888; }
+        .dark .agent-badge { border-color:#333; color:#888; }
+        @media (max-width:768px) { .agent-grid { grid-template-columns:1fr; } }
+    </style>
+</head>
+<body>
+<nav class="navbar"><div class="container"><div class="logo" style="cursor:pointer;" onclick="window.location.href='../index.html'"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c">C</span><span class="ct-t">T</span></span></span><span class="logo-text">CLOTHINK</span></div><ul class="nav-links"><li><a href="kesfet.html">Kesfet</a></li><li><a href="kombinler.html">Kombinler</a></li><li><a href="markalar.html">Markalar</a></li><li><a href="clothink.html">Clothink</a></li><li><a href="trend.html">Trendler</a></li><li><button id="notifBell" style="background:none;border:none;font-size:16px;cursor:pointer;padding:4px 6px;opacity:0.6;">🔔</button></li><li><button id="darkToggle" style="background:none;border:none;font-size:11px;cursor:pointer;padding:4px 10px;letter-spacing:1px;text-transform:uppercase;border:1px solid #ddd;color:#666;">Koyu</button></li><li><a href="giris.html" class="btn-primary">Giris</a></li></ul></div></nav>
+
+<section class="agent-hero">
+    <div class="container">
+        <h1>AI Takimi</h1>
+        <p>Dort yapay zeka ajani, tek vizyon</p>
+    </div>
+</section>
+
+<section class="page-section" style="padding:0;">
+    <div class="agent-grid">
+        <div class="agent-card">
+            <div class="agent-avatar" style="background:#c9a84c;">A</div>
+            <div class="agent-badge">CIO / Strateji</div>
+            <h3>ARIA</h3>
+            <div class="agent-role">Chief Innovation Officer</div>
+            <p>Marka vizyonunu yoneten, trendleri analiz eden ve Clothink'in stratejik yonunu belirleyen yapay zeka ajani. Moda dunyasindaki makro trendleri takip eder, yeni ozellikler onerir ve platformun buyume stratejisini olusturur.</p>
+            <div class="agent-skills"><span class="agent-skill">Trend Analizi</span><span class="agent-skill">Strateji</span><span class="agent-skill">Inovasyon</span></div>
+        </div>
+        <div class="agent-card">
+            <div class="agent-avatar" style="background:#4a6d8c;">K</div>
+            <div class="agent-badge">Tasarim / Estetik</div>
+            <h3>KAI</h3>
+            <div class="agent-role">Head of Design</div>
+            <p>Gorsel dilini, kullanici deneyimini ve estetik standartlari belirleyen yapay zeka ajani. Renk paletlerinden tipografiye, kullanici arayuzunden animasyonlara kadar tum gorsel kararlari yonetir.</p>
+            <div class="agent-skills"><span class="agent-skill">UX Design</span><span class="agent-skill">Renk Teorisi</span><span class="agent-skill">Tipografi</span></div>
+        </div>
+        <div class="agent-card">
+            <div class="agent-avatar" style="background:#7d5a50;">S</div>
+            <div class="agent-badge">Topluluk / Icerik</div>
+            <h3>SAGE</h3>
+            <div class="agent-role">Community Director</div>
+            <p>Kullanici toplulugunu yoneten, icerik kalitesini denetleyen ve etkilesimi artiran yapay zeka ajani. Kullanici davranislarini analiz eder, topluluk etkinlikleri duzenler ve platform kulturu olusturur.</p>
+            <div class="agent-skills"><span class="agent-skill">Icerik Kuration</span><span class="agent-skill">Kullanici Deneyimi</span><span class="agent-skill">Etkinlik</span></div>
+        </div>
+        <div class="agent-card">
+            <div class="agent-avatar" style="background:#3a5a40;">N</div>
+            <div class="agent-badge">Veri / Analitik</div>
+            <h3>NOVA</h3>
+            <div class="agent-role">Data Strategist</div>
+            <p>Platform verilerini analiz eden, kullanici metriklerini takip eden ve veriye dayali oneriler sunan yapay zeka ajani. A/B testleri, kullanici segmentasyonu ve performans optimizasyonu yapar.</p>
+            <div class="agent-skills"><span class="agent-skill">Data Analytics</span><span class="agent-skill">A/B Testing</span><span class="agent-skill">Optimizasyon</span></div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer" style="background:#0a0a0a;"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="footer-logo" style="color:#fff;"><span class="logo-ct"><span class="ct-monogram"><span class="ct-c" style="-webkit-text-stroke-color:#fff;">C</span><span class="ct-t" style="color:#fff;">T</span></span></span><span class="logo-text" style="color:#fff;">CLOTHINK</span></div><p style="color:rgba(255,255,255,0.3);">Kombinini olustur, tarzini kesfet.</p></div><div><h5 style="color:rgba(255,255,255,0.3);">Platform</h5><a href="kesfet.html" style="color:rgba(255,255,255,0.5);">Kesfet</a><a href="kombinler.html" style="color:rgba(255,255,255,0.5);">Kombinler</a><a href="trend.html" style="color:rgba(255,255,255,0.5);">Trendler</a></div><div><h5 style="color:rgba(255,255,255,0.3);">AI Takim</h5><a href="ai.html" style="color:rgba(255,255,255,0.5);">Aria</a><a href="ai.html" style="color:rgba(255,255,255,0.5);">Kai</a><a href="ai.html" style="color:rgba(255,255,255,0.5);">Sage</a><a href="ai.html" style="color:rgba(255,255,255,0.5);">Nova</a></div></div><p class="footer-bottom" style="color:rgba(255,255,255,0.15);border-top-color:rgba(255,255,255,0.06);">© 2026 Clothinkr</p></div></footer>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
