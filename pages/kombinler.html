@@ -221,10 +221,10 @@ document.addEventListener("DOMContentLoaded",function(){
     '<p style="color:#666;line-height:1.7;margin-bottom:24px;">'+desc+'</p>'+
     (prods.length?'<h5 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:12px;">KOMBINDEKI URUNLER</h5><div class="product-list">'+pHtml+'</div>':'')+
     '<div class="action-bar">'+
-    '<button id="detailLikeBtn" class="like-btn-action" onclick="toggleLike()">'+likes+'</button>'+
-    '<button id="detailSaveBtn" class="save-btn-action" onclick="toggleSave()">Kaydet</button>'+
-    '<button class="share-btn-action" onclick="shareOutfit()">Paylas</button>'+
-    '<button class="share-btn-action" style="background:#f9f6f0;color:#c9a84c;" onclick="aiReview()">AI Yorumla</button>'+
+    '<button id="detailLikeBtn" class="like-btn-action" onclick="window.toggleLike()">'+likes+'</button>'+
+    '<button id="detailSaveBtn" class="save-btn-action" onclick="window.toggleSave()">Kaydet</button>'+
+    '<button class="share-btn-action" onclick="window.shareOutfit()">Paylas</button>'+
+    '<button class="share-btn-action" style="background:#f9f6f0;color:#c9a84c;" onclick="window.aiReview()">AI Yorumla</button>'+
     '</div></div></div>';
     
     // Like/Save state from user
