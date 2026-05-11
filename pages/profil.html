@@ -222,6 +222,7 @@
                         <li><a data-tab="beğeniler">BeSenilenler</a></li>
 
                         <li><a data-tab="kaydedilenler">Kaydedilenler</a></li>
+                        <li><a style="cursor:pointer;" onclick="downloadUserData()">Verilerimi Indir</a></li>
                         <li><a data-tab="gorsel">Son Görüntülenen</a></li>
 
                         <li><a data-tab="şifre">ifre Degistir</a></li>
@@ -751,6 +752,28 @@
                 grid.appendChild(div);
             });
         }
+
+                window.downloadUserData = function() {
+            var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
+            if (!user) return;
+            var data = {
+                user: user,
+                profile: (JSON.parse(localStorage.getItem('clothink_profiles') || '{}'))[user.email] || {},
+                outfits: JSON.parse(localStorage.getItem('clothink_outfits_' + user.email) || '[]'),
+                likes: JSON.parse(localStorage.getItem('clothink_likes_' + user.email) || '[]'),
+                saves: JSON.parse(localStorage.getItem('clothink_saves_' + user.email) || '[]'),
+                cart: JSON.parse(localStorage.getItem('clothink_cart_' + user.email) || '[]'),
+                recent: JSON.parse(localStorage.getItem('clothink_recent_views') || '[]'),
+                following: JSON.parse(localStorage.getItem('clothink_following_' + user.email) || '[]'),
+                notifs: JSON.parse(localStorage.getItem('clothink_notifs_' + user.email) || '[]')
+            };
+            var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'clothink_yedek_' + new Date().toISOString().slice(0,10) + '.json';
+            a.click();
+            if (typeof showToast === 'function') showToast('Verilerin indirildi');
+        };
 
         document.getElementById('passwordForm').addEventListener('submit', function(e) {
 

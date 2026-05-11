@@ -2,6 +2,18 @@
     var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
     var nav = document.querySelector('.nav-links');
 
+    // SKIP TO CONTENT - klavye navigasyonu
+    if (!document.getElementById('skipLink')) {
+        var skip = document.createElement('a');
+        skip.id = 'skipLink';
+        skip.href = '#mainContent';
+        skip.textContent = 'Ana icerige gec';
+        skip.style.cssText = 'position:absolute;top:-100px;left:8px;background:#0a0a0a;color:#c9a84c;padding:8px 16px;z-index:9999;font-size:13px;text-decoration:none;transition:top 0.3s;';
+        skip.onfocus = function() { skip.style.top = '8px'; };
+        skip.onblur = function() { skip.style.top = '-100px'; };
+        document.body.insertBefore(skip, document.body.firstChild);
+    }
+
     // HAMBURGER MENU
     var navbar = document.querySelector('.navbar');
     if (navbar) {
