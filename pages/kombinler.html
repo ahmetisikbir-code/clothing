@@ -214,11 +214,26 @@
         var container = document.getElementById('detailContainer');
 
         if (!data) {
-
-            container.innerHTML = '<div class="empty-detail"><p>Kombin bulunamad.</p><a href="../index.html" class="btn-primary" style="margin-top:16px;">Ana Sayfaya Dn</a></div>';
-
+            // Show catalog outfits as default view
+            container.innerHTML = '<p style="color:#888;margin-bottom:24px;">Kesfetmek icin bir kombine tiklayin:</p>';
+            var grid = document.getElementById('otherGrid');
+            grid.innerHTML = '';
+            var allOutfits = [];
+            ['kadin','erkek','cocuk'].forEach(function(g) {
+                var cat = JSON.parse(localStorage.getItem('clothink_catalog_'+g)||'null');
+                if (cat) cat.forEach(function(o){ allOutfits.push(o); });
+            });
+            allOutfits.slice(0, 8).forEach(function(o){
+                var div = document.createElement('div');
+                div.className = 'outfit-card';
+                div.innerHTML = '<div class="outfit-photo" style="background-image:url('+(o.img||o.image)+')"></div><div class="outfit-info"><div><p class="outfit-author">'+(o.author||'')+'</p><p class="outfit-items">'+(o.items||'')+'</p></div><p class="outfit-like">'+(o.likes||0)+'</p></div>';
+                div.onclick = function(){
+                    localStorage.setItem('clothink_viewing_outfit', JSON.stringify(o));
+                    window.location.reload();
+                };
+                grid.appendChild(div);
+            });
             return;
-
         }
 
         var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
