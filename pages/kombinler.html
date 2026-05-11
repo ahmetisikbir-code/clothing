@@ -229,18 +229,31 @@
 
         // Always show catalog grid section
         var grid = document.getElementById('otherGrid');
-        grid.innerHTML = '';
+        // Only clear grid if we have catalog data to show
+        var hasCatalog = false;
         var allOutfits = [];
         ['kadin','erkek','cocuk'].forEach(function(g) {
             var cat = JSON.parse(localStorage.getItem('clothink_catalog_'+g)||'null');
-            if (cat) cat.forEach(function(o){ 
+            if (cat) { hasCatalog = true; cat.forEach(function(o){ 
                 if (!o.author) o.author = o.a || '';
                 if (!o.items) o.items = o.t || '';
                 if (!o.likes) o.likes = o.l || 0;
                 if (!o.img) o.img = o.i || o.image || '';
                 if (!o.title) o.title = o.T || '';
                 allOutfits.push(o); 
+            }); }
+        });
+        // Only replace hardcoded cards if we have real catalog data
+        if (hasCatalog && allOutfits.length > 0) {
+            grid.innerHTML = '';
+            allOutfits.forEach(function(o){
+                var div = document.createElement('div');
+                div.className = 'outfit-card'; div.style.cursor = 'pointer';
+                div.setAttribute('data-outfit', JSON.stringify(o));
+                div.innerHTML = '<div class="outfit-photo" style="background-image:url('+(o.img||o.image)+')"></div><div class="outfit-info"><div><p class="outfit-author">'+(o.author||'')+'</p><p class="outfit-items">'+(o.items||'')+'</p></div><p class="outfit-like">'+(o.likes||0)+'</p></div>';
+                grid.appendChild(div);
             });
+        }
         });
         if (allOutfits.length === 0) {
             allOutfits = [
