@@ -244,7 +244,7 @@
 <button onclick="rotate3D(-90)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;">&#8592;</button>
 <button onclick="rotate3D(90)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;">&#8594;</button>
 </div>
-<div class="action-bar"><button id="detailLikeBtn" class="' + (liked ? 'like-btn-action liked' : 'like-btn-action') + '" onclick="toggleLike()">' + (data.likes || 0) + '</button><button id="detailSaveBtn" class="' + (saved ? 'save-btn-action saved' : 'save-btn-action') + '" onclick="toggleSave()">' + (saved ? 'Kaydedildi' : 'Kaydet') + '</button><button class="share-btn-action" onclick="shareOutfit()">Payla?</button><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Satn alma islemi iin markann sitesine ynlendirileceksiniz.\')">Kombini Satn Al</button></div></div></div>';
+<div class="action-bar"><button id="detailLikeBtn" class="' + (liked ? 'like-btn-action liked' : 'like-btn-action') + '" onclick="toggleLike()">' + (data.likes || 0) + '</button><button id="detailSaveBtn" class="' + (saved ? 'save-btn-action saved' : 'save-btn-action') + '" onclick="toggleSave()">' + (saved ? 'Kaydedildi' : 'Kaydet') + '</button><button class="share-btn-action" onclick="shareOutfit()">Paylas</button><button class="share-btn-action" onclick="aiReview()" style="background:#f9f6f0;color:#c9a84c;">AI Yorumla</button><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Satn alma islemi iin markann sitesine ynlendirileceksiniz.\')">Kombini Satn Al</button></div></div></div>';
 
         var list = document.getElementById('productList');
 
@@ -403,23 +403,69 @@
 
 
 
-        // COMMENTS
-
+        // AI OUTFIT REVIEW
+        window.aiReview = function() {
+            if (!data) return;
+            var itemCount = (data.products && data.products.length) || parseInt(data.items) || 0;
+            var hasBrands = [];
+            var totalPrice = 0;
+            var categories = {};
+            if (data.products) data.products.forEach(function(p){
+                if (p.brand) hasBrands.push(p.brand);
+                if (p.price) totalPrice += parseInt(p.price.replace(/[^0-9]/g,'')) || 0;
+                if (p.cat) categories[p.cat] = true;
+            });
+            
+            // Generate AI review based on data
+            var reviews = [];
+            
+            // Item count analysis
+            if (itemCount <= 2) reviews.push("Bu minimalist bir kombin. Az parca ile cok sey anlatmak ustalik ister — basarilmis.");
+            else if (itemCount <= 4) reviews.push("Dengeli bir secim. " + itemCount + " parca ile gunluk kullanim icin ideal bir kombin olusturulmus.");
+            else reviews.push("Zengin bir kombin! " + itemCount + " parca ile detayli bir stil ortaya cikmis. Aksesuar kullanimi dikkat cekici.");
+            
+            // Brand analysis
+            if (hasBrands.length > 0) {
+                var luxuryBrands = ['GUCCI','PRADA','ARMANI','BOSS','BURBERRY','DIOR','JIMMY CHOO','ALLSAINTS'];
+                var hasLuxury = hasBrands.some(function(b){ return luxuryBrands.indexOf(b.toUpperCase()) > -1; });
+                if (hasLuxury) reviews.push("Luxury marka tercihi bu kombinie premium bir hava katmis. Yatirimlik parcalar akilli secim.");
+                var mixed = hasBrands.some(function(b){ return b.toUpperCase() === 'ZARA' || b.toUpperCase() === 'H&M'; }) && hasLuxury;
+                if (mixed) reviews.push("High-low mix harika! Luks ve uygun fiyatli markalari harmanlamak modern stilin altin kuralidir.");
+            }
+            
+            // Category analysis
+            var catCount = Object.keys(categories).length;
+            if (catCount >= 3) reviews.push("Ust, alt, ayakkabi ve aksesuar kategorilerinde tamamlayici secimler yapilmis. Butunsel bir kombin.");
+            
+            // Price analysis
+            if (totalPrice > 5000) reviews.push("Premium bir yatirim kombinasyonu. Toplam deger: TL" + totalPrice.toLocaleString() + " civari.");
+            else if (totalPrice > 1000) reviews.push("Fiyat-performans dengesi iyi kurulmus. Butcenizi zorlamadan stil sahibi olunabileceginin kaniti.");
+            
+            // General styling tips
+            reviews.push("Genel olarak bu kombin mevcut trendlerle uyumlu. Kisisel tarzinizi yansitmak icin guzel bir baslangic.");
+            
+            // Add as AI comment
+            var aiComment = {
+                name: 'Clothink AI',
+                text: reviews[Math.floor(Math.random() * reviews.length)],
+                date: new Date().toISOString(),
+                isAI: true
+            };
+            comments.unshift(aiComment);
+            localStorage.setItem(commentKey, JSON.stringify(comments));
+            renderComments();
+        };
         var commentKey = 'clothink_comments_' + data.img.replace(/[^a-z0-9]/gi,'_');
-
         var comments = JSON.parse(localStorage.getItem(commentKey) || '[]');
-
         var ca = document.getElementById('commentsArea');
-
         function renderComments() {
-
-            var html = '<div class="comments-box"><h3>Yorumlar (' + comments.length + ')</h3><div class="comment-input-wrap"><input id="commentInput" placeholder="Yorum yaz..." onkeydown="if(event.key==='Enter')postComment()"><button onclick="postComment()">Gnder</button></div>';
-
-            if (comments.length === 0) html += '<p style="color:#999;font-size:14px;">Henz yorum yok. lk yorumu sen yap!</p>';
-
+            var html = '<div class="comments-box"><h3>Yorumlar (' + comments.length + ')</h3><div class="comment-input-wrap"><input id="commentInput" placeholder="Yorum yaz..." onkeydown="if(event.key===\'Enter\')postComment()"><button onclick="postComment()">Gonder</button></div>';
+            if (comments.length === 0) html += '<p style="color:#999;font-size:14px;">Henuz yorum yok. Ilk yorumu sen yap!</p>';
             comments.forEach(function(c) {
-
                 var initial = (c.name || '?').charAt(0).toUpperCase();
+                if (c.isAI) {
+                    html += '<div class="comment-item" style="background:#f9f6f0;border-left:2px solid #c9a84c;"><div class="comment-avatar" style="background:#c9a84c;color:#fff;">AI</div><div class="comment-body"><div class="comment-author" style="color:#c9a84c;">Clothink AI ✦</div><div class="comment-text">' + c.text + '</div><div class="comment-date">AI Analizi</div></div></div>';
+                } else {
 
                 html += '<div class="comment-item"><div class="comment-avatar">' + initial + '</div><div class="comment-body"><div class="comment-author">' + c.name + '</div><div class="comment-text">' + c.text + '</div><div class="comment-date">' + new Date(c.date).toLocaleDateString('tr-TR') + '</div></div></div>';
 
