@@ -153,7 +153,7 @@
             <h2 style="font-size:22px;font-weight:700;margin-bottom:24px;">Diger Kombinler</h2>
 
             <div class="outfit-grid" id="otherGrid">
-                <div class="outfit-card" data-outfit='{"title":"Minimalist Chic","items":"3 urun","likes":42,"img":"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop","author":"@clothink"}'>
+                <div class="outfit-card" data-outfit='{"title":"Minimalist Chic","items":"3 urun","likes":42,"img":"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&amp;h=600&amp;fit=crop","author":"@clothink","desc":"Istanbulda bir pazar sabahi icin rahat ama stil sahibi bir secim."}'>
                     <div class="outfit-photo" style="background-image:url(https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=600&fit=crop)"></div>
                     <div class="outfit-info"><div><p class="outfit-author">@clothink</p><p class="outfit-items">3 urun</p></div><p class="outfit-like">42</p></div>
                 </div>
@@ -202,7 +202,8 @@ document.addEventListener("DOMContentLoaded",function(){
     if(!d)return;
     localStorage.removeItem("clothink_viewing_outfit");
     var c=document.getElementById("detailContainer");
-    c.innerHTML='<a href="javascript:history.back()" class="back-link">Geri</a><div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url('+d.img+')"></div><div class="outfit-hero-info"><h1>'+(d.title||'Kombin')+'</h1><p class="outfit-author">'+(d.author||'')+' · '+(d.likes||0)+' begeni</p><p>'+(d.desc||'')+'</p></div></div>';
+    var img=d.img||d.image||""; var title=d.title||"Kombin"; var author=d.author||""; var likes=d.likes||0; var desc=d.desc||"";
+    c.innerHTML='<a href="javascript:history.back()" class="back-link">Geri</a><div class="outfit-hero"><div class="outfit-hero-photo" style="background-image:url('+img+')"></div><div class="outfit-hero-info"><h1>'+title+'</h1><p class="outfit-author">'+author+' &middot; '+likes+' begeni</p><p style="color:#666;line-height:1.7;margin-bottom:24px;">'+desc+'</p><div class="action-bar"><button class="btn-primary" style="border:none;cursor:pointer;" onclick="alert(\'Paylas\')">Paylas</button></div></div></div>';
 });
 </script>
 </body>
