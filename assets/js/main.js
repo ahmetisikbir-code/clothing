@@ -95,6 +95,31 @@
         localStorage.setItem('clothink_recent_views', JSON.stringify(rv));
     };
 
+    // COOKIE CONSENT
+    if (!localStorage.getItem('clothink_cookies_ok')) {
+        var banner = document.createElement('div');
+        banner.id = 'cookieBanner';
+        banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#0a0a0a;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:9999;flex-wrap:wrap;font-size:13px;box-shadow:0 -4px 20px rgba(0,0,0,0.3);';
+        banner.innerHTML = '<span style="color:rgba(255,255,255,0.6);">Bu site cerez kullanir. <a href="' + (window.location.pathname.includes('/pages/') ? '' : 'pages/') + 'gizlilik.html" style="color:#c9a84c;text-decoration:underline;">Gizlilik Politikasi</a></span><button style="background:#c9a84c;color:#0a0a0a;border:none;padding:8px 20px;cursor:pointer;font-weight:600;font-size:12px;letter-spacing:1px;text-transform:uppercase;border-radius:0;">Tamam</button>';
+        document.body.appendChild(banner);
+        banner.querySelector('button').onclick = function() {
+            banner.remove();
+            localStorage.setItem('clothink_cookies_ok', '1');
+        };
+    }
+
+    // STAR RATING - add to outfit detail
+    window.rateOutfit = function(imgUrl, stars) {
+        var ratings = JSON.parse(localStorage.getItem('clothink_ratings') || '{}');
+        ratings[imgUrl] = stars;
+        localStorage.setItem('clothink_ratings', JSON.stringify(ratings));
+        showToast('Puan: ' + stars + '/5');
+    };
+    window.getRating = function(imgUrl) {
+        var ratings = JSON.parse(localStorage.getItem('clothink_ratings') || '{}');
+        return ratings[imgUrl] || 0;
+    };
+
     // NAVBAR INJECTIONS (search + cart icons)
     var navLinks = document.querySelector('.nav-links');
     if (navLinks && !document.getElementById('searchLink')) {
@@ -154,9 +179,27 @@ function addToCart(name, brand, price, img) {
     var cart = JSON.parse(localStorage.getItem('clothink_cart_' + user.email) || '[]');
     cart.push({ name: name, brand: brand, price: price, img: img });
     localStorage.setItem('clothink_cart_' + user.email, JSON.stringify(cart));
-    alert('🛒 "' + name + '" sepete eklendi!');
+    alert('Sepet: "' + name + '" sepete eklendi!');
     // reload to update cart badge
     window.location.reload();
+}
+
+// GOOGLE LOGIN SIMULATION
+function simulateGoogleLogin() {
+    var email = prompt('Google hesap e-postan:', 'kullanici@gmail.com');
+    if (!email) return;
+    var name = email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1);
+    var users = JSON.parse(localStorage.getItem('clothink_users') || '[]');
+    var found = users.find(function(u) { return u.email === email; });
+    if (!found) {
+        users.push({ name: name, email: email, password: 'google123' });
+        localStorage.setItem('clothink_users', JSON.stringify(users));
+        var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
+        profiles[email] = { username: email.split('@')[0], bio: '', gender: 'kadin' };
+        localStorage.setItem('clothink_profiles', JSON.stringify(profiles));
+    }
+    localStorage.setItem('clothink_user', JSON.stringify({ name: name, email: email }));
+    window.location.href = (window.location.pathname.includes('/pages/') ? '' : 'pages/') + '../index.html';
 }
 
 // PWA service worker
