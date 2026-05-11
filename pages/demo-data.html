@@ -122,18 +122,38 @@
             { name:'Koray Tumer', email:'koray@demo.com', gender:'erkek', username:'korayt', bio:'Fitness coach | Athleisure enthusiast' },
             { name:'Alper Ates', email:'alper@demo.com', gender:'erkek', username:'alpera', bio:'Architect | Modern gentleman style' },
             { name:'Luna Ozturk', email:'luna@demo.com', gender:'cocuk', username:'minikmoda', bio:'8 yas | Mini fashion blogger' },
-            { name:'Efe Yilmaz', email:'efe@demo.com', gender:'cocuk', username:'cocukmoda', bio:'10 yas | Gelecegin stil ikonu' }
+            { name:'Efe Yilmaz', email:'efe@demo.com', gender:'cocuk', username:'cocukmoda', bio:'10 yas | Gelecegin stil ikonu' },
+            { name:'Maya Demir', email:'maya@demo.com', gender:'cocuk', username:'oyuncakca', bio:'7 yas | Renkli kombinler' },
+            { name:'Atlas Kara', email:'atlas@demo.com', gender:'cocuk', username:'miniestilo', bio:'6 yas | Mini stil danismani' }
         ];
+
+        function generateAvatar(name, index) {
+            var c = document.createElement('canvas');
+            c.width = 160; c.height = 160;
+            var ctx = c.getContext('2d');
+            var colors = ['#c9a84c','#8b5e3c','#4a6d8c','#7d5a50','#2c3e50','#6b4c3a','#3a5a40','#5c3d5c','#1a1a2e','#16213e'];
+            ctx.fillStyle = colors[index % colors.length];
+            ctx.fillRect(0, 0, 160, 160);
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 64px "Playfair Display", serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(name.charAt(0).toUpperCase(), 80, 84);
+            return c.toDataURL('image/png');
+        }
 
         var existingUsers = JSON.parse(localStorage.getItem('clothink_users') || '[]');
         var profiles = JSON.parse(localStorage.getItem('clothink_profiles') || '{}');
 
-        users.forEach(function(u) {
+        users.forEach(function(u, i) {
             var idx = existingUsers.findIndex(function(e) { return e.email === u.email; });
             if (idx === -1) {
                 existingUsers.push({ name: u.name, email: u.email, password: '123456' });
             }
             profiles[u.email] = { username: u.username, bio: u.bio, gender: u.gender };
+
+            // Generate unique avatar
+            localStorage.setItem('clothink_avatar_' + u.email, generateAvatar(u.name, i));
 
             var cat = CATALOG[u.gender];
             var userOutfits = [];
