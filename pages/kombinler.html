@@ -243,18 +243,6 @@
         });
 
         if (!data) { container.innerHTML = '<p style="color:#888;text-align:center;padding:40px;">Detay icin bir kombine tiklayin</p>'; return; }
-            allOutfits.slice(0, 8).forEach(function(o){
-                var div = document.createElement('div');
-                div.className = 'outfit-card';
-                div.innerHTML = '<div class="outfit-photo" style="background-image:url('+(o.img||o.image)+')"></div><div class="outfit-info"><div><p class="outfit-author">'+(o.author||'')+'</p><p class="outfit-items">'+(o.items||'')+'</p></div><p class="outfit-like">'+(o.likes||0)+'</p></div>';
-                div.onclick = function(){
-                    localStorage.setItem('clothink_viewing_outfit', JSON.stringify(o));
-                    window.location.reload();
-                };
-                grid.appendChild(div);
-            });
-            return;
-        }
 
         var user = JSON.parse(localStorage.getItem('clothink_user') || 'null');
 
